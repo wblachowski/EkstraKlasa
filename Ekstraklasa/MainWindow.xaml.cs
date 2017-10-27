@@ -23,6 +23,16 @@ namespace Ekstraklasa
         {
             InitializeComponent();
             m_listbox_menu.SelectedIndex = 0;
+            m_content_control.Content = new Table();
+        }
+        void SelectionChanged(object sender, SelectionChangedEventArgs args)
+        {
+            int selection = (sender as ListBox).SelectedIndex;
+            switch (selection)
+            {
+                case 0: m_content_control.Content = new Matches(); break;
+                case 1: m_content_control.Content = new Table(); break;
+            }
         }
     }
 }

@@ -12,26 +12,28 @@
          TextElement.FontSize="12"
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto">
-    
+
     <Grid>
 
         <DockPanel LastChildFill="True">
             <Border BorderThickness="0 0 2 0" BorderBrush="#cdcfd1">
-            <StackPanel DockPanel.Dock="Left" Orientation=" Vertical" Width="200" Background="White">
-                <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
-                    <ListBox x:Name="m_listbox_menu" HorizontalAlignment="Left" Height="300" Margin="0,10,0,0" VerticalAlignment="Top" Width="200" Foreground="DarkSlateGray">
+                <StackPanel DockPanel.Dock="Left" Orientation=" Vertical" Width="200" Background="White">
+                    <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
+                    <ListBox x:Name="m_listbox_menu" HorizontalAlignment="Left" Height="300" Margin="0,10,0,0" VerticalAlignment="Top" Width="200" Foreground="DarkSlateGray"
+                             SelectionMode="Single" SelectionChanged="SelectionChanged"
+                             >
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal"  Margin="15,0,0,0">
                                 <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,6,0" Kind="Soccer" HorizontalAlignment="Right" />
                                 <TextBlock VerticalAlignment="Center">Mecze</TextBlock>
-                             </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
                             <StackPanel Orientation="Horizontal"  Margin="15,0,0,0">
                                 <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,6,0" Kind="Table"  HorizontalAlignment="Right" />
                                 <TextBlock VerticalAlignment="Center">Tabela</TextBlock>
                             </StackPanel>
-                     </ListBoxItem>
+                        </ListBoxItem>
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal"  Margin="15,0,0,0">
                                 <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,6,0" Kind="TshirtCrew"  HorizontalAlignment="Right" />
@@ -45,9 +47,10 @@
                             </StackPanel>
                         </ListBoxItem>
                     </ListBox>
-            </StackPanel>
+                </StackPanel>
             </Border>
-            <Canvas >
+            <Canvas>
+                <ContentControl x:Name="m_content_control" Content="ContentControl" />
             </Canvas>
         </DockPanel>
     </Grid>
