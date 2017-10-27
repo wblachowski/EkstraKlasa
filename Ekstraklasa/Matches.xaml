@@ -5,11 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ekstraklasa"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="500" d:DesignWidth="600"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
         <Label Content="MECZE" HorizontalAlignment="Left" Margin="94,106,0,0" VerticalAlignment="Top" Width="121"/>
+        <StackPanel Orientation="Vertical">
+        <Expander  Width="400" HorizontalAlignment="Stretch">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Legia Warszawa</TextBlock>
+                    <TextBlock Margin="5 0 5 0 "> 1:2</TextBlock>
+                    <TextBlock FontWeight="Bold">Lech Poznań</TextBlock>
+                </StackPanel>
+            </Expander.Header>
+                <StackPanel Orientation="Vertical"
+                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            >
+                    <TextBlock Opacity=".68" Text="Gola strzelł ksądz robak"
+                               TextWrapping="Wrap"/>
+            </StackPanel>
+        </Expander>
+            <Expander  Width="400" HorizontalAlignment="Stretch">
+                <Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontWeight="Bold">Brukbet Termalica</TextBlock>
+                        <TextBlock Margin="5 0 5 0 "> 5:2</TextBlock>
+                        <TextBlock >Pogoń Szczecin</TextBlock>
+                    </StackPanel>
+                </Expander.Header>
+                <StackPanel Orientation="Vertical"
+                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            >
+                    <TextBlock Opacity=".68" Text="Samobójcze bramki"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
 
     </Grid>
 </UserControl>
