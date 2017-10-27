@@ -7,7 +7,8 @@
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Ekstraklasa" Height="350" Width="300"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}"
+        ResizeMode="CanMinimize ">
     <Grid>
         <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="Logowanie" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top"/>
         <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0">

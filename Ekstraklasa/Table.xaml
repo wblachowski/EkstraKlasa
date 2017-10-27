@@ -5,11 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ekstraklasa"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="500" d:DesignWidth="600"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="135,166,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid  Margin="20 8 0 0"  IsReadOnly="True" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+            <DataGrid.Columns>
 
+                <DataGridTextColumn Binding="{Binding Code}"
+                                        Header="Lp."
+                                        Width="52"
+                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Name}"
+                                                               Header="Nazwa zespołu"   
+                                                               Width="200"
+                                                               />
+                <!-- set a max length to get an indicator in the editor -->
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Description}"
+                                                               Header="M"  
+                                                               Width="46"
+                                                               />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="Z"     
+                                                        Width="46"
+                                                        />
+
+
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="R"   
+                                                           Width="46"
+                                                        />
+
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="P"  
+                                                           Width="46"
+                                                        />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="B" 
+                                                           Width="46"
+                                                        />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="P" 
+                                                           Width="46"
+                                                        />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
