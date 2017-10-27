@@ -14,12 +14,15 @@
          TextOptions.TextRenderingMode="Auto">
 
     <Grid>
-
-        <DockPanel LastChildFill="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        
             <Border BorderThickness="0 0 2 0" BorderBrush="#cdcfd1">
-                <StackPanel DockPanel.Dock="Left" Orientation=" Vertical" Width="200" Background="White">
+                <StackPanel Grid.Column="1" Orientation=" Vertical"  Background="White">
                     <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
-                    <ListBox x:Name="m_listbox_menu" HorizontalAlignment="Left" Height="300" Margin="0,10,0,0" VerticalAlignment="Top" Width="200" Foreground="DarkSlateGray"
+                    <ListBox x:Name="m_listbox_menu"  Margin="0,10,0,0" VerticalAlignment="Top"  Foreground="DarkSlateGray"
                              SelectionMode="Single" SelectionChanged="SelectionChanged"
                              >
                         <ListBoxItem>
@@ -49,9 +52,8 @@
                     </ListBox>
                 </StackPanel>
             </Border>
-            <Canvas>
-                <ContentControl x:Name="m_content_control" Content="ContentControl" />
-            </Canvas>
-        </DockPanel>
+        <Canvas Grid.Column="2">
+            <ContentControl x:Name="m_content_control" Content="ContentControl" />
+        </Canvas>
     </Grid>
 </Window>
