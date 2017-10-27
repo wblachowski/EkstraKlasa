@@ -27,7 +27,7 @@
                                                                Header="M"  
                                                                Width="46"
                                                                />
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Numeric}"
                                                         Header="Z"     
                                                         Width="46"
                                                         />
@@ -46,7 +46,7 @@
                                                         Header="B" 
                                                            Width="46"
                                                         />
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Numeric}"
                                                         Header="P" 
                                                            Width="46"
                                                         />
