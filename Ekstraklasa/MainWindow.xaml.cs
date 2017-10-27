@@ -22,6 +22,7 @@ namespace Ekstraklasa
         public MainWindow()
         {
             InitializeComponent();
+            m_listbox_menu.SelectedIndex = 0;
         }
     }
 }
