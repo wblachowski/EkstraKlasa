@@ -9,39 +9,45 @@
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <Label Content="MECZE" HorizontalAlignment="Left" Margin="94,106,0,0" VerticalAlignment="Top" Width="121"/>
-        <StackPanel Orientation="Vertical">
-        <Expander  Width="400" HorizontalAlignment="Stretch">
-            <Expander.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Legia Warszawa</TextBlock>
-                    <TextBlock Margin="5 0 5 0 "> 1:2</TextBlock>
-                    <TextBlock FontWeight="Bold">Lech Poznań</TextBlock>
-                </StackPanel>
-            </Expander.Header>
-                <StackPanel Orientation="Vertical"
-                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                            >
-                    <TextBlock Opacity=".68" Text="Gola strzelł ksądz robak"
-                               TextWrapping="Wrap"/>
-            </StackPanel>
-        </Expander>
-            <Expander  Width="400" HorizontalAlignment="Stretch">
-                <Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontWeight="Bold">Brukbet Termalica</TextBlock>
-                        <TextBlock Margin="5 0 5 0 "> 5:2</TextBlock>
-                        <TextBlock >Pogoń Szczecin</TextBlock>
-                    </StackPanel>
-                </Expander.Header>
-                <StackPanel Orientation="Vertical"
-                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                            >
-                    <TextBlock Opacity=".68" Text="Samobójcze bramki"
-                               TextWrapping="Wrap"/>
-                </StackPanel>
-            </Expander>
-        </StackPanel>
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <StackPanel Orientation="Vertical">
 
+
+                        <Expander  Width="400" HorizontalAlignment="Stretch">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Legia Warszawa</TextBlock>
+                                    <TextBlock Margin="5 0 5 0 "> 1:2</TextBlock>
+                                    <TextBlock FontWeight="Bold">Lech Poznań</TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Orientation="Vertical"
+                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            >
+                                <TextBlock Opacity=".68" Text="Gola strzelł ksądz robak"
+                               TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Expander>
+                        <Expander  Width="400" HorizontalAlignment="Stretch">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold">Brukbet Termalica</TextBlock>
+                                    <TextBlock Margin="5 0 5 0 "> 5:2</TextBlock>
+                                    <TextBlock >Pogoń Szczecin</TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Orientation="Vertical"
+                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            >
+                                <TextBlock Opacity=".68" Text="Samobójcze bramki"
+                               TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
     </Grid>
 </UserControl>

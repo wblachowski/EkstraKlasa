@@ -6,12 +6,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ekstraklasa"
         mc:Ignorable="d"
-         Height="500" Width="800"
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Height="500" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.FontWeight="Regular"
-         TextElement.FontSize="12"
-         TextOptions.TextFormattingMode="Ideal"
-         TextOptions.TextRenderingMode="Auto">
+        TextElement.FontSize="12"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto">
 
     <Grid>
         <Grid.ColumnDefinitions>
