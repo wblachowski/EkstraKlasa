@@ -52,5 +52,6 @@
                                                         />
             </DataGrid.Columns>
         </DataGrid>
+        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="165,230,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
