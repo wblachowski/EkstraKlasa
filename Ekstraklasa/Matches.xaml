@@ -9,12 +9,10 @@
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" Margin="50 50 0 0">
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <StackPanel Orientation="Vertical">
-
-
                         <Expander  Width="400" HorizontalAlignment="Stretch">
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal">

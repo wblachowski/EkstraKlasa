@@ -10,7 +10,13 @@
         Style="{StaticResource WindowStyle}"
         ResizeMode="CanMinimize ">
     <Grid>
-        <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="Logowanie" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top"/>
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="Logowanie" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top"/>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
         <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" Margin="0 4 6 0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" />
