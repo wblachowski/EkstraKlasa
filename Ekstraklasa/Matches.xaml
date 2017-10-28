@@ -15,11 +15,16 @@
                     <StackPanel Orientation="Vertical">
                         <Expander  Width="400" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock>Legia Warszawa</TextBlock>
-                                    <TextBlock Margin="5 0 5 0 "> 1:2</TextBlock>
-                                    <TextBlock FontWeight="Bold">Lech Poznań</TextBlock>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FlowDirection="RightToLeft" Text="Legia Warszawa"/>
+                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="1:2"/>
+                                    <TextBlock Grid.Column="2" FontWeight="Bold" Text="Lech Poznań" />
+                                </Grid>
                             </Expander.Header>
                             <StackPanel Orientation="Vertical"
                             TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
@@ -30,11 +35,16 @@
                         </Expander>
                         <Expander  Width="400" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontWeight="Bold">Brukbet Termalica</TextBlock>
-                                    <TextBlock Margin="5 0 5 0 "> 5:2</TextBlock>
-                                    <TextBlock >Pogoń Szczecin</TextBlock>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FlowDirection="RightToLeft" FontWeight="Bold" Text="Termalica Bruk-Bet"/>
+                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="6:2"/>
+                                    <TextBlock Grid.Column="2"  Text="Pogoń Szczecin" />
+                                </Grid>
                             </Expander.Header>
                             <StackPanel Orientation="Vertical"
                             TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
