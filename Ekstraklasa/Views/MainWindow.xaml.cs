@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ekstraklasa.Controls;
 
 namespace Ekstraklasa
 {
@@ -32,7 +33,19 @@ namespace Ekstraklasa
             switch (selection)
             {
                 case 0: m_content_control.Content = new Matches(); break;
-                case 1: m_content_control.Content = new Table(); break;
+                //case 1: m_content_control.Content = new Table(); break;
+            }
+            if(selection == 1)
+            {
+                MatchControl match = new MatchControl();
+                match.tbTeamA.Text = "Legia warszawa";
+                match.tbTeamB.Text = "Lech Poznań";
+                match.score.Text = "1:2";
+                GoalControl goalControl = new GoalControl();
+                goalControl.Minute.Text = "23'";
+                goalControl.Scorer.Text = "W.Pastusiak";
+                match.GoalsA.Children.Add(goalControl);
+                m_content_control.Content = match;
             }
         }
     }

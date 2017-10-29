@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Ekstraklasa.Controls.MatchControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ekstraklasa.Controls"
+             mc:Ignorable="d"
+             Width="400"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Style="{StaticResource UserControlStyle}">
+    <Grid>
+        <Expander>
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" Text="Drużyna A"/>
+                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="A:B"/>
+                    <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="Drużyna B" />
+                </Grid>
+            </Expander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" x:Name="GoalsA" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                </StackPanel>
+                <StackPanel Grid.Column="3"  x:Name="GoalsB" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                </StackPanel>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

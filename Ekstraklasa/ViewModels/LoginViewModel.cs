@@ -32,6 +32,7 @@ namespace Ekstraklasa
                 return _loginCommand;
             }
         }
+
         private string _Username = null;
         public string Username
         {
@@ -48,6 +49,7 @@ namespace Ekstraklasa
                 }
             }
         }
+
         private string _Password = null;
         public string Password
         {
