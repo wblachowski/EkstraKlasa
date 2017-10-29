@@ -22,6 +22,7 @@ namespace Ekstraklasa
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
             m_listbox_menu.SelectedIndex = 0;
             m_content_control.Content = new Table();
         }

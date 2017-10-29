@@ -52,17 +52,21 @@ namespace Ekstraklasa
             }
             set
             {
-                _Password = null;
-                OnPropertyChanged("Password");
+                if (value != _Password)
+                {
+                    _Password = value;
+                    OnPropertyChanged("Password");
+                }
             }
 
         }
 
         private void Login()
         {
-            System.Diagnostics.Debug.WriteLine(this._Username);
+            System.Diagnostics.Debug.WriteLine(this._Username + " " + this._Password);
 
         }
+
         virtual protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)

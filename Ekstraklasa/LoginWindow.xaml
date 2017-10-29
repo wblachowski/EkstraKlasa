@@ -26,6 +26,9 @@
                 <materialDesign:PackIcon Margin="0 4 6 0" Kind="LockOutline" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" />
                 <PasswordBox TabIndex="1"
 					 x:Name="PasswordBox"
+                     local:PasswordBoxAssistant.BindPassword="true" 
+                     local:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, 
+                                                             UpdateSourceTrigger=PropertyChanged}"
 					 materialDesign:HintAssist.Hint="Hasło"  Width="158" />
             </StackPanel>
             <Button Focusable="False" Command="{Binding loginCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Content="Zaloguj" HorizontalAlignment="Right" Margin="0,60,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="1.04,0.52"/>

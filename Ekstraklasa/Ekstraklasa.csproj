@@ -64,9 +64,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Matches.xaml.cs">
       <DependentUpon>Matches.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PasswordBoxAssistant.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Table.xaml.cs">
       <DependentUpon>Table.xaml</DependentUpon>
