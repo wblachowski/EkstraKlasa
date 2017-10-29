@@ -53,6 +53,27 @@
                                TextWrapping="Wrap"/>
                             </StackPanel>
                         </Expander>
+
+                        <Expander  Width="400" HorizontalAlignment="Stretch">
+                            <Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FlowDirection="RightToLeft" FontWeight="Bold" Text="Wisła Płock"/>
+                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="1:0"/>
+                                    <TextBlock Grid.Column="2"  Text="Cracovia Kraków" />
+                                </Grid>
+                            </Expander.Header>
+                            <StackPanel Orientation="Vertical"
+                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            >
+                                <TextBlock Opacity=".68" Text="Samobójcze bramki"
+                               TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>

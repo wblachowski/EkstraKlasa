@@ -22,6 +22,7 @@ namespace Ekstraklasa
         public LoginWindow()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
         }
     }
 }
