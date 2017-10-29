@@ -43,8 +43,18 @@ namespace Ekstraklasa
                 match.score.Text = "1:2";
                 GoalControl goalControl = new GoalControl();
                 goalControl.Minute.Text = "23'";
-                goalControl.Scorer.Text = "W.Pastusiak";
+                goalControl.Scorer.Text = "W.Pastusijoiooik";
                 match.GoalsA.Children.Add(goalControl);
+                goalControl = new GoalControl();
+
+                goalControl.Minute.Text = "69'";
+                goalControl.Scorer.Text = "M.Mikołajczak";
+                match.GoalsA.Children.Add(goalControl);
+                 goalControl = new GoalControl();
+
+                goalControl.Minute.Text = "88'";
+                goalControl.Scorer.Text = "Ł.Fabiańskasdasddasi";
+                match.GoalsB.Children.Add(goalControl);
                 m_content_control.Content = match;
             }
         }

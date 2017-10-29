@@ -11,7 +11,7 @@
     <Grid>
         <Expander>
             <Expander.Header>
-                <Grid>
+                <Grid Width="312">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -22,16 +22,15 @@
                     <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="Drużyna B" />
                 </Grid>
             </Expander.Header>
-            <Grid>
+            <Grid Width="312" HorizontalAlignment="Left" Margin="25 0 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="36"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" x:Name="GoalsA" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                <StackPanel  Margin="0 0 2 0 " Grid.Column="0" HorizontalAlignment="Right" x:Name="GoalsA" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                 </StackPanel>
-                <StackPanel Grid.Column="3"  x:Name="GoalsB" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                <StackPanel Margin="-2 0 0 0 " Grid.Column="2"  x:Name="GoalsB" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                 </StackPanel>
             </Grid>
         </Expander>
