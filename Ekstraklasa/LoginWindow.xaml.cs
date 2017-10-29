@@ -22,7 +22,14 @@ namespace Ekstraklasa
         public LoginWindow()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            var viewModel = new LoginViewModel();
+            viewModel.Close += () => { this.Close(); };
+            viewModel.OpenNewWindow += () =>
+            {
+                var window = new LoginWindow();
+                window.Show();
+            };
+            DataContext = viewModel;
         }
     }
 }

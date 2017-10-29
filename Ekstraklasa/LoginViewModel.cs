@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -11,6 +12,10 @@ namespace Ekstraklasa
     class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
+        public delegate void SimpleEventHandler();
+        public event SimpleEventHandler OpenNewWindow;
+        public event SimpleEventHandler Close;
+
         public LoginViewModel()
         {
         }
@@ -64,13 +69,21 @@ namespace Ekstraklasa
         private void Login()
         {
             System.Diagnostics.Debug.WriteLine(this._Username + " " + this._Password);
-
+            this.OnSimpleEvent(this.Close);
         }
 
         virtual protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        private void OnSimpleEvent(SimpleEventHandler handler)
+        {
+            if(handler != null)
+            {
+                handler();
+            }
         }
     }
 }
