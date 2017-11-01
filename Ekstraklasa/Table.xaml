@@ -10,7 +10,7 @@
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <DataGrid  Margin="20 8 0 0"  IsReadOnly="True" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
             <DataGrid.Columns>
 
@@ -54,9 +54,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="165,230,0,0" VerticalAlignment="Top"/>
-        <dragablz:TabablzControl Margin="196,300,122,0"  FixedHeaderCount="3" BorderBrush="white">
+        <dragablz:TabablzControl Margin="196,300,122,0"  FixedHeaderCount="3" BorderBrush="white" >
             <dragablz:TabablzControl.Resources>
-                <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
+               <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
                 <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
             </dragablz:TabablzControl.Resources>
             <TabItem Header="Zawodnicy">
