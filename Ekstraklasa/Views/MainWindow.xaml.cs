@@ -43,7 +43,7 @@ namespace Ekstraklasa
                 match.score.Text = "1:2";
                 GoalControl goalControl = new GoalControl();
                 goalControl.Minute.Text = "23'";
-                goalControl.Scorer.Text = "W.Pastusijoiooik";
+                goalControl.Scorer.Text = "W.Pastus";
                 match.GoalsA.Children.Add(goalControl);
                 goalControl = new GoalControl();
 

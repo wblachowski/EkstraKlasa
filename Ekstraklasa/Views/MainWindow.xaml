@@ -15,17 +15,18 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition MinWidth="150" MaxWidth="200"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
             <Border BorderThickness="0 0 2 0" BorderBrush="#cdcfd1">
                 <StackPanel Grid.Column="1" Orientation=" Vertical"  Background="White">
                     <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
-                    <ListBox x:Name="m_listbox_menu"  Margin="0,10,0,0" VerticalAlignment="Top"  Foreground="DarkSlateGray"
+                    <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  Foreground="DarkSlateGray"
+                             ItemContainerStyle="{StaticResource MaterialDesignListBoxItem}"
                              SelectionMode="Single" SelectionChanged="SelectionChanged"
                              >
-                        <ListBoxItem>
+                    <ListBoxItem>
                             <StackPanel Orientation="Horizontal"  Margin="15,0,0,0">
                                 <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,6,0" Kind="Soccer" HorizontalAlignment="Right" />
                                 <TextBlock VerticalAlignment="Center">Mecze</TextBlock>
