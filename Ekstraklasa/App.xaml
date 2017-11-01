@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Ekstraklasa"
              StartupUri="./Views/MainWindow.xaml"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              >
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Ekstraklasa;component/Styles/Overrides.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
+                <ResourceDictionary>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
                 <Setter Property="Icon" Value="./Resources/icon.ico"/>
@@ -27,6 +31,9 @@
                 <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}"/>
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
             </Style>
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" >
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

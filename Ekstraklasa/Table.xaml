@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="600"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
     <Grid>
         <DataGrid  Margin="20 8 0 0"  IsReadOnly="True" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
@@ -53,5 +54,21 @@
             </DataGrid.Columns>
         </DataGrid>
         <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="165,230,0,0" VerticalAlignment="Top"/>
+        <dragablz:TabablzControl Margin="196,300,122,0"  FixedHeaderCount="3" BorderBrush="white">
+            <dragablz:TabablzControl.Resources>
+                <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
+                <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
+            </dragablz:TabablzControl.Resources>
+            <TabItem Header="Zawodnicy">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Hello World</TextBlock>
+            </TabItem>
+            <TabItem Header="Mecze">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Material Design</TextBlock>
+            </TabItem>
+            <TabItem Header="Stadion">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
+            </TabItem>
+        </dragablz:TabablzControl>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="4" Margin="196,340,0,0"  VerticalAlignment="Top" Width="282"/>
     </Grid>
 </UserControl>

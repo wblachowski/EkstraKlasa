@@ -19,10 +19,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
-            <Border BorderThickness="0 0 2 0" BorderBrush="#cdcfd1">
+            <Border BorderThickness="0 0 2 0" BorderBrush="#dadada">
                 <StackPanel Grid.Column="1" Orientation=" Vertical"  Background="White">
                     <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
-                    <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  Foreground="DarkSlateGray"
+                <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  Foreground="DarkSlateGray"
                              ItemContainerStyle="{StaticResource MaterialDesignListBoxItem}"
                              SelectionMode="Single" SelectionChanged="SelectionChanged"
                              >
