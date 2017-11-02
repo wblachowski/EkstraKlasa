@@ -13,7 +13,7 @@
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <StackPanel Margin="50 0 0 0" Orientation="Vertical">
-                        <Expander   Width="400" HorizontalAlignment="Stretch">
+                        <Expander   Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 ">
                             <Expander.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -28,12 +28,13 @@
                             </Expander.Header>
                             <StackPanel Orientation="Vertical"
                             TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            Margin="0 0 0 10"
                             >
                                 <TextBlock Opacity=".68" Text="Gola strzelł ksądz robak"
                                TextWrapping="Wrap"/>
                             </StackPanel>
                         </Expander>
-                        <Expander  Width="400" HorizontalAlignment="Stretch">
+                        <Expander  Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 ">
                             <Expander.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -48,13 +49,14 @@
                             </Expander.Header>
                             <StackPanel Orientation="Vertical"
                             TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            Margin="0 0 0 10"
                             >
                                 <TextBlock Opacity=".68" Text="Samobójcze bramki"
                                TextWrapping="Wrap"/>
                             </StackPanel>
                         </Expander>
 
-                        <Expander  Width="400" HorizontalAlignment="Stretch">
+                        <Expander  Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 "> 
                             <Expander.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -69,6 +71,7 @@
                             </Expander.Header>
                             <StackPanel Orientation="Vertical"
                             TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                            Margin="0 0 0 10"
                             >
                                 <TextBlock Opacity=".68" Text="Samobójcze bramki"
                                TextWrapping="Wrap"/>

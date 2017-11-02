@@ -55,6 +55,27 @@ namespace Ekstraklasa
                 goalControl.Minute.Text = "88'";
                 goalControl.Scorer.Text = "Ł.Fabiańskasdasddasi";
                 match.GoalsB.Children.Add(goalControl);
+
+                MatchControl match2 = new MatchControl();
+                match2.tbTeamA.Text = "Legia warszawa";
+                match2.tbTeamB.Text = "Lech Poznań";
+                match2.score.Text = "1:2";
+                GoalControl goalControl2 = new GoalControl();
+                goalControl2.Minute.Text = "23'";
+                goalControl2.Scorer.Text = "W.Pastus";
+                match2.GoalsA.Children.Add(goalControl2);
+                goalControl2 = new GoalControl();
+
+                goalControl2.Minute.Text = "69'";
+                goalControl2.Scorer.Text = "M.Mikołajczak";
+                match2.GoalsA.Children.Add(goalControl2);
+                goalControl2 = new GoalControl();
+
+                goalControl2.Minute.Text = "88'";
+                goalControl2.Scorer.Text = "Ł.Fabiańskasdasddasi";
+                match2.GoalsB.Children.Add(goalControl2);
+
+                
                 m_content_control.Content = match;
             }
         }
