@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="schemat" id="6006B6A2-B5AC-ABD1-7F85-1EF04BC968C1" version="3.5">
+<createdBy>wblachowski</createdBy>
+<createdTime>2017-10-30 18:05:59 UTC</createdTime>
+<ownerDesignName>schemat</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>6006B6A2-B5AC-ABD1-7F85-1EF04BC968C1</designId>
+</OSDM_Design>
