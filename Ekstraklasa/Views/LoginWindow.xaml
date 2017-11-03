@@ -31,7 +31,18 @@
                                                              UpdateSourceTrigger=PropertyChanged}"
 					 materialDesign:HintAssist.Hint="Hasło"  Width="158" />
             </StackPanel>
-            <Button IsDefault="True" Focusable="False" Command="{Binding loginCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Content="Zaloguj" HorizontalAlignment="Right" Margin="0,60,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="1.04,0.52"/>
+            <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+                <materialDesign:TransitionerSlide x:Name="bad_login" Visibility="{Binding Path=ShowBadLogin, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromTop, Duration=0:0:0.2}">
+                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                            <materialDesign:PackIcon Margin="0 0 6 0"  Kind="MinusCircleOutline" Foreground="#d50000"/>
+                            <TextBlock Margin="0 1 0 0" Text="Niepoprawny login lub hasło" Foreground="#d50000"></TextBlock>
+                        </StackPanel>
+                    </materialDesign:TransitioningContent>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
         </StackPanel>
+
+        <Button IsDefault="True" Focusable="False" Command="{Binding loginCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Content="Zaloguj" HorizontalAlignment="Right" Margin="0,0,50,50" VerticalAlignment="Bottom" Width="80" RenderTransformOrigin="1.04,0.52"/>
     </Grid>
 </Window>
