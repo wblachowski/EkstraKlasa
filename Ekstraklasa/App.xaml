@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Ekstraklasa;component/Styles/Overrides.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
                 <ResourceDictionary>
+                    <SolidColorBrush x:Key="MaterialDesignTextFieldBoxDisabledBackground" Color="Transparent"  />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 

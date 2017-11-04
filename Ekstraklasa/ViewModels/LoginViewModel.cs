@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.ComponentModel;
-using System.Linq;
+using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-
 namespace Ekstraklasa
 {
     class LoginViewModel : INotifyPropertyChanged
@@ -104,24 +102,54 @@ namespace Ekstraklasa
             }
         }
 
-        private void Login()
+        private bool _IsLogingFieldEnabled = true;
+        public bool IsLogingFieldEnabled
         {
-            System.Diagnostics.Debug.WriteLine(this._Username + " " + this._Password);
-            StringBuilder Sb = new StringBuilder();
-
-            using (var hash = SHA256.Create())
+            get
             {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(_Password));
+                return _IsLogingFieldEnabled;
+            }
+            set
+            {
+                if(value != _IsLogingFieldEnabled)
+                {
+                    _IsLogingFieldEnabled = value;
+                    OnPropertyChanged("IsLogingFieldEnabled");
+                }
+            }
+        }
 
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
+        private async void Login()
+        {
+            if (_IsLogingFieldEnabled)
+            {
+                IsLogingFieldEnabled = false;
+                int result = await ValidateLogin();
+                IsLogingFieldEnabled = true;
+                if (result != 0)
+                    {
+                        ShowBadLogin = true;
+                        switch (result)
+                        {
+                            case 1: ErrorText = "Niepoprawny login lub hasło"; break;
+                            case 2: ErrorText = "Brak połączenia z bazą danych"; break;
+                        }
+                    }
+                    else
+                    {
+                        ShowBadLogin = false;
+                        OnSimpleEvent(Close);
+                    }
             }
 
-            Console.WriteLine( Sb.ToString());
-            ErrorText = "Niepoprawny login lub hasło";
-            ShowBadLogin = true;
-            this.OnSimpleEvent(this.Close);
+        }
+
+        private async Task<int> ValidateLogin()
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.ValidateLogin(_Username, _Password);
+            });
         }
 
         virtual protected void OnPropertyChanged(string propName)
