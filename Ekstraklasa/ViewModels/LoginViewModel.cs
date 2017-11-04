@@ -124,6 +124,7 @@ namespace Ekstraklasa
             if (_IsLogingFieldEnabled)
             {
                 IsLogingFieldEnabled = false;
+                ShowBadLogin = false;
                 int result = await ValidateLogin();
                 IsLogingFieldEnabled = true;
                 if (result != 0)
