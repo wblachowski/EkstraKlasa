@@ -87,6 +87,23 @@ namespace Ekstraklasa
             }
         }
 
+        private string _ErrorText = "Błąd";
+        public string ErrorText
+        {
+            get
+            {
+                return _ErrorText;
+            }
+            set
+            {
+                if(value != _ErrorText)
+                {
+                    _ErrorText = value;
+                    OnPropertyChanged("ErrorText");
+                }
+            }
+        }
+
         private void Login()
         {
             System.Diagnostics.Debug.WriteLine(this._Username + " " + this._Password);
@@ -102,6 +119,7 @@ namespace Ekstraklasa
             }
 
             Console.WriteLine( Sb.ToString());
+            ErrorText = "Niepoprawny login lub hasło";
             ShowBadLogin = true;
             this.OnSimpleEvent(this.Close);
         }
