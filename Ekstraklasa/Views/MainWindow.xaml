@@ -45,7 +45,7 @@
                         </ListBoxItem>
                     <ListBoxItem Height="38">
                         <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Kind="HumanHandsdown"  HorizontalAlignment="Right" />
+                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Kind="HumanMale"  HorizontalAlignment="Right" />
                             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Zawodnicy</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
