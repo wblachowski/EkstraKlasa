@@ -18,7 +18,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" Text="Drużyna A"/>
-                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="A:B"/>
+                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="A : B"/>
                     <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="Drużyna B" />
                 </Grid>
             </Expander.Header>
