@@ -93,7 +93,7 @@
                         <Trigger Property="IsSelected" Value="True" >
                             <Setter Property="FontWeight" Value="SemiBold" />
                             <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Foreground" Value="#3f51b5" />
+                            <Setter Property="Foreground" Value="#3949AB" />
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

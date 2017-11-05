@@ -13,7 +13,7 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
         public delegate void SimpleEventHandler();
-        public event SimpleEventHandler OpenNewWindow;
+        public event SimpleEventHandler OpenMainWindow;
         public event SimpleEventHandler Close;
 
         public LoginViewModel()
@@ -94,7 +94,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(value != _ErrorText)
+                if (value != _ErrorText)
                 {
                     _ErrorText = value;
                     OnPropertyChanged("ErrorText");
@@ -111,7 +111,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(value != _IsLogingFieldEnabled)
+                if (value != _IsLogingFieldEnabled)
                 {
                     _IsLogingFieldEnabled = value;
                     OnPropertyChanged("IsLogingFieldEnabled");
@@ -128,19 +128,20 @@ namespace Ekstraklasa
                 int result = await ValidateLogin();
                 IsLogingFieldEnabled = true;
                 if (result != 0)
+                {
+                    ShowBadLogin = true;
+                    switch (result)
                     {
-                        ShowBadLogin = true;
-                        switch (result)
-                        {
-                            case 1: ErrorText = "Niepoprawny login lub hasło"; break;
-                            case 2: ErrorText = "Brak połączenia z bazą danych"; break;
-                        }
+                        case 1: ErrorText = "Niepoprawny login lub hasło"; break;
+                        case 2: ErrorText = "Brak połączenia z bazą danych"; break;
                     }
-                    else
-                    {
-                        ShowBadLogin = false;
-                        OnSimpleEvent(Close);
-                    }
+                }
+                else
+                {
+                    ShowBadLogin = false;
+                    OnSimpleEvent(OpenMainWindow);
+                    OnSimpleEvent(Close);
+                }
             }
 
         }
@@ -161,7 +162,7 @@ namespace Ekstraklasa
 
         private void OnSimpleEvent(SimpleEventHandler handler)
         {
-            if(handler != null)
+            if (handler != null)
             {
                 handler();
             }

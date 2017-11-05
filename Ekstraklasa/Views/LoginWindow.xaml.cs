@@ -26,9 +26,9 @@ namespace Ekstraklasa
             viewModel.Close += () => {
                 this.Close(); 
             };
-            viewModel.OpenNewWindow += () =>
+            viewModel.OpenMainWindow += () =>
             {
-                var window = new LoginWindow();
+                var window = new MainWindow();
                 window.Show();
             };
             DataContext = viewModel;
