@@ -25,9 +25,6 @@ namespace Ekstraklasa
             InitializeComponent();
             var viewModel = new MainViewModel();
             DataContext = viewModel;
-
-            m_listbox_menu.SelectedIndex = 0;
-            m_content_control.Content = new Table();
         }
         void SelectionChanged(object sender, SelectionChangedEventArgs args)
         {
