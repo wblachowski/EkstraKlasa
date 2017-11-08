@@ -12,6 +12,23 @@ namespace Ekstraklasa
 {
     public static class MainModel
     {
+        public static int TestConnection()
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+
         #region loging
 
         public static int ValidateLogin(string username, string password)

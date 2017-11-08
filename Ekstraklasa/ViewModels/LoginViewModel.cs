@@ -18,6 +18,7 @@ namespace Ekstraklasa
 
         public LoginViewModel()
         {
+            TestConnection();
         }
 
         private ICommand _loginCommand;
@@ -146,11 +147,29 @@ namespace Ekstraklasa
 
         }
 
+        private async void TestConnection()
+        {
+            int result = await TestConnectionAsync();
+            if (result != 0)
+            {
+                ShowBadLogin = true;
+                ErrorText = "Brak połączenia z bazą danych";
+            }
+        }
+
         private async Task<int> ValidateLoginAsync()
         {
             return await Task.Run(() =>
             {
                 return MainModel.ValidateLogin(_Username, _Password);
+            });
+        }
+
+        private async Task<int> TestConnectionAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.TestConnection();
             });
         }
 
