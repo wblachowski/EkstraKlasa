@@ -11,51 +11,59 @@
              Style="{StaticResource UserControlStyle}">
 
     <Grid>
-        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <Grid>
+                        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False">
-            <DataGrid.Columns>
+                        <DataGrid.Columns>
 
-                <DataGridTextColumn Binding="{Binding Nr}"
+                            <DataGridTextColumn Binding="{Binding Nr}"
                                         Header="Lp."
                                         Width="52"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
-                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Name}"
+                            <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                            <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Name}"
                                                                Header="Nazwa zespołu"   
                                                                Width="200"
                                                                />
-                <!-- set a max length to get an indicator in the editor -->
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Matches}"
+                            <!-- set a max length to get an indicator in the editor -->
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Matches}"
                                                                Header="M"  
                                                                Width="46"
                                                                />
-                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Wins}"
+                            <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Wins}"
                                                         Header="Z"     
                                                         Width="46"
                                                         />
 
 
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Ties}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Ties}"
                                                         Header="R"   
                                                            Width="46"
                                                         />
 
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Loses}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Loses}"
                                                         Header="P"  
                                                            Width="46"
                                                         />
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Goals}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Goals}"
                                                         Header="B" 
                                                            Width="46"
                                                         />
-                <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Points}"
+                            <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Points}"
                                                         Header="P" 
                                                            Width="46"
                                                         />
-            </DataGrid.Columns>
-        </DataGrid>
-        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="483,295,0,0" VerticalAlignment="Top"/>
-        <dragablz:TabablzControl Margin="50,300,122,0"  FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ProgressBar  Visibility="{Binding Path=IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  HorizontalAlignment="Left" Height="1" Margin="0,46,0,0" VerticalAlignment="Top" Width="600"/>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+        <dragablz:TabablzControl Visibility="Hidden" Margin="50,300,122,0"  FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
             <dragablz:TabablzControl.Resources>
                 <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
                 <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
@@ -71,6 +79,5 @@
             </TabItem>
         </dragablz:TabablzControl>
         <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Left" Height="5" Margin="50,340,0,0"  VerticalAlignment="Top" Width="500"/>
-        <ProgressBar  Visibility="{Binding Path=IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  HorizontalAlignment="Left" Height="1" Margin="0,46,0,0" VerticalAlignment="Top" Width="600"/>
     </Grid>
 </UserControl>
