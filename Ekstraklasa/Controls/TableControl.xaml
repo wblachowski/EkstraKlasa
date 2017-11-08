@@ -9,7 +9,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
-    
+
     <Grid>
         <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False">
@@ -17,7 +17,6 @@
 
                 <DataGridTextColumn Binding="{Binding Nr}"
                                         Header="Lp."
-
                                         Width="52"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                 <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
@@ -55,7 +54,7 @@
                                                         />
             </DataGrid.Columns>
         </DataGrid>
-        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="165,230,0,0" VerticalAlignment="Top"/>
+        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"  IsIndeterminate="True" HorizontalAlignment="Left" Height="40" Width="40" Margin="483,295,0,0" VerticalAlignment="Top"/>
         <dragablz:TabablzControl Margin="50,300,122,0"  FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
             <dragablz:TabablzControl.Resources>
                 <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
@@ -72,5 +71,6 @@
             </TabItem>
         </dragablz:TabablzControl>
         <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Left" Height="5" Margin="50,340,0,0"  VerticalAlignment="Top" Width="500"/>
+        <ProgressBar  Visibility="{Binding Path=IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  HorizontalAlignment="Left" Height="1" Margin="0,46,0,0" VerticalAlignment="Top" Width="600"/>
     </Grid>
 </UserControl>

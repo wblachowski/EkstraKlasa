@@ -34,10 +34,28 @@ namespace Ekstraklasa
             }
         }
 
+        private bool _IsProgressBarVisible = true;
+        public bool IsProgressBarVisible
+        {
+            get
+            {
+                return _IsProgressBarVisible;
+            }
+            set
+            {
+                if(_IsProgressBarVisible != value)
+                {
+                    _IsProgressBarVisible = value;
+                    OnPropertyChanged("IsProgressBarVisible");
+                }
+            }
+        }
+
         private async void UpdateTable()
         {
             List<TableEntity> list = await GetCurrentTableAsync();
             TableEntities = new ObservableCollection<TableEntity>(list);
+            IsProgressBarVisible = false;
 
         }
 
