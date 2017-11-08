@@ -53,7 +53,7 @@
                                                            Width="46"
                                                         />
                             <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Points}"
-                                                        Header="P" 
+                                                        Header="Pkt." 
                                                            Width="46"
                                                         />
                         </DataGrid.Columns>
