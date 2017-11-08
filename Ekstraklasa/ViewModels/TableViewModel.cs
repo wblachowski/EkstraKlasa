@@ -12,7 +12,12 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
 
-        private ObservableCollection<TableEntity> _TableEntities;
+        public TableViewModel()
+        {
+            UpdateTable();
+        }
+
+        private ObservableCollection<TableEntity> _TableEntities = new ObservableCollection<TableEntity>();
         public ObservableCollection<TableEntity> TableEntities
         {
             get
@@ -21,12 +26,26 @@ namespace Ekstraklasa
             }
             set
             {
-                if (!TableEntities.Equals(value))
+                if (!_TableEntities.Equals(value))
                 {
-                    TableEntities = value;
+                    _TableEntities = value;
                     OnPropertyChanged("TableEntities");
                 }
             }
+        }
+
+        private async void UpdateTable()
+        {
+            List<TableEntity> list = await GetCurrentTableAsync();
+            TableEntities = new ObservableCollection<TableEntity>(list);
+
+        }
+
+        private async Task<List<TableEntity>> GetCurrentTableAsync()
+        {
+            return await Task.Run(() => {
+                return MainModel.GetCurrentTable();
+            });
         }
 
         virtual protected void OnPropertyChanged(string propName)

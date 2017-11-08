@@ -23,6 +23,8 @@ namespace Ekstraklasa
         public TableControl()
         {
             InitializeComponent();
+            var viewModel = new TableViewModel();
+            DataContext = viewModel;
         }
     }
 }

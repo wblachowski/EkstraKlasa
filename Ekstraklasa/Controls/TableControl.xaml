@@ -9,13 +9,15 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
+    
     <Grid>
-        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
-                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False">
             <DataGrid.Columns>
 
-                <DataGridTextColumn Binding="{Binding Code}"
+                <DataGridTextColumn Binding="{Binding Nr}"
                                         Header="Lp."
+
                                         Width="52"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                 <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
@@ -24,30 +26,30 @@
                                                                Width="200"
                                                                />
                 <!-- set a max length to get an indicator in the editor -->
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Description}"
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Matches}"
                                                                Header="M"  
                                                                Width="46"
                                                                />
-                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn  Binding="{Binding Wins}"
                                                         Header="Z"     
                                                         Width="46"
                                                         />
 
 
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Ties}"
                                                         Header="R"   
                                                            Width="46"
                                                         />
 
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Loses}"
                                                         Header="P"  
                                                            Width="46"
                                                         />
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Goals}"
                                                         Header="B" 
                                                            Width="46"
                                                         />
-                <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Numeric}"
+                <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Binding="{Binding Points}"
                                                         Header="P" 
                                                            Width="46"
                                                         />

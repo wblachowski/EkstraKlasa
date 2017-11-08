@@ -125,7 +125,7 @@ namespace Ekstraklasa
             {
                 IsLogingFieldEnabled = false;
                 ShowBadLogin = false;
-                int result = await ValidateLogin();
+                int result = await ValidateLoginAsync();
                 IsLogingFieldEnabled = true;
                 if (result != 0)
                 {
@@ -146,7 +146,7 @@ namespace Ekstraklasa
 
         }
 
-        private async Task<int> ValidateLogin()
+        private async Task<int> ValidateLoginAsync()
         {
             return await Task.Run(() =>
             {

@@ -22,13 +22,13 @@ namespace Ekstraklasa
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql= "SELECT password FROM log_users WHERE name=:name"; 
-                    using (OracleCommand command = new OracleCommand(sql,connection))
+                    string sql = "SELECT password FROM log_users WHERE name=:name";
+                    using (OracleCommand command = new OracleCommand(sql, connection))
                     {
-                        command.Parameters.Add("name",username);
+                        command.Parameters.Add("name", username);
                         OracleDataReader dr = command.ExecuteReader();
                         dr.Read();
-                        if(dr.HasRows && dr.GetString(0) == GetPasswordHash(password))
+                        if (dr.HasRows && dr.GetString(0) == GetPasswordHash(password))
                         {
                             return 0;
                         }
@@ -39,7 +39,8 @@ namespace Ekstraklasa
                     }
 
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 return 2;
@@ -62,5 +63,44 @@ namespace Ekstraklasa
         }
 
         #endregion
+
+        public static List<TableEntity> GetCurrentTable()
+        {
+            List<TableEntity> TableList = new List<TableEntity>();
+            int nr = 1;
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Ekstraklasa.Queries.GetTables;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if(dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string name = dr.GetString(0);
+                                int matches = dr.GetInt32(1);
+                                int wins = dr.GetInt32(2);
+                                int ties = dr.GetInt32(3);
+                                int loses = dr.GetInt32(4);
+                                string goals = dr.GetInt32(5).ToString() + ":" + dr.GetInt32(6).ToString();
+                                int points = dr.GetInt32(7);
+                                TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points));
+                                nr++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            return TableList;
+        }
     }
 }
