@@ -23,6 +23,8 @@ namespace Ekstraklasa
         public MatchesControl()
         {
             InitializeComponent();
+            var viewModel = new MatchesViewModel();
+            DataContext = viewModel;
         }
     }
 }
