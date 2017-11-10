@@ -35,6 +35,10 @@
                             </StackPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:GoalControl}">
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <ItemsControl ItemsSource="{Binding GoalsB}" Margin="-2 0 0 0 " Grid.Column="2" >
                     <ItemsControl.ItemsPanel>
@@ -43,6 +47,10 @@
                             </StackPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:GoalControl}">
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Grid>
         </Expander>

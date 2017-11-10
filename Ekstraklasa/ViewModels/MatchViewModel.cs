@@ -12,6 +12,15 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
 
+        public MatchViewModel()
+        {
+            TeamA = "Lech Poznan";
+            TeamB = "Legia warszawa";
+            Score = "2:1";
+            
+
+
+        }
         private string _TeamA;
         public string TeamA
         {
