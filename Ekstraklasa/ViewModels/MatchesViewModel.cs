@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,23 @@ namespace Ekstraklasa
         public MatchesViewModel()
         {
 
+        }
+
+        private ObservableCollection<MatchControl> _Matches = new ObservableCollection<MatchControl>();
+        public ObservableCollection<MatchControl> Matches
+        {
+            get
+            {
+                return _Matches;
+            }
+            set
+            {
+                if(_Matches != value)
+                {
+                    _Matches = value;
+                    OnPropertyChanged("Matches");
+                }
+            }
         }
 
         virtual protected void OnPropertyChanged(string propName)

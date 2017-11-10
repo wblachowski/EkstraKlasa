@@ -12,72 +12,14 @@
         <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                    <StackPanel Margin="0 20 0 0 " Orientation="Vertical">
-                        <Expander   Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 ">
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock FlowDirection="RightToLeft" Text="Legia Warszawa"/>
-                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="1:2"/>
-                                    <TextBlock Grid.Column="2" FontWeight="Bold" Text="Lech Poznań" />
-                                </Grid>
-                            </Expander.Header>
-                            <StackPanel Orientation="Vertical"
-                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                            Margin="0 0 0 10"
-                            >
-                                <TextBlock Opacity=".68" Text="Gola strzelł ksądz robak"
-                               TextWrapping="Wrap"/>
-                            </StackPanel>
-                        </Expander>
-                        <Expander  Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 ">
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock FlowDirection="RightToLeft" FontWeight="Bold" Text="Termalica Bruk-Bet"/>
-                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="6:2"/>
-                                    <TextBlock Grid.Column="2"  Text="Pogoń Szczecin" />
-                                </Grid>
-                            </Expander.Header>
-                            <StackPanel Orientation="Vertical"
-                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                            Margin="0 0 0 10"
-                            >
-                                <TextBlock Opacity=".68" Text="Samobójcze bramki"
-                               TextWrapping="Wrap"/>
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander  Width="400" HorizontalAlignment="Stretch" Margin="0 -10 0 0 "> 
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock FlowDirection="RightToLeft" FontWeight="Bold" Text="Wisła Płock"/>
-                                    <TextBlock Grid.Column="1" Margin="8 0 8 0" Text="1:0"/>
-                                    <TextBlock Grid.Column="2"  Text="Cracovia Kraków" />
-                                </Grid>
-                            </Expander.Header>
-                            <StackPanel Orientation="Vertical"
-                            TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                            Margin="0 0 0 10"
-                            >
-                                <TextBlock Opacity=".68" Text="Samobójcze bramki"
-                               TextWrapping="Wrap"/>
-                            </StackPanel>
-                        </Expander>
-                    </StackPanel>
+                    <ItemsControl Margin="0 20 0 0 " ItemsSource="{Binding Matches}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
