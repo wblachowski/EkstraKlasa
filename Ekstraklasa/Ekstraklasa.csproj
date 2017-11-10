@@ -80,8 +80,8 @@
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Matches.xaml.cs">
-      <DependentUpon>Matches.xaml</DependentUpon>
+    <Compile Include="MatchesControl.xaml.cs">
+      <DependentUpon>MatchesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PasswordBoxAssistant.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -120,7 +120,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Matches.xaml">
+    <Page Include="MatchesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

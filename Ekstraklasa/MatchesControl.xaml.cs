@@ -18,9 +18,9 @@ namespace Ekstraklasa
     /// <summary>
     /// Interaction logic for Matches.xaml
     /// </summary>
-    public partial class Matches : UserControl
+    public partial class MatchesControl : UserControl
     {
-        public Matches()
+        public MatchesControl()
         {
             InitializeComponent();
         }

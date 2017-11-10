@@ -31,7 +31,7 @@ namespace Ekstraklasa
             int selection = (sender as ListBox).SelectedIndex;
             switch (selection)
             {
-                case 0: m_content_control.Content = new Matches(); break;
+                case 0: m_content_control.Content = new MatchesControl(); break;
                 //case 1: m_content_control.Content = new Table(); break;
             }
             if(selection == 1)
