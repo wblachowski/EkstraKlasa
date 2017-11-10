@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,40 @@ namespace Ekstraklasa
                 {
                     _Score = value;
                     OnPropertyChanged("Score");
+                }
+            }
+        }
+
+        private ObservableCollection<GoalControl> _GoalsA = new ObservableCollection<GoalControl>();
+        public ObservableCollection<GoalControl> GoalsA
+        {
+            get
+            {
+                return _GoalsA;
+            }
+            set
+            {
+                if(_GoalsA != value)
+                {
+                    _GoalsA = value;
+                    OnPropertyChanged("GoalsA");
+                }
+            }
+        }
+
+        private ObservableCollection<GoalControl> _GoalsB = new ObservableCollection<GoalControl>();
+        public ObservableCollection<GoalControl> GoalsB
+        {
+            get
+            {
+                return _GoalsB;
+            }
+            set
+            {
+                if (_GoalsB != value)
+                {
+                    _GoalsB = value;
+                    OnPropertyChanged("GoalsB");
                 }
             }
         }
