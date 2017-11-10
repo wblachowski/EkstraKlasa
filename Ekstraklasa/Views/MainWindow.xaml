@@ -22,7 +22,7 @@
                     <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
                 <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  
                              ItemContainerStyle="{StaticResource MaterialDesignListBoxItem}"
-                             SelectionMode="Single" SelectionChanged="SelectionChanged" 
+                             SelectionMode="Single"
                              SelectedIndex="{Binding menuSelectedIndex}"
                              Foreground="#555555"
                              >
