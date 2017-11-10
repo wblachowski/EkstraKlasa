@@ -10,8 +10,8 @@
              Style="{StaticResource UserControlStyle}">
     <Grid>
         <StackPanel Orientation="Horizontal" Opacity=".68">
-            <TextBlock x:Name="Minute" Margin="0 0 6 0" Text="63'"></TextBlock>
-            <TextBlock x:Name="Scorer" Text="R.Lewandowski"></TextBlock>
+            <TextBlock x:Name="Minute" Margin="0 0 6 0" Text="{Binding Minute}"></TextBlock>
+            <TextBlock x:Name="Scorer" Text="{Binding Scorer}"></TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -23,6 +23,8 @@ namespace Ekstraklasa.Controls
         public MatchControl()
         {
             InitializeComponent();
+            var viewModel = new MatchViewModel();
+            DataContext = viewModel;
         }
 
     }

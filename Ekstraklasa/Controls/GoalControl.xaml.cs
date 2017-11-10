@@ -23,6 +23,8 @@ namespace Ekstraklasa.Controls
         public GoalControl()
         {
             InitializeComponent();
+            var viewModel = new GoalViewModel();
+            DataContext = viewModel;
         }
     }
 }

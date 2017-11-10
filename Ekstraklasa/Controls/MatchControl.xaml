@@ -17,9 +17,9 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" Text="Drużyna A"/>
-                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="A : B"/>
-                    <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="Drużyna B" />
+                    <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" Text="{Binding TeamA}"/>
+                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="{Binding Score}"/>
+                    <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="{Binding TeamB}" />
                 </Grid>
             </Expander.Header>
             <Grid Width="312" HorizontalAlignment="Left" Margin="25 0 0 0">
@@ -28,10 +28,22 @@
                     <ColumnDefinition Width="36"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel  Margin="0 0 2 0 " Grid.Column="0" HorizontalAlignment="Right" x:Name="GoalsA" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                </StackPanel>
-                <StackPanel Margin="-2 0 0 0 " Grid.Column="2"  x:Name="GoalsB" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                </StackPanel>
+                <ItemsControl ItemsSource="{Binding GoalsA}" Margin="0 0 2 0 " Grid.Column="0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel  HorizontalAlignment="Right" x:Name="GoalsA" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding GoalsB}" Margin="-2 0 0 0 " Grid.Column="2" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel  x:Name="GoalsB" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </Grid>
         </Expander>
     </Grid>
