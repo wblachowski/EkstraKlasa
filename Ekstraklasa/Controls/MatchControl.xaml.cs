@@ -27,5 +27,12 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
+        public MatchControl(MatchEntity match)
+        {
+            InitializeComponent();
+            var viewModel = new MatchViewModel(match);
+            DataContext = viewModel;
+        }
+
     }
 }

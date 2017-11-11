@@ -17,6 +17,7 @@ namespace Ekstraklasa
             ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
             temp.Add(new MatchControl());
             Matches = temp;
+            UpdateMatches();
         }
 
         private ObservableCollection<MatchControl> _Matches = new ObservableCollection<MatchControl>();
@@ -34,6 +35,25 @@ namespace Ekstraklasa
                     OnPropertyChanged("Matches");
                 }
             }
+        }
+
+        private async void UpdateMatches()
+        {
+            List<MatchEntity> matches = await GetCurrentMatchesAsync();
+            ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
+            foreach(MatchEntity match in matches)
+            {
+                temp.Add(new MatchControl(match));
+            }
+            Matches = temp;
+        }
+
+        private async Task<List<MatchEntity>> GetCurrentMatchesAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.GetCurrentMatches();
+            });
         }
 
         virtual protected void OnPropertyChanged(string propName)

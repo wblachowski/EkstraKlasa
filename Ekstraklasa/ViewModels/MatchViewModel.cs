@@ -14,12 +14,14 @@ namespace Ekstraklasa
 
         public MatchViewModel()
         {
-            TeamA = "Lech Poznan";
-            TeamB = "Legia warszawa";
-            Score = "2:1";
-            
+            Score = "Brak danych";
+        }
 
-
+        public MatchViewModel(MatchEntity match)
+        {
+            TeamA = match.Host;
+            TeamB = match.Guest;
+            Score = String.Format("{0}:{1}", match.ScoreHost, match.ScoreGuest);
         }
         private string _TeamA;
         public string TeamA
