@@ -11,6 +11,17 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
 
+        public GoalViewModel()
+        {
+
+        }
+
+        public GoalViewModel(GoalEntity goal)
+        {
+            Minute = String.Format("{0}'", goal.Minute.ToString());
+            Scorer = String.Format("{0}.{1}", goal.Firstname.Substring(0, 1), goal.Lastname);
+        }
+
         private string _Minute;
         public string Minute
         {

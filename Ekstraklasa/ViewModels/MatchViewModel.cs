@@ -22,7 +22,12 @@ namespace Ekstraklasa
             TeamA = match.Host;
             TeamB = match.Guest;
             Score = String.Format("{0}:{1}", match.ScoreHost, match.ScoreGuest);
+            ID = match.ID;
+            UpdateGoals();
         }
+
+        private int ID;
+
         private string _TeamA;
         public string TeamA
         {
@@ -106,6 +111,35 @@ namespace Ekstraklasa
                     OnPropertyChanged("GoalsB");
                 }
             }
+        }
+
+        private async void UpdateGoals()
+        {
+            List<GoalEntity> goals = await GetGoalsByIDAsync();
+            ObservableCollection<GoalControl> tempA = new ObservableCollection<GoalControl>();
+            ObservableCollection<GoalControl> tempB = new ObservableCollection<GoalControl>();
+            foreach(GoalEntity goal in goals)
+            {
+                if (goal.HostGoal)
+                {
+                    tempA.Add(new GoalControl(goal));
+                }
+                else
+                {
+                    tempB.Add(new GoalControl(goal));
+                }
+            }
+            GoalsA = tempA;
+            GoalsB = tempB;
+        }
+        
+        private async Task<List<GoalEntity>> GetGoalsByIDAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.GetGoalsByID(ID);
+            });
+
         }
 
 

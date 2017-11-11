@@ -26,5 +26,12 @@ namespace Ekstraklasa
             var viewModel = new GoalViewModel();
             DataContext = viewModel;
         }
+
+        public GoalControl(GoalEntity goal)
+        {
+            InitializeComponent();
+            var viewModel = new GoalViewModel(goal);
+            DataContext = viewModel;
+        }
     }
 }

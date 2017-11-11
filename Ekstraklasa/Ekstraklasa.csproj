@@ -75,6 +75,7 @@
     <Compile Include="Controls\MatchControl.xaml.cs">
       <DependentUpon>MatchControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\GoalEntity.cs" />
     <Compile Include="Data\MatchEntity.cs" />
     <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\TableEntity.cs" />
