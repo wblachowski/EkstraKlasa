@@ -9,7 +9,7 @@ namespace Ekstraklasa
     public static class Queries
     {
         public static string GetTables = "select name, " +
-            "count(*) as games," +
+            "count(match.id) as games," +
             "count(case when (team.id=team_host_id and score_host>score_guest) or(team.id=team_guest_id and score_guest>score_host) then 1 end) as wins, " +
             "count(case when score_host=score_guest then 1 end) as ties, " +
             "count(case when (team.id= team_host_id and score_host<score_guest) or(team.id=team_guest_id and score_guest<score_host) then 1 end) as loses, " +
@@ -17,7 +17,8 @@ namespace Ekstraklasa
             "nvl(sum(case when team.id=team_host_id then score_guest when team.id=team_guest_id then score_host end),0) as goals_conceded, " +
             "sum(case when (team.id=team_host_id and score_host>score_guest) then 3 when score_host=score_guest then 1 " +
             "when(team.id=team_guest_id and score_guest>score_host) then 3 else 0 end) as points " +
-            "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name order by points desc";
+            "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name "+
+            "order by points desc, games desc, wins desc";
 
         public static string GetAllMatches = "select m.id, start_time,a.name as host, b.name as guest, score_host,score_guest,s.name, s.city, s.address " +
             "from match m " +
