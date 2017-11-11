@@ -115,9 +115,45 @@ namespace Ekstraklasa
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
             }
             return TableList;
+        }
+
+        public static List<MatchEntity> GetCurrentMatches()
+        {
+            List<MatchEntity> Matches = new List<MatchEntity>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Ekstraklasa.Queries.GetAllMatches;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int id = dr.GetInt32(0);
+                                DateTime date = dr.GetDateTime(1);
+                                string host = dr.GetString(2);
+                                string guest = dr.GetString(3);
+                                int scoreHost = dr.GetInt32(4);
+                                int scoreGuest = dr.GetInt32(5);
+                                string stadium = dr.GetString(6);
+                                string city = dr.GetString(7);
+                                string address = dr.GetString(8);
+                                Matches.Add(new MatchEntity(id, date, host, guest, scoreHost, scoreGuest, stadium, city, address));
+                            }
+                        }
+                    }
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Matches;
         }
     }
 }

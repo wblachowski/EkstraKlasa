@@ -23,7 +23,8 @@ namespace Ekstraklasa
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
-            "join stadium s on m.stadium_id=s.id";
+            "join stadium s on m.stadium_id=s.id " +
+            "order by start_time desc";
 
     }
 }
