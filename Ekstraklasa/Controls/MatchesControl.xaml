@@ -6,26 +6,57 @@
              xmlns:local="clr-namespace:Ekstraklasa"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="600"
+             Height="500" Width="600"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
-            <materialDesign:TransitionerSlide >
-                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                    <ItemsControl Margin="0 20 0 0 " ItemsSource="{Binding Matches}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical">
-                                </StackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type local:MatchControl}">
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </materialDesign:TransitioningContent>
-            </materialDesign:TransitionerSlide>
-        </materialDesign:Transitioner>
+        <StackPanel Orientation="Vertical">
+            <TreeView Grid.Row="0">
+                <TreeViewItem   Header="Filtruj" Style="{StaticResource MaterialDesignTreeViewItem}" ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                    <StackPanel  Margin="-9 -10 0 0" Orientation="Horizontal">
+                        <ComboBox materialDesign:HintAssist.Hint="Gospodarz" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
+                            <ComboBoxItem>Legia Warszwa</ComboBoxItem>
+                            <ComboBoxItem>Lech Poznań</ComboBoxItem>
+                            <ComboBoxItem>Pogoń Szczecin</ComboBoxItem>
+                            <ComboBoxItem>Korona Kielce</ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Gość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
+                            <ComboBoxItem>Legia Warszwa</ComboBoxItem>
+                            <ComboBoxItem>Lech Poznań</ComboBoxItem>
+                            <ComboBoxItem>Pogoń Szczecin</ComboBoxItem>
+                            <ComboBoxItem>Korona Kielce</ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Stadion" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
+                            <ComboBoxItem>Inea</ComboBoxItem>
+                            <ComboBoxItem>Pepsi Arena</ComboBoxItem>
+                        </ComboBox>
+                        <DatePicker materialDesign:HintAssist.Hint="Data"     Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday" />
+
+                    </StackPanel>
+                </TreeViewItem>
+            </TreeView>
+            <materialDesign:Transitioner  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+                <materialDesign:TransitionerSlide >
+                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                        <ItemsControl Margin="0 20 0 0 " ItemsSource="{Binding Matches}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                    </StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type local:MatchControl}">
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </materialDesign:TransitioningContent>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </StackPanel>
     </Grid>
 </UserControl>
