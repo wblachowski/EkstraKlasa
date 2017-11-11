@@ -10,8 +10,8 @@
              Style="{StaticResource UserControlStyle}">
     <Grid>
         <StackPanel Orientation="Horizontal" Opacity=".68">
-            <TextBlock x:Name="Minute" Margin="0 0 6 0" Text="{Binding Minute}"></TextBlock>
             <TextBlock x:Name="Scorer" Text="{Binding Scorer}"></TextBlock>
+            <TextBlock x:Name="Minute" Margin="6 0 0 0" Text="{Binding Minute}"></TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>
