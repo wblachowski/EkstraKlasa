@@ -19,10 +19,10 @@
                     </TreeViewItem.Header>
                     <StackPanel  Margin="-9 -10 0 0" Orientation="Horizontal">
                         <ComboBox materialDesign:HintAssist.Hint="Gospodarz" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding HostTeams}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding HostTeams}" SelectedValue="{Binding HostSelected}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Gość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}" SelectedValue="{Binding GuestSelected}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Stadion" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
 				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}">

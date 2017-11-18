@@ -38,6 +38,7 @@ namespace Ekstraklasa
             }
         }
 
+        private ObservableCollection<string> FullHost = new ObservableCollection<string>();
         private ObservableCollection<string> _HostTeams = new ObservableCollection<string>();
         public ObservableCollection<string> HostTeams
         {
@@ -55,6 +56,7 @@ namespace Ekstraklasa
             }
         }
 
+        private ObservableCollection<string> FullGuest = new ObservableCollection<string>();
         private ObservableCollection<string> _GuestTeams = new ObservableCollection<string>();
         public ObservableCollection<string> GuestTeams
         {
@@ -89,13 +91,56 @@ namespace Ekstraklasa
             }
         }
 
+        private string _HostSelected;
+        public string HostSelected
+        {
+            get
+            {
+                return _HostSelected;
+            }
+            set
+            {
+                if (_HostSelected != value)
+                {
+                    _HostSelected = value;
+                    GuestTeams = new ObservableCollection<string>(FullGuest);
+                    GuestTeams.Remove(value);
+                    OnPropertyChanged("GuestTeams");
+                    OnPropertyChanged("HostSelected");
+                }
+            }
+        }
+
+        private string _GuestSelected;
+        public string GuestSelected
+        {
+            get
+            {
+                return _GuestSelected;
+            }
+            set
+            {
+                if (_GuestSelected != value)
+                {
+                    _GuestSelected = value;
+                    HostTeams = new ObservableCollection<string>(FullHost);
+                    HostTeams.Remove(value);
+                    OnPropertyChanged("HostTeams");
+                    OnPropertyChanged("GuestSelected");
+                }
+            }
+        }
+
+
         private async void UpdateFilters()
         {
             List<string> teams = await GetCurrentFiltersAsync();
             List<string> stadiums = await GetCurrentStadiumsAsync();
-            HostTeams = new ObservableCollection<string>(teams);
-            GuestTeams = new ObservableCollection<string>(teams);
+            FullHost = new ObservableCollection<string>(teams);
+            FullGuest = new ObservableCollection<string>(teams);
             Stadiums = new ObservableCollection<string>(stadiums);
+            GuestTeams = new ObservableCollection<string>(FullGuest);
+            HostTeams = new ObservableCollection<string>(FullHost);
         }
 
         private async void UpdateMatches()
