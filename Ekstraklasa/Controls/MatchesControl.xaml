@@ -13,26 +13,19 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <TreeView Grid.Row="0">
-                <TreeViewItem   Header="Filtruj" Style="{StaticResource MaterialDesignTreeViewItem}" ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                <TreeViewItem x:Name="m_tvFilter" Style="{StaticResource MaterialDesignTreeViewItem}" ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                    <TreeViewItem.Header>
+                        <TextBlock MouseDown="Filter_Mouse_Down">Filtruj</TextBlock>
+                    </TreeViewItem.Header>
                     <StackPanel  Margin="-9 -10 0 0" Orientation="Horizontal">
                         <ComboBox materialDesign:HintAssist.Hint="Gospodarz" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
-                            <ComboBoxItem>Legia Warszwa</ComboBoxItem>
-                            <ComboBoxItem>Lech Poznań</ComboBoxItem>
-                            <ComboBoxItem>Pogoń Szczecin</ComboBoxItem>
-                            <ComboBoxItem>Korona Kielce</ComboBoxItem>
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding HostTeams}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Gość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
-                            <ComboBoxItem>Legia Warszwa</ComboBoxItem>
-                            <ComboBoxItem>Lech Poznań</ComboBoxItem>
-                            <ComboBoxItem>Pogoń Szczecin</ComboBoxItem>
-                            <ComboBoxItem>Korona Kielce</ComboBoxItem>
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Stadion" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56">
-                            <ComboBoxItem>Inea</ComboBoxItem>
-                            <ComboBoxItem>Pepsi Arena</ComboBoxItem>
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}">
                         </ComboBox>
                         <DatePicker materialDesign:HintAssist.Hint="Data"     Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday" />
 

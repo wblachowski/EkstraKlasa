@@ -94,7 +94,7 @@ namespace Ekstraklasa
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         OracleDataReader dr = command.ExecuteReader();
-                        if(dr.HasRows)
+                        if (dr.HasRows)
                         {
                             while (dr.Read())
                             {
@@ -149,7 +149,8 @@ namespace Ekstraklasa
                         }
                     }
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -179,7 +180,7 @@ namespace Ekstraklasa
                                 bool hostGoal = dr.GetInt32(3) == 1 ? true : false;
                                 goals.Add(new GoalEntity(minute, firstname, lastname, hostGoal));
                             }
-                       }
+                        }
                     }
                 }
             }
@@ -189,6 +190,68 @@ namespace Ekstraklasa
             }
 
             return goals;
+        }
+
+        public static List<string> GetTeams()
+        {
+            List<string> teams = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetTeams;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string team = dr.GetString(0);
+                                teams.Add(team);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return teams;
+        }
+
+        public static List<string> GetStadiums()
+        {
+            List<string> stadiums = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetStadiums;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string stadium = dr.GetString(0);
+                                stadiums.Add(stadium);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return stadiums;
         }
     }
 }

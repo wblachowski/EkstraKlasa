@@ -26,5 +26,10 @@ namespace Ekstraklasa
             var viewModel = new MatchesViewModel();
             DataContext = viewModel;
         }
+
+        private void Filter_Mouse_Down(object sender, MouseButtonEventArgs e)
+        {
+            m_tvFilter.IsExpanded = !m_tvFilter.IsExpanded;
+        }
     }
 }

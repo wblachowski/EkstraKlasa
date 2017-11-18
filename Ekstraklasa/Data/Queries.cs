@@ -29,5 +29,9 @@ namespace Ekstraklasa
 
         public static string GetGoalsByID = "select minute, firstname, lastname, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL "+ 
            "from match m join goal g on g.match_id=id join person p on g.player_pesel = pesel where m.id = :id";
+
+        public static string GetTeams = "select name from team order by name desc";
+
+        public static string GetStadiums = "select name from stadium order by name desc";
     }
 }
