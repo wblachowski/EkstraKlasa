@@ -21,6 +21,8 @@ namespace Ekstraklasa
         {
             TeamA = match.Host;
             TeamB = match.Guest;
+            TeamAPath = match.HostPath;
+            TeamBPath = match.GuestPath;
             Score = String.Format("{0}:{1}", match.ScoreHost, match.ScoreGuest);
             ID = match.ID;
             UpdateGoals();
@@ -37,10 +39,27 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_TeamA != value)
+                if (_TeamA != value)
                 {
                     _TeamA = value;
                     OnPropertyChanged("TeamA");
+                }
+            }
+        }
+
+        private string _TeamAPath;
+        public string TeamAPath
+        {
+            get
+            {
+                return _TeamAPath;
+            }
+            set
+            {
+                if (_TeamAPath != value)
+                {
+                    _TeamAPath = value;
+                    OnPropertyChanged("TeamAPath");
                 }
             }
         }
@@ -54,10 +73,27 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_TeamB != value)
+                if (_TeamB != value)
                 {
                     _TeamB = value;
                     OnPropertyChanged("TeamB");
+                }
+            }
+        }
+
+        private string _TeamBPath;
+        public string TeamBPath
+        {
+            get
+            {
+                return _TeamBPath;
+            }
+            set
+            {
+                if (_TeamBPath != value)
+                {
+                    _TeamBPath = value;
+                    OnPropertyChanged("TeamBPath");
                 }
             }
         }
@@ -71,7 +107,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_Score != value)
+                if (_Score != value)
                 {
                     _Score = value;
                     OnPropertyChanged("Score");
@@ -88,7 +124,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_GoalsA != value)
+                if (_GoalsA != value)
                 {
                     _GoalsA = value;
                     OnPropertyChanged("GoalsA");
@@ -118,7 +154,7 @@ namespace Ekstraklasa
             List<GoalEntity> goals = await GetGoalsByIDAsync();
             ObservableCollection<GoalControl> tempA = new ObservableCollection<GoalControl>();
             ObservableCollection<GoalControl> tempB = new ObservableCollection<GoalControl>();
-            foreach(GoalEntity goal in goals)
+            foreach (GoalEntity goal in goals)
             {
                 if (goal.HostGoal)
                 {
@@ -132,7 +168,7 @@ namespace Ekstraklasa
             GoalsA = tempA;
             GoalsB = tempB;
         }
-        
+
         private async Task<List<GoalEntity>> GetGoalsByIDAsync()
         {
             return await Task.Run(() =>

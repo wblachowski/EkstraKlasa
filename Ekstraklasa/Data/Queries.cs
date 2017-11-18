@@ -20,7 +20,8 @@ namespace Ekstraklasa
             "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name,logo_path "+
             "order by points desc, games desc, wins desc";
 
-        public static string GetAllMatches = "select m.id, start_time,a.name as host, b.name as guest, score_host,score_guest,s.name, s.city, s.address " +
+        public static string GetAllMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, "+
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +

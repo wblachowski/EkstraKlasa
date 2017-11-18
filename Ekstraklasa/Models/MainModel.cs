@@ -139,13 +139,15 @@ namespace Ekstraklasa
                                 int id = dr.GetInt32(0);
                                 DateTime date = dr.GetDateTime(1);
                                 string host = dr.GetString(2);
-                                string guest = dr.GetString(3);
-                                int scoreHost = dr.GetInt32(4);
-                                int scoreGuest = dr.GetInt32(5);
-                                string stadium = dr.GetString(6);
-                                string city = dr.GetString(7);
-                                string address = dr.GetString(8);
-                                Matches.Add(new MatchEntity(id, date, host, guest, scoreHost, scoreGuest, stadium, city, address));
+                                string hostPath = dr.GetString(3);
+                                string guest = dr.GetString(4);
+                                string guestPath = dr.GetString(5);
+                                int scoreHost = dr.GetInt32(6);
+                                int scoreGuest = dr.GetInt32(7);
+                                string stadium = dr.GetString(8);
+                                string city = dr.GetString(9);
+                                string address = dr.GetString(10);
+                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, stadium, city, address));
                             }
                         }
                     }

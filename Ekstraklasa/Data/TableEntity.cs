@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,13 @@ namespace Ekstraklasa
         public string Goals { get; set; }
         public int Points { get; set; }
 
-        public TableEntity(int Nr, string Name, int Matches, int Wins, int Ties, int Loses, string Goals, int Points,string Path= "C:\\Users\\wblachowski\\Documents\\Visual Studio 2017\\Projects\\Ekstraklasa\\Logos\\Legia_Warszawa.png")
+        public TableEntity(int Nr, string Name, int Matches, int Wins, int Ties, int Loses, string Goals, int Points,string Path)
         {
             this.Nr = Nr;
             this.Path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\" + Path;
             if (String.IsNullOrEmpty(Path.Trim()))
             {
-                this.Path = "C:\\Users\\wblachowski\\Documents\\Visual Studio 2017\\Projects\\Ekstraklasa\\Logos\\Legia_Warszawa.png";
+                this.Path = ConfigurationManager.AppSettings["default_logo"];
             }
             this.Name = Name;
             this.Matches = Matches;

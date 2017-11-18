@@ -31,7 +31,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <StackPanel Width="30" Margin="-8 0 0 0">
-                                                    <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="15" VerticalAlignment="Center"  Source="{Binding Path}"/>
+                                                    <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="15" Source="{Binding Path}"/>
                                                 </StackPanel>
                                                 <TextBlock Text="{Binding Name}"/>
                                             </StackPanel>

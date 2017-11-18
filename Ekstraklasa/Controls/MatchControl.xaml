@@ -11,15 +11,25 @@
     <Grid>
         <Expander>
             <Expander.Header>
-                <Grid Width="312">
+                <Grid Width="312" Margin="0 -10 0 -10" Height="30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" Text="{Binding TeamA}"/>
-                    <TextBlock x:Name="score" Grid.Column="1" Margin="8 0 8 0" Text="{Binding Score}"/>
-                    <TextBlock x:Name="tbTeamB" Grid.Column="2" Text="{Binding TeamB}" />
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" VerticalAlignment="Center" Text="{Binding TeamA}"/>
+                        <StackPanel Width="30" VerticalAlignment="Center"  Margin="5 0 0 0">
+                            <Image  RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25" Source="{Binding TeamAPath}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock x:Name="score" Grid.Column="1"  VerticalAlignment="Center" Margin="10 0 10 0" Text="{Binding Score}"/>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <StackPanel Width="30" VerticalAlignment="Center" Margin="0 0 5 0">
+                            <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25"  Source="{Binding TeamBPath}"/>
+                        </StackPanel>
+                        <TextBlock x:Name="tbTeamB"  VerticalAlignment="Center" Text="{Binding TeamB}" />
+                    </StackPanel>
                 </Grid>
             </Expander.Header>
             <Grid Width="312" HorizontalAlignment="Left" Margin="25 0 0 0">
