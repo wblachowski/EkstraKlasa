@@ -106,8 +106,7 @@ namespace Ekstraklasa
                                 int loses = dr.GetInt32(5);
                                 string goals = dr.GetInt32(6).ToString() + ":" + dr.GetInt32(7).ToString();
                                 int points = dr.GetInt32(8);
-                                //we ignore path at this moment
-                                TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points));
+                                TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points,path));
                                 nr++;
                             }
                         }

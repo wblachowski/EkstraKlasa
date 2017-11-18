@@ -21,7 +21,11 @@ namespace Ekstraklasa
         public TableEntity(int Nr, string Name, int Matches, int Wins, int Ties, int Loses, string Goals, int Points,string Path= "C:\\Users\\wblachowski\\Documents\\Visual Studio 2017\\Projects\\Ekstraklasa\\Logos\\Legia_Warszawa.png")
         {
             this.Nr = Nr;
-            this.Path = Path;
+            this.Path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\" + Path;
+            if (String.IsNullOrEmpty(Path.Trim()))
+            {
+                this.Path = "C:\\Users\\wblachowski\\Documents\\Visual Studio 2017\\Projects\\Ekstraklasa\\Logos\\Legia_Warszawa.png";
+            }
             this.Name = Name;
             this.Matches = Matches;
             this.Wins = Wins;
