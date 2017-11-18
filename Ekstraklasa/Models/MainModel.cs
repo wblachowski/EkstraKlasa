@@ -99,12 +99,14 @@ namespace Ekstraklasa
                             while (dr.Read())
                             {
                                 string name = dr.GetString(0);
-                                int matches = dr.GetInt32(1);
-                                int wins = dr.GetInt32(2);
-                                int ties = dr.GetInt32(3);
-                                int loses = dr.GetInt32(4);
-                                string goals = dr.GetInt32(5).ToString() + ":" + dr.GetInt32(6).ToString();
-                                int points = dr.GetInt32(7);
+                                string path = dr.GetString(1);
+                                int matches = dr.GetInt32(2);
+                                int wins = dr.GetInt32(3);
+                                int ties = dr.GetInt32(4);
+                                int loses = dr.GetInt32(5);
+                                string goals = dr.GetInt32(6).ToString() + ":" + dr.GetInt32(7).ToString();
+                                int points = dr.GetInt32(8);
+                                //we ignore path at this moment
                                 TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points));
                                 nr++;
                             }

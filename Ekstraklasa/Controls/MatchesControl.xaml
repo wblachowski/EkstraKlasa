@@ -28,7 +28,6 @@
 				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}">
                         </ComboBox>
                         <DatePicker materialDesign:HintAssist.Hint="Data"     Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday" />
-
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>
