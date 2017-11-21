@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace Ekstraklasa
             }
         }
 
-        private string _TeamAPath;
+        private string _TeamAPath = ConfigurationManager.AppSettings["default_logo"];
         public string TeamAPath
         {
             get
@@ -81,7 +82,7 @@ namespace Ekstraklasa
             }
         }
 
-        private string _TeamBPath;
+        private string _TeamBPath = ConfigurationManager.AppSettings["default_logo"];
         public string TeamBPath
         {
             get

@@ -23,6 +23,8 @@ namespace Ekstraklasa
         public TeamsControl()
         {
             InitializeComponent();
+            var viewModel = new TeamsViewModel();
+            DataContext = viewModel;
         }
     }
 }

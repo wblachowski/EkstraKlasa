@@ -256,5 +256,37 @@ namespace Ekstraklasa
 
             return stadiums;
         }
+
+        public static List<List<string>> GetTeamsWithImages()
+        {
+            List<List<string>> teams = new List<List<string>>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetTeamsWithImages;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string name = dr.GetString(0);
+                                string path = dr.GetString(1);
+                                teams.Add(new List<string>(new string[] { name, path }));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return teams;
+        }
     }
 }

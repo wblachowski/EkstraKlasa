@@ -25,6 +25,24 @@ namespace Ekstraklasa
             var viewModel = new MainViewModel();
             DataContext = viewModel;
         }
+
+        public void AdjustOpacity(Object sender, EventArgs e)
+        {
+            
+            foreach (ListBoxItem item in m_listbox_menu.Items)
+            {
+                StackPanel panel = item.Content as StackPanel;
+                Object icon = panel.Children[0];
+                if (item.IsSelected)
+                {
+                    (icon as Control).Opacity = 1;
+                }
+                else
+                {
+                    (icon as Control).Opacity = 0.63;
+                }
+            }
+        }
  
     }
 }
