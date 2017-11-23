@@ -257,9 +257,9 @@ namespace Ekstraklasa
             return stadiums;
         }
 
-        public static List<List<string>> GetTeamsWithImages()
+        public static List<TableEntity> GetTeamsWithImages()
         {
-            List<List<string>> teams = new List<List<string>>();
+            List<TableEntity> teams = new List<TableEntity>();
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
@@ -275,7 +275,7 @@ namespace Ekstraklasa
                             {
                                 string name = dr.GetString(0);
                                 string path = dr.GetString(1);
-                                teams.Add(new List<string>(new string[] { name, path }));
+                                teams.Add(new TableEntity(0,name,0,0,0,0,"",0,path));
                             }
                         }
                     }

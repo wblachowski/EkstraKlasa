@@ -5,19 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ekstraklasa"
              mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialMenu="clr-namespace:MaterialMenu;assembly=MaterialMenu"
              d:DesignHeight="500" d:DesignWidth="600"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <ItemsControl ItemsSource="{Binding Teams}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="2"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        <ListView  ItemsSource="{Binding Teams}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Drużyna">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Width="30" Margin="-8 0 0 0">
+                                        <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="15" Source="{Binding Path}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Button">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="MaterialDesignFlatToggleButton">
+                                    <materialDesign:PackIcon Kind="Delete" Height="21" Width="21" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:TeamControl}"/>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
     </Grid>
 </UserControl>
