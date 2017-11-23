@@ -34,7 +34,7 @@
                     <GridViewColumn Header="Buttons">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Width="100" HorizontalAlignment="Right" Height="23" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Width="60" HorizontalAlignment="Right" Height="23" VerticalAlignment="Center">
                                     <Button Foreground="Black" Opacity="0.54" Style="{StaticResource MaterialDesignFlatButton}" CommandParameter="{Binding Name}"  Command="" ToolTip="Edytuj drużynę" Padding="3">
                                         <materialDesign:PackIcon Kind="Pencil" Height="18" Width="18" />
                                     </Button>

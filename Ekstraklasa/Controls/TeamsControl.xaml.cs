@@ -34,8 +34,11 @@ namespace Ekstraklasa
 
         private void ListViewSizeChanged(object sender, EventArgs a)
         {
-            if(sender!=null)
-            NameColumn.Width = (sender as ListView).ActualWidth - 100;
+            if (sender != null)
+            {
+                NameColumn.Width = Math.Max((sender as ListView).ActualWidth - 100, 0);
+
+            }
         }
     }
 }
