@@ -10,58 +10,59 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto">
+    <materialDesign:DialogHost Identifier="RootDialog">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="150" MaxWidth="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="150" MaxWidth="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
             <Border BorderThickness="0 0 1 0" BorderBrush="#cdcfd1">
                 <StackPanel Grid.Column="1" Orientation=" Vertical"  Background="White">
                     <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="10,10,0,0">Przeglądaj</TextBlock>
-                <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  
+                    <ListBox x:Name="m_listbox_menu" Style="{StaticResource MaterialDesignListBox}" Margin="0,10,0,0" VerticalAlignment="Top"  
                              ItemContainerStyle="{StaticResource MaterialDesignListBoxItem}"
                              SelectionMode="Single"
                              SelectedIndex="{Binding menuSelectedIndex}"
                              SelectionChanged="AdjustOpacity"
                              >
-                    <ListBoxItem Height="38">
+                        <ListBoxItem Height="38">
                             <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon  Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="Soccer" HorizontalAlignment="Right"/>
+                                <materialDesign:PackIcon  Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="Soccer" HorizontalAlignment="Right"/>
                                 <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"   VerticalAlignment="Center">Mecze</TextBlock>
                             </StackPanel>
-                     </ListBoxItem>
-                    <ListBoxItem Height="38">
-                        <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0"  Opacity="0.63" Kind="Table"  HorizontalAlignment="Right" />
-                            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"  VerticalAlignment="Center">Tabela</TextBlock>
-                            </StackPanel>
                         </ListBoxItem>
-                    <ListBoxItem Height="38">
-                        <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63" Kind="TshirtCrew"  HorizontalAlignment="Right" />
-                            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Drużyny</TextBlock>
-                            </StackPanel>
-                        </ListBoxItem>
-                    <ListBoxItem Height="38">
-                        <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="HumanMale"  HorizontalAlignment="Right" />
-                            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Zawodnicy</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Height="38">
+                        <ListBoxItem Height="38">
                             <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
-                            <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="TrophyOutline"  HorizontalAlignment="Right" />
-                            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Najlepsi strzelcy</TextBlock>
+                                <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0"  Opacity="0.63" Kind="Table"  HorizontalAlignment="Right" />
+                                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"  VerticalAlignment="Center">Tabela</TextBlock>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Height="38">
+                            <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
+                                <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63" Kind="TshirtCrew"  HorizontalAlignment="Right" />
+                                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Drużyny</TextBlock>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Height="38">
+                            <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
+                                <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="HumanMale"  HorizontalAlignment="Right" />
+                                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Zawodnicy</TextBlock>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Height="38">
+                            <StackPanel Orientation="Horizontal"  Margin="6,0,0,0">
+                                <materialDesign:PackIcon Height="20" Width="20" Margin="0,0,20,0" Opacity="0.63"  Kind="TrophyOutline"  HorizontalAlignment="Right" />
+                                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">Najlepsi strzelcy</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                     </ListBox>
                 </StackPanel>
             </Border>
-        <Canvas Grid.Column="2">
-               <ContentControl Visibility="Hidden" x:Name="m_content_control" Content="ContentControl" Margin="20 20 0 0 "/>
-            <ContentControl Content="{Binding mainControl}" Margin="0 0 0 0"/>
-        </Canvas>
-    </Grid>
+            <Canvas Grid.Column="2">
+                <ContentControl Visibility="Hidden" x:Name="m_content_control" Content="ContentControl" Margin="20 20 0 0 "/>
+                <ContentControl Content="{Binding mainControl}" Margin="0 0 0 0"/>
+            </Canvas>
+        </Grid>
+    </materialDesign:DialogHost>
 </Window>
