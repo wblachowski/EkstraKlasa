@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,10 @@ namespace Ekstraklasa
             InitializeComponent();
             var viewModel = new TeamsViewModel();
             DataContext = viewModel;
+        }
+        private void OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("SAMPLE 2: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
         }
     }
 }

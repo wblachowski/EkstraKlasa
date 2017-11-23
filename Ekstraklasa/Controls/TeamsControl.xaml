@@ -38,13 +38,16 @@
                                     <Button Foreground="Black" Opacity="0.54" Style="{StaticResource MaterialDesignFlatButton}" CommandParameter="{Binding Name}"  Command="" ToolTip="Edytuj drużynę" Padding="3">
                                         <materialDesign:PackIcon Kind="Pencil" Height="18" Width="18" />
                                     </Button>
-                                    <Button Foreground="Black" Opacity="0.54" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ToolTip="Usuń drużynę" Padding="3">
+                                    <Button Foreground="Black" Opacity="0.54" Style="{StaticResource MaterialDesignFlatButton}" 
+                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                            materialDesign:DialogHost.DialogClosingAttached="OnDialogClosing"
+                                            ToolTip="Usuń drużynę" Padding="3">
                                         <Button.CommandParameter>
                                             <StackPanel Orientation="Vertical" Margin="16">
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Czy na pewno chcesz usunąć drużynę "></TextBlock>
                                                     <TextBlock Text="{Binding Name}"/>
-                                                    <TextBlock Text=" ?"></TextBlock>
+                                                    <TextBlock Text="?"></TextBlock>
                                                 </StackPanel>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
