@@ -17,7 +17,7 @@
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <Grid>
-                        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="True" AutoGenerateColumns="False"
+                        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
                                     >
                             <DataGrid.Columns >

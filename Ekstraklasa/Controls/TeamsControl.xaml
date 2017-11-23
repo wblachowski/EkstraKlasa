@@ -11,7 +11,7 @@
              d:DesignHeight="600" d:DesignWidth="600"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <ListView ItemsSource="{Binding Teams}">
+        <ListView ItemsSource="{Binding Teams}" SizeChanged="ListViewSizeChanged">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -19,7 +19,7 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Drużyna" Width="600">
+                    <GridViewColumn x:Name="NameColumn" Header="Drużyna" Width="600">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Height="30">

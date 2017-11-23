@@ -31,5 +31,11 @@ namespace Ekstraklasa
         {
             Console.WriteLine("SAMPLE 2: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
         }
+
+        private void ListViewSizeChanged(object sender, EventArgs a)
+        {
+            if(sender!=null)
+            NameColumn.Width = (sender as ListView).ActualWidth - 100;
+        }
     }
 }
