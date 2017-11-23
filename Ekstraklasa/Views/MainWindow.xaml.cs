@@ -44,5 +44,10 @@ namespace Ekstraklasa
                 }
             }
         }
+
+        private void sizechanged(object sender, EventArgs a)
+        {
+            Console.WriteLine((sender as Canvas).Width);
+        }
     }
 }

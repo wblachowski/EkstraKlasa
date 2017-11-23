@@ -32,7 +32,7 @@
                     </StackPanel>
                 </Grid>
             </Expander.Header>
-            <Grid Width="312" HorizontalAlignment="Left" Margin="25 0 0 0">
+            <Grid Width="312" HorizontalAlignment="Left" Margin="25 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="36"/>
