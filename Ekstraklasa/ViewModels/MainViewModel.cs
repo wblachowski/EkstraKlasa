@@ -58,9 +58,17 @@ namespace Ekstraklasa
             {
                 case 0: mainControl = new MatchesControl();break;
                 case 1: mainControl = new TableControl();break;
-                case 2: mainControl = new TeamsControl();break;
-                case 3: mainControl = new TeamDetailsControl();break;
+                case 2: mainControl = new TeamsControl(ChangeControl); break;
+                case 3: mainControl = new TeamDetailsControl(); break;
             }
+        }
+
+        private void ChangeControl(UserControl control)
+        {
+            if (control != null) {
+                mainControl = control;
+            }
+            Console.WriteLine("ORDER TO CHANGE");
         }
 
         virtual protected void OnPropertyChanged(string propName)

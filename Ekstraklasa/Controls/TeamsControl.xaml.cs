@@ -21,12 +21,16 @@ namespace Ekstraklasa
     /// </summary>
     public partial class TeamsControl : UserControl
     {
-        public TeamsControl()
-        {
+        public TeamsControl(delegateChangeControl ChangeControl = null){
             InitializeComponent();
             var viewModel = new TeamsViewModel();
+            if (ChangeControl != null)
+            {
+                viewModel.TeamChosen += ChangeControl;
+            }
             DataContext = viewModel;
         }
+
         private void OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
         {
             Console.WriteLine("SAMPLE 2: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
