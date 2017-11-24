@@ -288,5 +288,51 @@ namespace Ekstraklasa
 
             return teams;
         }
+
+        public static List<TeamEntity> GetTeamDetails(string TeamName ="")
+        {
+            List<TeamEntity> teams = new List<TeamEntity>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetTeamsDetails;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("name", String.IsNullOrEmpty(TeamName) ? "%" : TeamName);
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string name = dr.GetString(0);
+                                string path = dr.GetString(1);
+                                DateTime foundedDate = dr.GetDateTime(2);
+                                string stadiumName = dr.GetString(3);
+                                string stadiumCity = dr.GetString(4);
+                                string stadiumAddress = dr.GetString(5);
+                                int stadiumCapacity = dr.GetInt32(6);
+                                long pesel = dr.GetInt64(7);
+                                string firstname = dr.GetString(8);
+                                string lastname = dr.GetString(9);
+                                DateTime dateOfBirth = dr.GetDateTime(10);
+                                string nationality = dr.GetString(11);
+                                DateTime hiringDate = dr.GetDateTime(12);
+                                teams.Add(new TeamEntity(name,path, foundedDate, new CoachEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, hiringDate), new StadiumEntity(stadiumName, stadiumAddress, stadiumCity, stadiumCapacity)));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return teams;
+        }
+
+
     }
 }

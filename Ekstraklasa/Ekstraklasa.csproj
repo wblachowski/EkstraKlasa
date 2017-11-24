@@ -112,10 +112,15 @@
     <Compile Include="Controls\TeamsControl.xaml.cs">
       <DependentUpon>TeamsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\CoachEntity.cs" />
     <Compile Include="Data\GoalEntity.cs" />
     <Compile Include="Data\MatchEntity.cs" />
+    <Compile Include="Data\PersonEntity.cs" />
+    <Compile Include="Data\PlayerEntity.cs" />
     <Compile Include="Data\Queries.cs" />
+    <Compile Include="Data\StadiumEntity.cs" />
     <Compile Include="Data\TableEntity.cs" />
+    <Compile Include="Data\TeamEntity.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="ViewModels\GoalViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="ViewModels\MatchesViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
+    <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

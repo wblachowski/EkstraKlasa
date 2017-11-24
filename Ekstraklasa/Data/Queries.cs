@@ -36,5 +36,9 @@ namespace Ekstraklasa
         public static string GetStadiums = "select name from stadium order by name desc";
 
         public static string GetTeamsWithImages = "select name, logo_path from team order by name desc";
+
+        public static string GetTeamsDetails = "select team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, coach.pesel, " +
+            "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id "+
+            "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
     }
 }
