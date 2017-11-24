@@ -26,7 +26,7 @@ namespace Ekstraklasa
             var viewModel = new TeamsViewModel();
             if (ChangeControl != null)
             {
-                viewModel.TeamChosen += ChangeControl;
+                viewModel.ChangeContentEvent += ChangeControl;
             }
             DataContext = viewModel;
         }
