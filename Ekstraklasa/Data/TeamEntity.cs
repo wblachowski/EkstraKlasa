@@ -9,8 +9,8 @@ namespace Ekstraklasa
 {
     public class TeamEntity
     {
-        public string Name = "";
-        public string LogoPath = "";
+        public string Name { get; set; }
+        public string LogoPath { get; set; }
         public DateTime FoundedDate;
         public CoachEntity Coach = null;
         public StadiumEntity Stadium = null;

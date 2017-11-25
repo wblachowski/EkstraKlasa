@@ -24,7 +24,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Height="30">
                                     <StackPanel Width="30" VerticalAlignment="Center" >
-                                        <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="15" Source="{Binding Path}"/>
+                                        <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="15" Source="{Binding LogoPath}"/>
                                     </StackPanel>
                                     <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                                 </StackPanel>

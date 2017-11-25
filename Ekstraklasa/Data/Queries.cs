@@ -40,5 +40,8 @@ namespace Ekstraklasa
         public static string GetTeamsDetails = "select team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id "+
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
+
+        public static string GetPlayers = "select * from person natural join player where team_id in (select id from team where name like :name) " +
+             " order by team_id, decode(position, 'BRAMKARZ', 1, '%OBROŃCA%', 2, '%POMOCNIK%', 3, '%NAPASTNIK%', 4)";
     }
 }

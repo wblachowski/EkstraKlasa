@@ -36,8 +36,8 @@ namespace Ekstraklasa
             }
         }
 
-        private ObservableCollection<TableEntity> _Teams = new ObservableCollection<TableEntity>();
-        public ObservableCollection<TableEntity> Teams
+        private ObservableCollection<TeamEntity> _Teams = new ObservableCollection<TeamEntity>();
+        public ObservableCollection<TeamEntity> Teams
         {
             get
             {
@@ -53,8 +53,8 @@ namespace Ekstraklasa
             }
         }
 
-        private TableEntity _SelectedItem;
-        public TableEntity SelectedItem
+        private TeamEntity _SelectedItem;
+        public TeamEntity SelectedItem
         {
             get
             {
@@ -76,14 +76,14 @@ namespace Ekstraklasa
 
         private async void UpdateTeams()
         {
-            List<TableEntity> temp = await GetTeamsAsync();
-            Teams = new ObservableCollection<TableEntity>(temp);
+            List<TeamEntity> temp = await GetTeamsAsync();
+            Teams = new ObservableCollection<TeamEntity>(temp);
         }
 
-        private async Task<List<TableEntity>> GetTeamsAsync()
+        private async Task<List<TeamEntity>> GetTeamsAsync()
         {
             return await Task.Run(()=> {
-                return MainModel.GetTeamsWithImages();
+                return MainModel.GetTeamDetails();
             });
         }
 

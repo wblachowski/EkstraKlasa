@@ -257,38 +257,6 @@ namespace Ekstraklasa
             return stadiums;
         }
 
-        public static List<TableEntity> GetTeamsWithImages()
-        {
-            List<TableEntity> teams = new List<TableEntity>();
-            try
-            {
-                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
-                {
-                    connection.Open();
-                    string sql = Queries.GetTeamsWithImages;
-                    using (OracleCommand command = new OracleCommand(sql, connection))
-                    {
-                        OracleDataReader dr = command.ExecuteReader();
-                        if (dr.HasRows)
-                        {
-                            while (dr.Read())
-                            {
-                                string name = dr.GetString(0);
-                                string path = dr.GetString(1);
-                                teams.Add(new TableEntity(0,name,0,0,0,0,"",0,path));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            return teams;
-        }
-
         public static List<TeamEntity> GetTeamDetails(string TeamName ="")
         {
             List<TeamEntity> teams = new List<TeamEntity>();
@@ -331,6 +299,47 @@ namespace Ekstraklasa
             }
 
             return teams;
+        }
+
+        public static List<PlayerEntity> GetPlayers(string TeamName = "")
+        {
+            List<PlayerEntity> players = new List<PlayerEntity>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetPlayers;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("name", String.IsNullOrEmpty(TeamName) ? "%" : TeamName);
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                long pesel = dr.GetInt64(0);
+                                string firstname = dr.GetString(1);
+                                string lastname = dr.GetString(2);
+                                DateTime dateOfBirth = dr.GetDateTime(3);
+                                string nationality = dr.GetString(4);
+                                int weight = dr.GetInt32(5);
+                                int height = dr.GetInt32(6);
+                                int nr = dr.GetInt32(7);
+                                string position = dr.GetString(9);
+                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            return players;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -58,8 +59,8 @@ namespace Ekstraklasa
             }
         }
 
-        private string _Coach;
-        public string Coach
+        private CoachEntity _Coach;
+        public CoachEntity Coach
         {
             get
             {
@@ -67,7 +68,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_Coach != value)
+                if (_Coach != value)
                 {
                     _Coach = value;
                     OnPropertyChanged("Coach");
@@ -143,6 +144,23 @@ namespace Ekstraklasa
             }
         }
 
+        private ObservableCollection<PlayerEntity> _Players;
+        public ObservableCollection<PlayerEntity> Players
+        {
+            get
+            {
+                return _Players;
+            }
+            set
+            {
+                if (_Players != value)
+                {
+                    _Players = value;
+                    OnPropertyChanged("Players");
+                }
+            }
+        }
+
         private ICommand _GoBackCommand;
         public ICommand GoBackCommand
         {
@@ -174,17 +192,29 @@ namespace Ekstraklasa
             TeamEntity team = teams[0];
             Name = team.Name;
             FoundedDate = team.FoundedDate;
-            Coach = team.Coach.Firstname + " " + team.Coach.Lastname;
+            Coach = team.Coach;
             LogoPath = team.LogoPath;
             StadiumName = team.Stadium.Name;
             StadiumAddress = team.Stadium.Address + ", " + team.Stadium.City;
             StadiumCapacity = Convert.ToString(team.Stadium.Capacity) + " miejsc";
+
+            List<PlayerEntity> players = await GetPlayersAsync(TeamName);
+            Players = new ObservableCollection<PlayerEntity>(players);
         }
 
         private async Task<List<TeamEntity>> GetTeamEntityAsync(string TeamName)
         {
-            return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
                 return MainModel.GetTeamDetails(TeamName);
+            });
+        }
+
+        private async Task<List<PlayerEntity>> GetPlayersAsync(string TeamName)
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.GetPlayers(TeamName);
             });
         }
 
