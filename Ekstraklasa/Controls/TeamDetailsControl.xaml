@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Ekstraklasa.TeamDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ekstraklasa"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600"
+             Style="{StaticResource UserControlStyle}">
+    <Grid>
+        <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
+            <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
+                <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
+            </Button>
+            <Button Foreground="Black" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Right" Margin="0 0 10 0">
+                <materialDesign:PackIcon Kind="DotsVertical" Height="25" Width="25" />
+            </Button>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Height="140" Margin="100 30 100 0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image VerticalAlignment="Center" Grid.Column="0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="130" Source="{Binding LogoPath}"/>
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
+                    <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Text="{Binding Name}"/>
+                    <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="DemiBold" Text="Rok założenia:  "></TextBlock>
+                            <TextBlock Text="{Binding FoundedDate, StringFormat='{}{0:dd MMMM yyyy}', ConverterCulture=pl}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="DemiBold"  Text="Trener:  "></TextBlock>
+                            <TextBlock Text="{Binding Coach}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="DemiBold"  Text="Stadion:  "></TextBlock>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding StadiumName}"/>
+                                <TextBlock Text="{Binding StadiumAddress}"/>
+                                <TextBlock Text="{Binding StadiumCapacity}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <Grid VerticalAlignment="Top"  Margin="100,180,100,0">
+            <dragablz:TabablzControl  FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
+                <dragablz:TabablzControl.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" Opacity="0.87"/>
+                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
+                </dragablz:TabablzControl.Resources>
+                <TabItem Header="Zawodnicy">
+                    <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Hello World</TextBlock>
+                </TabItem>
+                <TabItem Header="Mecze">
+                    <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Material Design</TextBlock>
+                </TabItem>
+                <TabItem Header="Trener">
+                    <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
+                </TabItem>
+                <TabItem Header="Forma">
+                    <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
+                </TabItem>
+            </dragablz:TabablzControl>
+            <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="1" VerticalAlignment="Bottom" />
+            <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="5" Margin="0,40,-100,0"  VerticalAlignment="Top" />
+        </Grid>
+    </Grid>
+</UserControl>

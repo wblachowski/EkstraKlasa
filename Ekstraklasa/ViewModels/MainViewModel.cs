@@ -67,7 +67,6 @@ namespace Ekstraklasa
             if (control != null) {
                 mainControl = control;
             }
-            Console.WriteLine("ORDER TO CHANGE");
         }
 
         virtual protected void OnPropertyChanged(string propName)

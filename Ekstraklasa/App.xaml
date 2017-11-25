@@ -23,6 +23,7 @@
             <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
                 <Setter Property="Icon" Value="./Resources/icon.ico"/>
                 <Setter Property="Window.Title" Value="Ekstraklasa"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="FontFamily" Value="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"/>
                 <Setter Property="TextElement.FontSize" Value="12"/>
                 <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}"/>
@@ -31,6 +32,7 @@
             <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
                 <Setter Property="FontFamily" Value="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"/>
                 <Setter Property="TextElement.FontSize" Value="14"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}"/>
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
             </Style>
