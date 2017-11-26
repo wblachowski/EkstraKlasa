@@ -31,5 +31,10 @@ namespace Ekstraklasa
         {
             m_tvFilter.IsExpanded = !m_tvFilter.IsExpanded;
         }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            m_tvFilter.IsExpanded = false;
+        }
     }
 }

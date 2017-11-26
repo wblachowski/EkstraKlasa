@@ -35,6 +35,9 @@
                                 </Binding>
                             </DatePicker.Text>
                         </DatePicker>
+                        <Button VerticalAlignment="Bottom" Margin="24 0 0 3" Foreground="Black" Opacity="0.54" Style="{StaticResource ButtonTransparent}" Command="{Binding clearCommand}" Padding="0" Click="Clear_Click">
+                            <materialDesign:PackIcon Kind="Close" Height="18" Width="18" />
+                        </Button>
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>

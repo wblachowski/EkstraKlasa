@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ekstraklasa
 {
@@ -164,6 +165,28 @@ namespace Ekstraklasa
                     OnPropertyChanged("DateSelected");
                 }
             }
+        }
+
+        private ICommand _clearCommand;
+        public ICommand clearCommand
+        {
+            get
+            {
+                if (_clearCommand == null)
+                {
+                    _clearCommand = new RelayCommand(param => this.ClearFilters());
+                }
+                return _clearCommand;
+            }
+        }
+
+        private void ClearFilters()
+        {
+            HostSelected = "";
+            GuestSelected = "";
+            StadiumSelected = "";
+            DateSelected = "";
+
         }
 
 
