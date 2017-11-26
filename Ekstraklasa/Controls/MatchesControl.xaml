@@ -18,15 +18,15 @@
                     </TreeViewItem.Header>
                     <StackPanel  Margin="-9 -10 0 0" Orientation="Horizontal">
                         <ComboBox materialDesign:HintAssist.Hint="Gospodarz" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding HostTeams}" SelectedValue="{Binding HostSelected}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding HostTeams}" Text="{Binding HostSelected}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Gość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}" SelectedValue="{Binding GuestSelected}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}" Text="{Binding GuestSelected}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Stadion" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}" Text="{Binding StadiumSelected}">
                         </ComboBox>
-                        <DatePicker materialDesign:HintAssist.Hint="Data"     Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday" />
+                        <DatePicker materialDesign:HintAssist.Hint="Data"   Text="{Binding DateSelected,Mode=TwoWay}"  Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday" />
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>

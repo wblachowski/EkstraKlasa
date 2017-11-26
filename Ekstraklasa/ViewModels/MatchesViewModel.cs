@@ -105,9 +105,25 @@ namespace Ekstraklasa
                     _HostSelected = value;
                     GuestTeams = new ObservableCollection<string>(FullGuest);
                     GuestTeams.Remove(value);
+                    UpdateMatches();
                     OnPropertyChanged("GuestTeams");
                     OnPropertyChanged("HostSelected");
                 }
+            }
+        }
+
+        private string _StadiumSelected;
+        public string StadiumSelected
+        {
+            get
+            {
+                return _StadiumSelected;
+            }
+            set
+            {
+                _StadiumSelected = value;
+                UpdateMatches();
+                OnPropertyChanged("StadiumSelected");
             }
         }
 
@@ -125,8 +141,27 @@ namespace Ekstraklasa
                     _GuestSelected = value;
                     HostTeams = new ObservableCollection<string>(FullHost);
                     HostTeams.Remove(value);
+                    UpdateMatches();
                     OnPropertyChanged("HostTeams");
                     OnPropertyChanged("GuestSelected");
+                }
+            }
+        }
+
+        private string _DateSelected = "";
+        public string DateSelected
+        {
+            get
+            {
+                return _DateSelected;
+            }
+            set
+            {
+                if (_DateSelected != value)
+                {
+                    _DateSelected = value;
+                    UpdateMatches();
+                    OnPropertyChanged("DateSelected");
                 }
             }
         }
@@ -174,7 +209,7 @@ namespace Ekstraklasa
         {
             return await Task.Run(() =>
             {
-                return MainModel.GetCurrentMatches();
+                return MainModel.GetCurrentMatches(HostSelected,GuestSelected,StadiumSelected,DateSelected);
             });
         }
 

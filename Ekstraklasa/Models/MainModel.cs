@@ -120,17 +120,22 @@ namespace Ekstraklasa
             return TableList;
         }
 
-        public static List<MatchEntity> GetCurrentMatches()
+        public static List<MatchEntity> GetCurrentMatches(string host_name, string guest_name, string stadium_name, string start_date)
         {
+            
             List<MatchEntity> Matches = new List<MatchEntity>();
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql = Ekstraklasa.Queries.GetAllMatches;
+                    string sql = Ekstraklasa.Queries.GetMatches;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
+                        command.Parameters.Add("host", String.IsNullOrEmpty(host_name) ? "%" : host_name);
+                        command.Parameters.Add("guest", String.IsNullOrEmpty(guest_name) ? "%" : guest_name);
+                        command.Parameters.Add("stadium", String.IsNullOrEmpty(stadium_name) ? "%" : stadium_name);
+                        command.Parameters.Add("start_date", String.IsNullOrEmpty(start_date) ? "%" : start_date);
                         OracleDataReader dr = command.ExecuteReader();
                         if (dr.HasRows)
                         {

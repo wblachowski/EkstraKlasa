@@ -20,12 +20,16 @@ namespace Ekstraklasa
             "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name,logo_path "+
             "order by points desc, games desc, wins desc";
 
-        public static string GetAllMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, "+
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
-            "from match m " +
-            "join team a on team_host_id = a.id " +
-            "join team b on team_guest_id = b.id " +
-            "join stadium s on m.stadium_id=s.id " +
+        public static string GetMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, "+
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address "+
+            "from match m "+
+            "join team a on team_host_id = a.id "+
+            "join team b on team_guest_id = b.id "+
+            "join stadium s on m.stadium_id=s.id "+
+            "where a.name like :host "+
+            "and b.name like :guest "+
+            "and s.name like :stadium "+
+            "and to_char(start_time,'DD.MM.YYYY') like :start_date "+
             "order by start_time desc";
 
         public static string GetGoalsByID = "select minute, firstname, lastname, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL "+ 

@@ -59,7 +59,8 @@
                 <TabItem Header="Zawodnicy">
                     <DataGrid   IsReadOnly="True" ItemsSource="{Binding Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
-                                    >
+                                CellStyle="{StaticResource MaterialDesignDataGridCell}"    
+                                >
                         <DataGrid.Columns >
 
                             <DataGridTextColumn  Binding="{Binding Nr}"
