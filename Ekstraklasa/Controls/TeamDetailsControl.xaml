@@ -16,9 +16,12 @@
             <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
                 <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
             </Button>
-            <Button Foreground="Black" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Right" Margin="0 0 10 0">
-                <materialDesign:PackIcon Kind="DotsVertical" Height="25" Width="25" />
-            </Button>
+            <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
+                <StackPanel>
+                    <Button Content="Edytuj"/>
+                    <Button Content="Usuń"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
         </DockPanel>
         <DockPanel LastChildFill="False" Height="140" Margin="100 30 100 0" VerticalAlignment="Top">
             <Grid>
