@@ -113,6 +113,7 @@
       <DependentUpon>TeamsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\CoachEntity.cs" />
+    <Compile Include="Data\DateFormatRule.cs" />
     <Compile Include="Data\GoalEntity.cs" />
     <Compile Include="Data\MatchEntity.cs" />
     <Compile Include="Data\PersonEntity.cs" />
