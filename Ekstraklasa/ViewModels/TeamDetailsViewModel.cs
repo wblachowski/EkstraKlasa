@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OxyPlot;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -24,6 +25,34 @@ namespace Ekstraklasa
             GetData(TeamName);
             UpdateMatches(TeamName);
             ChangeContentEvent = ChangeControl;
+            /*
+            Points = new List<DataPoint>
+            {
+                                  new DataPoint(0, 4),
+                                  new DataPoint(10, 13),
+                                  new DataPoint(20, 15),
+                                  new DataPoint(30, 16),
+                                  new DataPoint(40, 12),
+                                  new DataPoint(50, 12)
+            };*/
+        }
+
+        private IList<DataPoint> _Points;
+        public IList<DataPoint> Points
+        {
+            get
+            {
+                return _Points;
+            }
+            set
+            {
+                if (_Points != value)
+                {
+                    _Points = value;
+                    Console.WriteLine(_Points.Count);
+                    OnPropertyChanged("Points");
+                }
+            }
         }
 
         private string _Name;
@@ -224,11 +253,36 @@ namespace Ekstraklasa
         {
             List<MatchEntity> matches = await GetCurrentMatchesAsync(TeamName);
             ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
+            List<DataPoint> pointsTemp = new List<DataPoint>();
+            int it = 0;
             foreach (MatchEntity match in matches)
             {
                 temp.Add(new MatchControl(match));
+                DataPoint point = new DataPoint();
+                if (match.Host == TeamName)
+                {
+                    switch (Math.Sign(match.ScoreHost - match.ScoreGuest))
+                    {
+                        case 1: point = new DataPoint(it, 3);break;
+                        case 0: point = new DataPoint(it, 1); break;
+                        case -1: point = new DataPoint(it, 0); break;
+                    }
+                }else
+                if (match.Guest == TeamName)
+                {
+                    switch (Math.Sign(match.ScoreGuest - match.ScoreHost))
+                    {
+                        case 1: point = new DataPoint(it, 3); break;
+                        case 0: point = new DataPoint(it, 1); break;
+                        case -1: point = new DataPoint(it, 0); break;
+                    }
+                }
+
+                pointsTemp.Insert(0,point);
+                it++;
             }
             Matches = temp;
+            Points = pointsTemp;
         }
 
         private async Task<List<MatchEntity>> GetCurrentMatchesAsync(string TeamName)
