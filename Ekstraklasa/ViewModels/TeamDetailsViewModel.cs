@@ -22,6 +22,7 @@ namespace Ekstraklasa
         public TeamDetailsViewModel(string TeamName, delegateChangeControl ChangeControl)
         {
             GetData(TeamName);
+            UpdateMatches(TeamName);
             ChangeContentEvent = ChangeControl;
         }
 
@@ -161,6 +162,23 @@ namespace Ekstraklasa
             }
         }
 
+        private ObservableCollection<MatchControl> _Matches = new ObservableCollection<MatchControl>();
+        public ObservableCollection<MatchControl> Matches
+        {
+            get
+            {
+                return _Matches;
+            }
+            set
+            {
+                if (_Matches != value)
+                {
+                    _Matches = value;
+                    OnPropertyChanged("Matches");
+                }
+            }
+        }
+
         private ICommand _GoBackCommand;
         public ICommand GoBackCommand
         {
@@ -200,6 +218,25 @@ namespace Ekstraklasa
 
             List<PlayerEntity> players = await GetPlayersAsync(TeamName);
             Players = new ObservableCollection<PlayerEntity>(players);
+        }
+
+        private async void UpdateMatches(string TeamName)
+        {
+            List<MatchEntity> matches = await GetCurrentMatchesAsync(TeamName);
+            ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
+            foreach (MatchEntity match in matches)
+            {
+                temp.Add(new MatchControl(match));
+            }
+            Matches = temp;
+        }
+
+        private async Task<List<MatchEntity>> GetCurrentMatchesAsync(string TeamName)
+        {
+            return await Task.Run(() =>
+            {
+                return MainModel.GetCurrentMatchesTeam(TeamName);
+            });
         }
 
         private async Task<List<TeamEntity>> GetTeamEntityAsync(string TeamName)

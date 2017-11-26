@@ -32,6 +32,15 @@ namespace Ekstraklasa
             "and to_char(start_time,'DD.MM.YYYY') like :start_date "+
             "order by start_time desc";
 
+        public static string GetMatchesTeam = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
+            "from match m " +
+            "join team a on team_host_id = a.id " +
+            "join team b on team_guest_id = b.id " +
+            "join stadium s on m.stadium_id=s.id " +
+            "where a.name like :team or b.name like :team " + 
+            "order by start_time desc";
+
         public static string GetGoalsByID = "select minute, firstname, lastname, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL "+ 
            "from match m join goal g on g.match_id=id join person p on g.player_pesel = pesel where m.id = :id";
 

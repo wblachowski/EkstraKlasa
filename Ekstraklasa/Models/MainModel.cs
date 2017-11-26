@@ -165,6 +165,47 @@ namespace Ekstraklasa
             return Matches;
         }
 
+        public static List<MatchEntity> GetCurrentMatchesTeam(string TeamName)
+        { 
+            List<MatchEntity> Matches = new List<MatchEntity>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Ekstraklasa.Queries.GetMatchesTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("team", String.IsNullOrEmpty(TeamName) ? "%" : TeamName);
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int id = dr.GetInt32(0);
+                                DateTime date = dr.GetDateTime(1);
+                                string host = dr.GetString(2);
+                                string hostPath = dr.GetString(3);
+                                string guest = dr.GetString(4);
+                                string guestPath = dr.GetString(5);
+                                int scoreHost = dr.GetInt32(6);
+                                int scoreGuest = dr.GetInt32(7);
+                                string stadium = dr.GetString(8);
+                                string city = dr.GetString(9);
+                                string address = dr.GetString(10);
+                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, stadium, city, address));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Matches;
+        }
+
         public static List<GoalEntity> GetGoalsByID(int ID)
         {
             List<GoalEntity> goals = new List<GoalEntity>();
