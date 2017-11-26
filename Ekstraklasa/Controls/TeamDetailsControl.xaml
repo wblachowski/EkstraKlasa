@@ -9,6 +9,7 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600"
+             Language="pl-PL"
              Style="{StaticResource UserControlStyle}">
     <Grid>
         <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
@@ -123,16 +124,22 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Forma">
-                    <Grid Height="200">
-                        <oxy:Plot Background="Transparent">
-                        <oxy:Plot.Series>
+                    <Grid Height="200" Margin="0 10 0 0">
+                        <oxy:Plot Background="Transparent" DefaultTrackerTemplate="{x:Null}">
+                            <oxy:Plot.Axes>
+                                <oxy:LinearAxis IsZoomEnabled="False" Position="Left" Minimum="-0.5" Maximum="3.5" MajorStep="1" MinorStep="1"/>
+                                <oxy:DateTimeAxis IsZoomEnabled="False" Position="Bottom"  LabelFormatter="formatter" Minimum="{Binding MinDate}" Maximum="{Binding MaxDate}"/>
+                            </oxy:Plot.Axes>
+                            <oxy:Plot.Series>
                                 <oxy:LineSeries ItemsSource="{Binding Points}"
                                                 MarkerType="Circle"
-                                                Color="SteelBlue"
-                                                MarkerFill="SteelBlue" 
+                                                MarkerStroke="{StaticResource Primary400}"
+                                                MarkerStrokeThickness="2"
+                                                Color="{StaticResource Primary400}"
+                                                MarkerFill="#fafafa" 
                                                 />
-                        </oxy:Plot.Series>
-                    </oxy:Plot>
+                            </oxy:Plot.Series>
+                        </oxy:Plot>
                     </Grid>
                 </TabItem>
             </dragablz:TabablzControl>

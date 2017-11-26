@@ -1,4 +1,5 @@
 ﻿using OxyPlot;
+using OxyPlot.Axes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,16 +26,6 @@ namespace Ekstraklasa
             GetData(TeamName);
             UpdateMatches(TeamName);
             ChangeContentEvent = ChangeControl;
-            /*
-            Points = new List<DataPoint>
-            {
-                                  new DataPoint(0, 4),
-                                  new DataPoint(10, 13),
-                                  new DataPoint(20, 15),
-                                  new DataPoint(30, 16),
-                                  new DataPoint(40, 12),
-                                  new DataPoint(50, 12)
-            };*/
         }
 
         private IList<DataPoint> _Points;
@@ -49,7 +40,6 @@ namespace Ekstraklasa
                 if (_Points != value)
                 {
                     _Points = value;
-                    Console.WriteLine(_Points.Count);
                     OnPropertyChanged("Points");
                 }
             }
@@ -208,6 +198,40 @@ namespace Ekstraklasa
             }
         }
 
+        private double _MinDate;
+        public double MinDate
+        {
+            get
+            {
+                return _MinDate;
+            }
+            set
+            {
+                if (_MinDate != value)
+                {
+                    _MinDate = value;
+                    OnPropertyChanged("MinDate");
+                }
+            }
+        }
+        private double _MaxDate;
+        public double MaxDate
+        {
+            get
+            {
+                return _MaxDate;
+            }
+            set
+            {
+                if (_MaxDate != value)
+                {
+                    _MaxDate = value;
+                    OnPropertyChanged("MaxDate");
+                }
+            }
+        }
+
+
         private ICommand _GoBackCommand;
         public ICommand GoBackCommand
         {
@@ -254,20 +278,32 @@ namespace Ekstraklasa
             List<MatchEntity> matches = await GetCurrentMatchesAsync(TeamName);
             ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
             List<DataPoint> pointsTemp = new List<DataPoint>();
-            int it = 0;
+            //int it = matches.Count;
+            DateTime minDate = DateTime.MaxValue;
+            DateTime maxDate = DateTime.MinValue;
             foreach (MatchEntity match in matches)
             {
                 temp.Add(new MatchControl(match));
                 DataPoint point = new DataPoint();
+                double it = DateTimeAxis.ToDouble(match.Date);
+                if (match.Date < minDate)
+                {
+                    minDate = match.Date;
+                }
+                if (match.Date > maxDate)
+                {
+                    maxDate = match.Date;
+                }
                 if (match.Host == TeamName)
                 {
                     switch (Math.Sign(match.ScoreHost - match.ScoreGuest))
                     {
-                        case 1: point = new DataPoint(it, 3);break;
+                        case 1: point = new DataPoint(it, 3); break;
                         case 0: point = new DataPoint(it, 1); break;
                         case -1: point = new DataPoint(it, 0); break;
                     }
-                }else
+                }
+                else
                 if (match.Guest == TeamName)
                 {
                     switch (Math.Sign(match.ScoreGuest - match.ScoreHost))
@@ -278,11 +314,13 @@ namespace Ekstraklasa
                     }
                 }
 
-                pointsTemp.Insert(0,point);
-                it++;
+                pointsTemp.Add(point);
+                //it--;
             }
             Matches = temp;
             Points = pointsTemp;
+            MinDate = DateTimeAxis.ToDouble(minDate.Subtract(new TimeSpan(1, 0, 0, 0)));
+            MaxDate = DateTimeAxis.ToDouble(maxDate.AddDays(1));
         }
 
         private async Task<List<MatchEntity>> GetCurrentMatchesAsync(string TeamName)

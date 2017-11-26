@@ -1,5 +1,7 @@
-﻿using System;
+﻿using OxyPlot.Axes;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,12 @@ namespace Ekstraklasa
             InitializeComponent();
             var viewModel = new TeamDetailsViewModel(Name, ChangeControl);
             DataContext = viewModel;
+        }
+
+        private string formatter(double d)
+        {
+            DateTime myDate = DateTimeAxis.ToDateTime(d);
+            return myDate.ToString("dd MMM", new CultureInfo("pl-PL"));
         }
     }
 }
