@@ -12,6 +12,7 @@ namespace Ekstraklasa
     class MatchesViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
+        public event delegateChangeControl ChangeContentEvent = null;
 
         public MatchesViewModel()
         {
@@ -177,6 +178,24 @@ namespace Ekstraklasa
                     _clearCommand = new RelayCommand(param => this.ClearFilters());
                 }
                 return _clearCommand;
+            }
+        }
+
+        private ICommand _NewMatchCommand;
+        public ICommand NewMatchCommand
+        {
+            get
+            {
+                if (_NewMatchCommand == null)
+                {
+                    _NewMatchCommand = new RelayCommand(param => {
+                        if (ChangeContentEvent != null)
+                        {
+                            ChangeContentEvent(new NewMatchControl(ChangeContentEvent));
+                        }
+                    });
+                }
+                return _NewMatchCommand;
             }
         }
 

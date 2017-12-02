@@ -27,6 +27,14 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
+        public MatchesControl(delegateChangeControl changeControlDelegate)
+        {
+            InitializeComponent();
+            var viewModel = new MatchesViewModel();
+            viewModel.ChangeContentEvent += changeControlDelegate;
+            DataContext = viewModel;
+        }
+
         private void Filter_Mouse_Down(object sender, MouseButtonEventArgs e)
         {
             m_tvFilter.IsExpanded = !m_tvFilter.IsExpanded;

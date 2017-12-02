@@ -5,18 +5,38 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ekstraklasa
 {
     class NewMatchViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
+        public event delegateChangeControl ChangeContentEvent = null;
 
         public NewMatchViewModel()
         {
             SetDateAndTime();
             UpdateTeams();
             UpdateStadiums();
+        }
+
+        private ICommand _GoBackCommand;
+        public ICommand GoBackCommand
+        {
+            get
+            {
+                if (_GoBackCommand == null)
+                {
+                    _GoBackCommand = new RelayCommand(param => {
+                        if (ChangeContentEvent != null)
+                        {
+                            ChangeContentEvent(new MatchesControl(ChangeContentEvent));
+                        }
+                    });
+                }
+                return _GoBackCommand;
+            }
         }
 
         private string _ScoreHost;

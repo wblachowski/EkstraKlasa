@@ -56,10 +56,9 @@ namespace Ekstraklasa
         {
             switch (index)
             {
-                case 0: mainControl = new MatchesControl();break;
+                case 0: mainControl = new MatchesControl(ChangeControl);break;
                 case 1: mainControl = new TableControl();break;
                 case 2: mainControl = new TeamsControl(ChangeControl); break;
-                case 3: mainControl = new NewMatchControl();break;
             }
         }
 

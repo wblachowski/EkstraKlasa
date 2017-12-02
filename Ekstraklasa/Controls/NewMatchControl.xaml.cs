@@ -27,6 +27,14 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
+        public NewMatchControl(delegateChangeControl changeContentDelegate)
+        {
+            InitializeComponent();
+            var viewModel = new NewMatchViewModel();
+            viewModel.ChangeContentEvent += changeContentDelegate;
+            DataContext = viewModel;
+        }
+
         private void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
