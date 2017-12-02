@@ -75,8 +75,8 @@ namespace Ekstraklasa
             }
         }
 
-        private ObservableCollection<string> _Stadiums = new ObservableCollection<string>();
-        public ObservableCollection<string> Stadiums
+        private ObservableCollection<StadiumEntity> _Stadiums = new ObservableCollection<StadiumEntity>();
+        public ObservableCollection<StadiumEntity> Stadiums
         {
             get
             {
@@ -193,10 +193,10 @@ namespace Ekstraklasa
         private async void UpdateFilters()
         {
             List<string> teams = await GetCurrentFiltersAsync();
-            List<string> stadiums = await GetCurrentStadiumsAsync();
+            List<StadiumEntity> stadiums = await GetCurrentStadiumsAsync();
             FullHost = new ObservableCollection<string>(teams);
             FullGuest = new ObservableCollection<string>(teams);
-            Stadiums = new ObservableCollection<string>(stadiums);
+            Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
             GuestTeams = new ObservableCollection<string>(FullGuest);
             HostTeams = new ObservableCollection<string>(FullHost);
         }
@@ -212,7 +212,7 @@ namespace Ekstraklasa
             Matches = temp;
         }
 
-        private async Task<List<string>> GetCurrentStadiumsAsync()
+        private async Task<List<StadiumEntity>> GetCurrentStadiumsAsync()
         {
             return await Task.Run(() =>
             {

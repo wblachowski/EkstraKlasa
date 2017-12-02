@@ -118,17 +118,7 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Mecze">
-                    <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical">
-                                </StackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type local:MatchControl}"/>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
                 </TabItem>
                 <TabItem Header="Trener">
                     <Grid Margin="8 15 0 0">

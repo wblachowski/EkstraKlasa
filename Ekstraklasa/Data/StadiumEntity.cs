@@ -8,10 +8,10 @@ namespace Ekstraklasa
 {
     public class StadiumEntity
     {
-        public string Name;
-        public string Address;
-        public string City;
-        public int Capacity;
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public int Capacity { get; set; }
 
         public StadiumEntity(string Name, string Address, string City, int Capacity)
         {

@@ -272,9 +272,9 @@ namespace Ekstraklasa
             return teams;
         }
 
-        public static List<string> GetStadiums()
+        public static List<StadiumEntity> GetStadiums()
         {
-            List<string> stadiums = new List<string>();
+            List<StadiumEntity> stadiums = new List<StadiumEntity>();
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
@@ -288,8 +288,12 @@ namespace Ekstraklasa
                         {
                             while (dr.Read())
                             {
-                                string stadium = dr.GetString(0);
-                                stadiums.Add(stadium);
+                                string name = dr.GetString(1);
+                                string city = dr.GetString(2);
+                                string address = dr.GetString(3);
+                                int capacity = dr.GetInt32(4);
+
+                                stadiums.Add(new StadiumEntity(name,address,city,capacity));
                             }
                         }
                     }

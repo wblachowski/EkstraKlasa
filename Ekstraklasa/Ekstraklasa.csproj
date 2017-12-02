@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -115,6 +115,15 @@
     <Compile Include="Controls\MatchControl.xaml.cs">
       <DependentUpon>MatchControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewGuestGoalControl.xaml.cs">
+      <DependentUpon>NewGuestGoalControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewHostGoalControl.xaml.cs">
+      <DependentUpon>NewHostGoalControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewMatchControl.xaml.cs">
+      <DependentUpon>NewMatchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TeamDetailsControl.xaml.cs">
       <DependentUpon>TeamDetailsControl.xaml</DependentUpon>
     </Compile>
@@ -122,6 +131,7 @@
       <DependentUpon>TeamsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\CoachEntity.cs" />
+    <Compile Include="Data\NameConverter.cs" />
     <Compile Include="Data\DateFormatRule.cs" />
     <Compile Include="Data\GoalEntity.cs" />
     <Compile Include="Data\MatchEntity.cs" />
@@ -131,6 +141,7 @@
     <Compile Include="Data\StadiumEntity.cs" />
     <Compile Include="Data\TableEntity.cs" />
     <Compile Include="Data\TeamEntity.cs" />
+    <Compile Include="Data\TimeFormatRule.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="ViewModels\GoalViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -148,6 +159,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\MatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewGuestGoalControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewHostGoalControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewMatchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,6 +200,7 @@
     </Compile>
     <Compile Include="ViewModels\MatchesViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
+    <Compile Include="ViewModels\NewMatchViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />

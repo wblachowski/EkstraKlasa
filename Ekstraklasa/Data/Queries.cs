@@ -46,7 +46,7 @@ namespace Ekstraklasa
 
         public static string GetTeams = "select name from team order by name desc";
 
-        public static string GetStadiums = "select name from stadium order by name desc";
+        public static string GetStadiums = "select * from stadium order by name desc";
 
         public static string GetTeamsWithImages = "select name, logo_path from team order by name desc";
 

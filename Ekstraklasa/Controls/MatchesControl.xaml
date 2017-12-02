@@ -24,7 +24,7 @@
 				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding GuestTeams}" Text="{Binding GuestSelected}">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Stadion" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}" Text="{Binding StadiumSelected}">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Stadiums}" DisplayMemberPath="Name" Text="{Binding StadiumSelected}">
                         </ComboBox>
                         <DatePicker materialDesign:HintAssist.Hint="Data"  Margin="15 14 0 0" Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="PL" FirstDayOfWeek="Monday">
                             <DatePicker.Text>
@@ -44,17 +44,7 @@
             <materialDesign:Transitioner  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
                 <materialDesign:TransitionerSlide >
                     <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                        <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                    </StackPanel>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type local:MatchControl}"/>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
                     </materialDesign:TransitioningContent>
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
