@@ -29,7 +29,6 @@ namespace Ekstraklasa
 
         private void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            // xaml.cs code
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }

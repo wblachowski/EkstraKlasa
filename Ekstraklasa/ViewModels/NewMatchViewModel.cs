@@ -30,8 +30,9 @@ namespace Ekstraklasa
             {
                 if (_ScoreHost != value)
                 {
-                    _ScoreHost = value;
+                    _ScoreHost = value.Trim();
                     OnPropertyChanged("ScoreHost");
+                    OnPropertyChanged("AreThereGoals");
                     List<NewHostGoalControl> goals = new List<NewHostGoalControl>();
                     int count;
                     if (Int32.TryParse(_ScoreHost, out count))
@@ -59,11 +60,12 @@ namespace Ekstraklasa
             {
                 if (_ScoreGuest != value)
                 {
-                    _ScoreGuest = value;
+                    _ScoreGuest = value.Trim();
                     OnPropertyChanged("ScoreGuest");
+                    OnPropertyChanged("AreThereGoals");
                     List<NewGuestGoalControl> goals = new List<NewGuestGoalControl>();
                     int count;
-                    if (Int32.TryParse(_ScoreGuest,out count))
+                    if (Int32.TryParse(_ScoreGuest, out count))
                     {
                         for (int i = 0; i < count; i++)
                         {
@@ -230,12 +232,29 @@ namespace Ekstraklasa
                 }
             }
         }
-        
+
         public bool IsHostStadiumBox
         {
             get
             {
                 return !_IsHostStadium;
+            }
+        }
+
+        public bool AreThereGoals
+        {
+            get
+            {
+                string sg = ScoreGuest == null ? "" : ScoreGuest.Trim();
+                string sh = ScoreHost == null ? "" : ScoreHost.Trim();
+                if ((sh.Length > 0 && sh != "0") || (sg.Length > 0 && sg != "0"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -281,7 +300,8 @@ namespace Ekstraklasa
 
         private async void UpdateHostGoals()
         {
-            await Task.Run(()=> {
+            await Task.Run(() =>
+            {
                 List<NewHostGoalControl> goals = new List<NewHostGoalControl>();
                 int count;
                 if (Int32.TryParse(_ScoreHost, out count))
@@ -342,6 +362,7 @@ namespace Ekstraklasa
         {
             List<PlayerEntity> playersHost = new List<PlayerEntity>();
             List<PlayerEntity> playersGuest = new List<PlayerEntity>();
+
             if (TeamHost != null)
             {
                 playersHost = await GetPlayersAsync(TeamHost.Name);
@@ -352,15 +373,19 @@ namespace Ekstraklasa
             }
             List<PlayerEntity> playersGuestCopy = new List<PlayerEntity>(playersGuest);
 
-            if (TeamHost != null && TeamGuest != null)
+            if (playersHost.Count>0 && playersGuest.Count>0)
             {
                 playersGuest.Add(null);
             }
+
+
             playersGuest.AddRange(playersHost);
-            if (TeamHost != null && TeamGuest != null)
+
+            if (playersHost.Count > 0 && playersGuest.Count > 0)
             {
                 playersHost.Add(null);
             }
+
             playersHost.AddRange(playersGuestCopy);
 
             PlayersHost = new ObservableCollection<PlayerEntity>(playersHost);

@@ -16,7 +16,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid  Grid.Row="0" Margin="100 30 100 0" VerticalAlignment="Top" Background="LightGray">
+        <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
+            <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
+                <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
+            </Button>
+            <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
+                <StackPanel>
+                    <Button Content="Wyczyść wartości"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </DockPanel>
+        <Grid  Grid.Row="0" Margin="100 30 100 0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
@@ -38,10 +48,10 @@
                        >
             </ComboBox>
         </Grid>
-        <Grid Grid.Row="1" Margin="100 10 100 0">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        <Grid Grid.Row="1" Margin="100 30 100 0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                 <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">Data</TextBlock>
-                <StackPanel  Margin="20 2 0 0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <StackPanel  Margin="20 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <DatePicker materialDesign:HintAssist.Hint="Data"  Width="100" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday">
                         <DatePicker.Text>
                             <Binding Path="DateSelected" Mode="TwoWay">
@@ -67,9 +77,9 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="3" Margin="100 16 100 0" Background="LightGray">
+        <Grid Grid.Row="3" Margin="100 16 100 90"  Visibility="{Binding AreThereGoals,Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">Bramki</TextBlock>
-            <ScrollViewer Margin="0 20 0 0" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Margin="0 5 0 0" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical">
                     <DockPanel LastChildFill="False">
                         <DockPanel DockPanel.Dock="Left" Margin="50 0 0 0">
@@ -82,6 +92,6 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Button Grid.RowSpan="4" VerticalAlignment="Bottom"  Margin="0 0 15 15" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Dodaj"/>
+        <Button Grid.RowSpan="4" VerticalAlignment="Bottom"  Margin="0 0 100 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Dodaj"/>
     </Grid>
 </UserControl>
