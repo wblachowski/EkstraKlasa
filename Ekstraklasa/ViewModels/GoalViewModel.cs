@@ -19,7 +19,7 @@ namespace Ekstraklasa
         public GoalViewModel(GoalEntity goal)
         {
             Minute = String.Format("{0}'", goal.Minute.ToString());
-            Scorer = String.Format("{0}.{1}", goal.Firstname.Substring(0, 1), goal.Lastname);
+            Scorer = String.Format("{0}.{1}", goal.Scorer.Firstname.Substring(0, 1), goal.Scorer.Lastname);
         }
 
         private string _Minute;

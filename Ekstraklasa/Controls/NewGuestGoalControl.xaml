@@ -15,7 +15,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <ComboBox  Margin="0 13 0 0" FontSize="13" Width="110" materialDesign:HintAssist.Hint="Strzelec" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, 
-AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest,Converter={StaticResource NameConverter}}"
+AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest,Converter={StaticResource NameConverter}}" SelectedItem="{Binding Scorer}"
                        >
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemSelectedCollapsedStyle}">
@@ -33,7 +33,7 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest,Converter={Sta
                     </Style>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
-            <TextBox Margin="10 0 0 0" Style="{StaticResource MaterialDesignTextBox}" Width="20" TextAlignment="Center" MaxLength="2" PreviewTextInput="PreviewTextInput"/>
+            <TextBox Margin="10 0 0 0" Style="{StaticResource MaterialDesignTextBox}" Text="{Binding Minute}" Width="20" TextAlignment="Center" MaxLength="2" PreviewTextInput="PreviewTextInput"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -8,17 +8,15 @@ namespace Ekstraklasa
 {
     public class GoalEntity
     {
-        public GoalEntity(int Minute, string Firstname, string Lastname, bool HostGoal)
+        public GoalEntity(PlayerEntity Scorer, int Minute, bool HostGoal)
         {
+            this.Scorer = Scorer;
             this.Minute = Minute;
-            this.Firstname = Firstname;
-            this.Lastname = Lastname;
             this.HostGoal = HostGoal;
         }
 
+        public PlayerEntity Scorer { get; set; }
         public int Minute;
-        public string Firstname;
-        public string Lastname;
         public bool HostGoal;
     }
 }

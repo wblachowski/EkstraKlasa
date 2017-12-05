@@ -17,19 +17,19 @@ namespace Ekstraklasa
             "nvl(sum(case when team.id=team_host_id then score_guest when team.id=team_guest_id then score_host end),0) as goals_conceded, " +
             "sum(case when (team.id=team_host_id and score_host>score_guest) then 3 when score_host=score_guest then 1 " +
             "when(team.id=team_guest_id and score_guest>score_host) then 3 else 0 end) as points " +
-            "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name,logo_path "+
+            "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name,logo_path " +
             "order by points desc, games desc, wins desc";
 
-        public static string GetMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, "+
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address "+
-            "from match m "+
-            "join team a on team_host_id = a.id "+
-            "join team b on team_guest_id = b.id "+
-            "join stadium s on m.stadium_id=s.id "+
-            "where a.name like :host "+
-            "and b.name like :guest "+
-            "and s.name like :stadium "+
-            "and to_char(start_time,'DD.MM.YYYY') like :start_date "+
+        public static string GetMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
+            "from match m " +
+            "join team a on team_host_id = a.id " +
+            "join team b on team_guest_id = b.id " +
+            "join stadium s on m.stadium_id=s.id " +
+            "where a.name like :host " +
+            "and b.name like :guest " +
+            "and s.name like :stadium " +
+            "and to_char(start_time,'DD.MM.YYYY') like :start_date " +
             "order by start_time desc";
 
         public static string GetMatchesTeam = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
@@ -38,11 +38,13 @@ namespace Ekstraklasa
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
             "join stadium s on m.stadium_id=s.id " +
-            "where a.name like :team or b.name like :team " + 
+            "where a.name like :team or b.name like :team " +
             "order by start_time desc";
 
-        public static string GetGoalsByID = "select minute, firstname, lastname, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL "+ 
-           "from match m join goal g on g.match_id=id join person p on g.player_pesel = pesel where m.id = :id";
+        public static string GetGoalsByID = "select minute, p.pesel, firstname, lastname, date_of_birth, nationality, weight, height, nr, " +
+            "position, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL " +
+            "from match m join goal g on g.match_id=id join player on player.pesel=g.player_pesel " +
+            "join person p on g.player_pesel = p.pesel where m.id = :id";
 
         public static string GetTeams = "select name from team order by name desc";
 
@@ -51,7 +53,7 @@ namespace Ekstraklasa
         public static string GetTeamsWithImages = "select name, logo_path from team order by name desc";
 
         public static string GetTeamsDetails = "select team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, coach.pesel, " +
-            "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id "+
+            "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
 
         public static string GetPlayers = "select * from person natural join player where team_id in (select id from team where name like :name) " +

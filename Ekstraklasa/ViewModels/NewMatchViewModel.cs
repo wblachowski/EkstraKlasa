@@ -39,6 +39,19 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _AddCommand;
+        public ICommand AddCommand
+        {
+            get
+            {
+                if (_AddCommand == null)
+                {
+                    _AddCommand = new RelayCommand(param => AddMatch());
+                }
+                return _AddCommand;
+            }
+        }
+
         private string _ScoreHost;
         public string ScoreHost
         {
@@ -318,36 +331,12 @@ namespace Ekstraklasa
             TimeSelected = DateTime.Now.ToString("HH:mm");
         }
 
-        private async void UpdateHostGoals()
+        private async void AddMatch()
         {
             await Task.Run(() =>
             {
-                List<NewHostGoalControl> goals = new List<NewHostGoalControl>();
-                int count;
-                if (Int32.TryParse(_ScoreHost, out count))
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        goals.Add(new NewHostGoalControl());
-                    }
-                }
-                GoalsHost = new ObservableCollection<NewHostGoalControl>(goals);
+                
             });
-        }
-
-
-        private List<NewHostGoalControl> GetHostGoals()
-        {
-            List<NewHostGoalControl> goals = new List<NewHostGoalControl>();
-            int count;
-            if (Int32.TryParse(_ScoreHost, out count))
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    goals.Add(new NewHostGoalControl());
-                }
-            }
-            return goals;
         }
 
         private async void UpdateStadiums()

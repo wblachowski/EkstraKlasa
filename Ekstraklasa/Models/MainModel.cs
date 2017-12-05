@@ -224,10 +224,17 @@ namespace Ekstraklasa
                             while (dr.Read())
                             {
                                 int minute = dr.GetInt32(0);
-                                string firstname = dr.GetString(1);
-                                string lastname = dr.GetString(2);
-                                bool hostGoal = dr.GetInt32(3) == 1 ? true : false;
-                                goals.Add(new GoalEntity(minute, firstname, lastname, hostGoal));
+                                string pesel = dr.GetInt64(1).ToString();
+                                string firstname = dr.GetString(2);
+                                string lastname = dr.GetString(3);
+                                DateTime dateOfBirth = dr.GetDateTime(4);
+                                string nationality = dr.GetString(5);
+                                int weight = dr.GetInt32(6);
+                                int height = dr.GetInt32(7);
+                                int nr = dr.GetInt32(8);
+                                string position = dr.GetString(9);
+                                bool hostGoal = dr.GetInt32(10) == 1 ? true : false;
+                                goals.Add(new GoalEntity(new PlayerEntity(pesel,firstname,lastname,dateOfBirth,nationality,weight,height,nr,position),minute,hostGoal));
                             }
                         }
                     }
