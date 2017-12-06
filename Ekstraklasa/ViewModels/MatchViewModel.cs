@@ -159,11 +159,11 @@ namespace Ekstraklasa
             {
                 if (goal.HostGoal)
                 {
-                    tempA.Add(new GoalControl(goal));
+                    tempA.Add(new GoalControl(goal,true));
                 }
                 else
                 {
-                    tempB.Add(new GoalControl(goal));
+                    tempB.Add(new GoalControl(goal,false));
                 }
             }
             GoalsA = tempA;

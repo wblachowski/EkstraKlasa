@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -325,6 +326,23 @@ namespace Ekstraklasa
             }
         }
 
+        private StadiumEntity _StadiumSelected;
+        public StadiumEntity StadiumSelected
+        {
+            get
+            {
+                return _StadiumSelected;
+            }
+            set
+            {
+                if (_StadiumSelected != value)
+                {
+                    _StadiumSelected = value;
+                    OnPropertyChanged("StadiumSelected");
+                }
+            }
+        }
+
         private void SetDateAndTime()
         {
             DateSelected = DateTime.Now.ToString("dd.MM.yyyy");
@@ -333,9 +351,31 @@ namespace Ekstraklasa
 
         private async void AddMatch()
         {
+            DateTime time = DateTime.ParseExact(DateSelected+" "+TimeSelected,"dd.MM.yyyy HH:mm",CultureInfo.InvariantCulture);
+            StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
+            List<GoalEntity> hostGoals = new List<GoalEntity>(), guestGoals = new List<GoalEntity>();
+            foreach(NewHostGoalControl control in GoalsHost){
+                GoalViewModel viewModel = (control.DataContext as GoalViewModel);
+                hostGoals.Add(new GoalEntity(viewModel.Scorer, Convert.ToInt32(viewModel.Minute), true));
+            }
+            foreach (NewGuestGoalControl control in GoalsGuest)
+            {
+                GoalViewModel viewModel = (control.DataContext as GoalViewModel);
+                guestGoals.Add(new GoalEntity(viewModel.Scorer, Convert.ToInt32(viewModel.Minute), false));
+            }
             await Task.Run(() =>
             {
-                
+                MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium));
+
+                foreach(GoalEntity hostGoal in hostGoals)
+                {
+                    MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id);
+                }
+
+                foreach(GoalEntity guestGoal in guestGoals)
+                {
+                    MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
+                }
             });
         }
 
@@ -390,7 +430,7 @@ namespace Ekstraklasa
 
             playersGuest.AddRange(playersHost);
 
-            if (playersHost.Count > 0 && playersGuest.Count > 0)
+            if (playersHost.Count > 0 && playersGuestCopy.Count > 0)
             {
                 playersHost.Add(null);
             }

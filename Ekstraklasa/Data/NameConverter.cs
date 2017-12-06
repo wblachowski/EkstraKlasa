@@ -14,18 +14,32 @@ namespace Ekstraklasa
         public object Convert(object value, Type targetType, object parameter,
                   System.Globalization.CultureInfo culture)
         {
+
             List<string> list = new List<string>();
-            foreach(object player in (value as ObservableCollection<PlayerEntity>))
+
+            if(value.GetType() == typeof(PlayerEntity))
             {
-                if (player != null) { 
-                list.Add((player as PlayerEntity).Firstname.Substring(0,1) + '.' + (player as PlayerEntity).Lastname);
-                }
-                else
-                {
-                    list.Add("");
-                }
+                return (value as PlayerEntity).Firstname.Substring(0, 1) + '.' + (value as PlayerEntity).Lastname;
+
             }
-            return list;
+
+            if (value.GetType() == typeof(ObservableCollection<PlayerEntity>))
+            {
+
+                foreach (object player in (value as ObservableCollection<PlayerEntity>))
+                {
+                    if (player != null)
+                    {
+                        list.Add((player as PlayerEntity).Firstname.Substring(0, 1) + '.' + (player as PlayerEntity).Lastname);
+                    }
+                    else
+                    {
+                        list.Add("");
+                    }
+                }
+                return list;
+            }
+            return value;
         }
         public object ConvertBack(object value, Type targetType, object parameter,
                          System.Globalization.CultureInfo culture)

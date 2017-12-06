@@ -12,6 +12,7 @@ namespace Ekstraklasa
         public int Height { get; set; }
         public int Nr { get; set; }
         public string Position { get; set; }
+        public string Display { get; set; }
 
         public PlayerEntity(string Pesel, string Firstname, string Lastname, DateTime DateOfBirth, string Nationality, int Weight, int Height, int Nr, string Position)
             : base(Pesel, Firstname, Lastname, DateOfBirth, Nationality)
@@ -20,6 +21,7 @@ namespace Ekstraklasa
             this.Height = Height;
             this.Nr = Nr;
             this.Position = Position;
+            this.Display = Firstname.Substring(0, 1) + '.' + Lastname;
         }
     }
 }

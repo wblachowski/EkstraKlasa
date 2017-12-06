@@ -9,6 +9,7 @@ namespace Ekstraklasa
 {
     public class TeamEntity
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string LogoPath { get; set; }
         public DateTime FoundedDate;
@@ -17,8 +18,9 @@ namespace Ekstraklasa
 
         public TeamEntity() { }
 
-        public TeamEntity(string Name,string LogoPath, DateTime FoundedDate, CoachEntity Coach, StadiumEntity Stadium)
+        public TeamEntity(int Id, string Name,string LogoPath, DateTime FoundedDate, CoachEntity Coach, StadiumEntity Stadium)
         {
+            this.Id = Id;
             string basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\";
             this.Name = Name;
             this.LogoPath = String.IsNullOrEmpty(LogoPath.Trim()) ? ConfigurationManager.AppSettings["default_logo"] : basePath + LogoPath;

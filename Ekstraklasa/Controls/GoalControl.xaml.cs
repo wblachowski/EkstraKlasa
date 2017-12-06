@@ -27,11 +27,12 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
-        public GoalControl(GoalEntity goal)
+        public GoalControl(GoalEntity goal, bool toRight)
         {
             InitializeComponent();
             var viewModel = new GoalViewModel(goal);
             DataContext = viewModel;
+            panel.HorizontalAlignment = toRight ? HorizontalAlignment.Right : HorizontalAlignment.Left;
         }
     }
 }

@@ -8,9 +8,12 @@
              FontSize="12"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
+    <UserControl.Resources>
+        <local:NameConverter x:Key="NameConverter" />
+    </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal" Opacity=".68">
-            <TextBlock x:Name="Scorer" Text="{Binding Scorer}"></TextBlock>
+        <StackPanel Name="panel" Orientation="Horizontal" Opacity=".68">
+            <TextBlock x:Name="Scorer" Text="{Binding Path=Scorer, Converter={StaticResource NameConverter}}"></TextBlock>
             <TextBlock x:Name="Minute" Margin="6 0 0 0" Text="{Binding Minute}"></TextBlock>
         </StackPanel>
     </Grid>

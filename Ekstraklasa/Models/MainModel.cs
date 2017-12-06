@@ -144,16 +144,19 @@ namespace Ekstraklasa
                                 int id = dr.GetInt32(0);
                                 DateTime date = dr.GetDateTime(1);
                                 string host = dr.GetString(2);
-                                string hostPath = dr.GetString(3);
-                                string guest = dr.GetString(4);
-                                string guestPath = dr.GetString(5);
-                                int scoreHost = dr.GetInt32(6);
-                                int scoreGuest = dr.GetInt32(7);
-                                string stadium = dr.GetString(8);
-                                string city = dr.GetString(9);
-                                string address = dr.GetString(10);
-                                int capacity = dr.GetInt32(11);
-                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest,new StadiumEntity(stadium,address,city,capacity)));
+                                int hostId = dr.GetInt32(3);
+                                string hostPath = dr.GetString(4);
+                                string guest = dr.GetString(5);
+                                int guestId = dr.GetInt32(6);
+                                string guestPath = dr.GetString(7);
+                                int scoreHost = dr.GetInt32(8);
+                                int scoreGuest = dr.GetInt32(9);
+                                string stadium = dr.GetString(10);
+                                string city = dr.GetString(11);
+                                string address = dr.GetString(12);
+                                int capacity = dr.GetInt32(13);
+                                int Sid = dr.GetInt32(14);
+                                Matches.Add(new MatchEntity(id, date, host,hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest,new StadiumEntity(Sid,stadium,address,city,capacity)));
                             }
                         }
                     }
@@ -186,16 +189,19 @@ namespace Ekstraklasa
                                 int id = dr.GetInt32(0);
                                 DateTime date = dr.GetDateTime(1);
                                 string host = dr.GetString(2);
-                                string hostPath = dr.GetString(3);
-                                string guest = dr.GetString(4);
-                                string guestPath = dr.GetString(5);
-                                int scoreHost = dr.GetInt32(6);
-                                int scoreGuest = dr.GetInt32(7);
-                                string stadium = dr.GetString(8);
-                                string city = dr.GetString(9);
-                                string address = dr.GetString(10);
-                                int capacity = dr.GetInt32(11);
-                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, new StadiumEntity(stadium,address,city,capacity)));
+                                int hostId = dr.GetInt32(3);
+                                string hostPath = dr.GetString(4);
+                                string guest = dr.GetString(5);
+                                int guestId = dr.GetInt32(6);
+                                string guestPath = dr.GetString(7);
+                                int scoreHost = dr.GetInt32(8);
+                                int scoreGuest = dr.GetInt32(9);
+                                string stadium = dr.GetString(10);
+                                string city = dr.GetString(11);
+                                string address = dr.GetString(12);
+                                int capacity = dr.GetInt32(13);
+                                int Sid = dr.GetInt32(14);
+                                Matches.Add(new MatchEntity(id, date, host, hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest, new StadiumEntity(Sid,stadium,address,city,capacity)));
                             }
                         }
                     }
@@ -297,12 +303,13 @@ namespace Ekstraklasa
                         {
                             while (dr.Read())
                             {
+                                int id = dr.GetInt32(0);
                                 string name = dr.GetString(1);
                                 string city = dr.GetString(2);
                                 string address = dr.GetString(3);
                                 int capacity = dr.GetInt32(4);
 
-                                stadiums.Add(new StadiumEntity(name,address,city,capacity));
+                                stadiums.Add(new StadiumEntity(id,name,address,city,capacity));
                             }
                         }
                     }
@@ -333,20 +340,22 @@ namespace Ekstraklasa
                         {
                             while (dr.Read())
                             {
-                                string name = dr.GetString(0);
-                                string path = dr.GetString(1);
-                                DateTime foundedDate = dr.GetDateTime(2);
-                                string stadiumName = dr.GetString(3);
-                                string stadiumCity = dr.GetString(4);
-                                string stadiumAddress = dr.GetString(5);
-                                int stadiumCapacity = dr.GetInt32(6);
-                                long pesel = dr.GetInt64(7);
-                                string firstname = dr.GetString(8);
-                                string lastname = dr.GetString(9);
-                                DateTime dateOfBirth = dr.GetDateTime(10);
-                                string nationality = dr.GetString(11);
-                                DateTime hiringDate = dr.GetDateTime(12);
-                                teams.Add(new TeamEntity(name,path, foundedDate, new CoachEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, hiringDate), new StadiumEntity(stadiumName, stadiumAddress, stadiumCity, stadiumCapacity)));
+                                int Id = dr.GetInt32(0);
+                                string name = dr.GetString(1);
+                                string path = dr.GetString(2);
+                                DateTime foundedDate = dr.GetDateTime(3);
+                                string stadiumName = dr.GetString(4);
+                                string stadiumCity = dr.GetString(5);
+                                string stadiumAddress = dr.GetString(6);
+                                int stadiumCapacity = dr.GetInt32(7);
+                                int stadiumId = dr.GetInt32(8);
+                                long pesel = dr.GetInt64(9);
+                                string firstname = dr.GetString(10);
+                                string lastname = dr.GetString(11);
+                                DateTime dateOfBirth = dr.GetDateTime(12);
+                                string nationality = dr.GetString(13);
+                                DateTime hiringDate = dr.GetDateTime(14);
+                                teams.Add(new TeamEntity(Id, name,path, foundedDate, new CoachEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, hiringDate), new StadiumEntity(stadiumId, stadiumName, stadiumAddress, stadiumCity, stadiumCapacity)));
                             }
                         }
                     }
@@ -408,16 +417,38 @@ namespace Ekstraklasa
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql = Queries.GetPlayers;
+                    string sql = Queries.InsertMatch;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("start_time", Match.Date);
                         command.Parameters.Add("score_host", Match.ScoreHost);
                         command.Parameters.Add("score_guest", Match.ScoreGuest);
-                        // !!!!!! command.Parameters.Add("stadium_id", Match.Stadium);
-                        command.Parameters.Add("score_host", Match.ScoreHost);
-                        command.Parameters.Add("score_host", Match.ScoreHost);
-                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        command.Parameters.Add("stadium_id", Match.Stadium.Id);
+                        command.Parameters.Add("team_host_id", Match.HostId);
+                        command.Parameters.Add("team_guest_id", Match.GuestId);
+                        int Rows = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void InsertGoal(int minute, string pesel,int team_id)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertGoal;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("minute", minute);
+                        command.Parameters.Add("pesel", pesel);
+                        command.Parameters.Add("team_id", team_id);
                         int Rows = command.ExecuteNonQuery();
                     }
                 }

@@ -72,7 +72,7 @@
                     <CheckBox Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center" IsChecked="{Binding IsHostStadium}">
                         Stadion gospodarza
                     </CheckBox>
-                    <ComboBox Margin="0 4 0 0" materialDesign:HintAssist.Hint="Obiekt" Visibility="{Binding IsHostStadiumBox,Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Stadiums}" DisplayMemberPath="Name">
+                    <ComboBox Margin="0 4 0 0" materialDesign:HintAssist.Hint="Obiekt" Visibility="{Binding IsHostStadiumBox,Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Stadiums}" SelectedItem="{Binding StadiumSelected}" DisplayMemberPath="Name">
                     </ComboBox>
                 </StackPanel>
             </StackPanel>

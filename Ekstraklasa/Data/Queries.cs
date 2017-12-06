@@ -20,8 +20,8 @@ namespace Ekstraklasa
             "from team left outer join match on team.id=team_host_id or team.id=team_guest_id group by name,logo_path " +
             "order by points desc, games desc, wins desc";
 
-        public static string GetMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity " +
+        public static string GetMatches = "select m.id, start_time,a.name as host, a.id, a.logo_path as host_path, b.name as guest, " +
+            "b.id, b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity, s.id " +
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
@@ -32,8 +32,8 @@ namespace Ekstraklasa
             "and to_char(start_time,'DD.MM.YYYY') like :start_date " +
             "order by start_time desc";
 
-        public static string GetMatchesTeam = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity " +
+        public static string GetMatchesTeam = "select m.id, start_time,a.name as host, a.id, a.logo_path as host_path, b.name as guest, " +
+            "b.id, b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity, s.id " +
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
@@ -50,7 +50,7 @@ namespace Ekstraklasa
 
         public static string GetStadiums = "select * from stadium order by name desc";
 
-        public static string GetTeamsDetails = "select team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, coach.pesel, " +
+        public static string GetTeamsDetails = "select team.id, team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, stadium.id, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
 
@@ -59,5 +59,7 @@ namespace Ekstraklasa
 
         public static string InsertMatch = "insert into match(start_time,score_host,score_guest,stadium_id,team_host_id,team_guest_id) " +
              "values(:start_time,:score_host,:score_guest,:stadium_id,:team_host_id,:team_guest_id)";
+
+        public static string InsertGoal = "insert into goal values(:minute,:pesel,:team_id,(select max(id) from match))";
     }
 }

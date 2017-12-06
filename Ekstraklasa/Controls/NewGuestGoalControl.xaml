@@ -14,13 +14,19 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <ComboBox  Margin="0 13 0 0" FontSize="13" Width="110" materialDesign:HintAssist.Hint="Strzelec" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, 
-AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest,Converter={StaticResource NameConverter}}" SelectedItem="{Binding Scorer}"
-                       >
+            <ComboBox  Margin="0 13 0 0" FontSize="13" Width="110" materialDesign:HintAssist.Hint="Strzelec" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, 
+AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest}" SelectedItem="{Binding Scorer}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Converter={StaticResource NameConverter}}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemSelectedCollapsedStyle}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding}" Value="">
+                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ComboBoxItem}">
