@@ -21,7 +21,7 @@ namespace Ekstraklasa
             "order by points desc, games desc, wins desc";
 
         public static string GetMatches = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity " +
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
@@ -33,7 +33,7 @@ namespace Ekstraklasa
             "order by start_time desc";
 
         public static string GetMatchesTeam = "select m.id, start_time,a.name as host, a.logo_path as host_path, b.name as guest, " +
-            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address " +
+            "b.logo_path as guest_path, score_host,score_guest,s.name, s.city, s.address, s.capacity " +
             "from match m " +
             "join team a on team_host_id = a.id " +
             "join team b on team_guest_id = b.id " +
@@ -50,13 +50,14 @@ namespace Ekstraklasa
 
         public static string GetStadiums = "select * from stadium order by name desc";
 
-        public static string GetTeamsWithImages = "select name, logo_path from team order by name desc";
-
         public static string GetTeamsDetails = "select team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
 
         public static string GetPlayers = "select * from person natural join player where team_id in (select id from team where name like :name) " +
-             " order by team_id, decode(position, 'BRAMKARZ', 1, '%OBROŃCA%', 2, '%POMOCNIK%', 3, '%NAPASTNIK%', 4)";
+             "order by team_id, decode(position, 'BRAMKARZ', 1, '%OBROŃCA%', 2, '%POMOCNIK%', 3, '%NAPASTNIK%', 4)";
+
+        public static string InsertMatch = "insert into match(start_time,score_host,score_guest,stadium_id,team_host_id,team_guest_id) " +
+             "values(:start_time,:score_host,:score_guest,:stadium_id,:team_host_id,:team_guest_id)";
     }
 }

@@ -17,11 +17,9 @@ namespace Ekstraklasa
         public string GuestPath;
         public int ScoreHost;
         public int ScoreGuest;
-        public string Stadium;
-        public string City;
-        public string Address;
+        public StadiumEntity Stadium { get; set; }
 
-        public MatchEntity(int ID,DateTime Date, string Host, string HostPath, string Guest, string GuestPath, int ScoreHost, int ScoreGuest, string Stadium, string City, string Address)
+        public MatchEntity(int ID,DateTime Date, string Host, string HostPath, string Guest, string GuestPath, int ScoreHost, int ScoreGuest, StadiumEntity Stadium)
         {
             string basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\";
             this.ID = ID;
@@ -33,8 +31,6 @@ namespace Ekstraklasa
             this.ScoreHost = ScoreHost;
             this.ScoreGuest = ScoreGuest;
             this.Stadium = Stadium;
-            this.City = City;
-            this.Address = Address;
         }
     }
 }

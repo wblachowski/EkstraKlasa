@@ -211,7 +211,7 @@ namespace Ekstraklasa
 
         private async void UpdateFilters()
         {
-            List<string> teams = await GetCurrentFiltersAsync();
+            List<string> teams = await GetCurrentTeamsAsync();
             List<StadiumEntity> stadiums = await GetCurrentStadiumsAsync();
             FullHost = new ObservableCollection<string>(teams);
             FullGuest = new ObservableCollection<string>(teams);
@@ -239,7 +239,7 @@ namespace Ekstraklasa
             });
         }
 
-        private async Task<List<string>> GetCurrentFiltersAsync()
+        private async Task<List<string>> GetCurrentTeamsAsync()
         {
             return await Task.Run(() =>
             {

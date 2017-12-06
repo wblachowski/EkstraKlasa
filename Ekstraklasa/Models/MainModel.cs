@@ -152,7 +152,8 @@ namespace Ekstraklasa
                                 string stadium = dr.GetString(8);
                                 string city = dr.GetString(9);
                                 string address = dr.GetString(10);
-                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, stadium, city, address));
+                                int capacity = dr.GetInt32(11);
+                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest,new StadiumEntity(stadium,address,city,capacity)));
                             }
                         }
                     }
@@ -193,7 +194,8 @@ namespace Ekstraklasa
                                 string stadium = dr.GetString(8);
                                 string city = dr.GetString(9);
                                 string address = dr.GetString(10);
-                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, stadium, city, address));
+                                int capacity = dr.GetInt32(11);
+                                Matches.Add(new MatchEntity(id, date, host, hostPath, guest, guestPath, scoreHost, scoreGuest, new StadiumEntity(stadium,address,city,capacity)));
                             }
                         }
                     }
@@ -399,6 +401,33 @@ namespace Ekstraklasa
             return players;
         }
 
+        public static void InsertMatch(MatchEntity Match)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetPlayers;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("start_time", Match.Date);
+                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        command.Parameters.Add("score_guest", Match.ScoreGuest);
+                        // !!!!!! command.Parameters.Add("stadium_id", Match.Stadium);
+                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        int Rows = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
+
+        }
     }
 }
