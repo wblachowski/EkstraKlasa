@@ -44,7 +44,7 @@ namespace Ekstraklasa
         public static string GetGoalsByID = "select minute, p.pesel, firstname, lastname, date_of_birth, nationality, weight, height, nr, " +
             "position, (case when g.team_id=m.team_host_id then 1 else 0 end) as HOSTGOAL " +
             "from match m join goal g on g.match_id=id join player on player.pesel=g.player_pesel " +
-            "join person p on g.player_pesel = p.pesel where m.id = :id";
+            "join person p on g.player_pesel = p.pesel where m.id = :id order by minute";
 
         public static string GetTeams = "select name from team order by name desc";
 

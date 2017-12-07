@@ -377,6 +377,10 @@ namespace Ekstraklasa
                     MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
                 }
             });
+            if (ChangeContentEvent != null)
+            {
+                ChangeContentEvent(new MatchesControl());
+            }
         }
 
         private async void UpdateStadiums()
