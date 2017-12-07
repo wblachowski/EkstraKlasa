@@ -453,6 +453,8 @@ namespace Ekstraklasa
             });
         }
 
+        
+
 
         virtual protected void OnPropertyChanged(string propName)
         {

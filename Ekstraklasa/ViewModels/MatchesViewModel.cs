@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -202,9 +203,7 @@ namespace Ekstraklasa
             GuestSelected = "";
             StadiumSelected = "";
             DateSelected = "";
-
         }
-
 
         private async void UpdateFilters()
         {
@@ -220,12 +219,11 @@ namespace Ekstraklasa
         private async void UpdateMatches()
         {
             List<MatchEntity> matches = await GetCurrentMatchesAsync();
-            ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
+            Matches.Clear();
             foreach (MatchEntity match in matches)
             {
-                temp.Add(new MatchControl(match));
+                Matches.Add(new MatchControl(match));
             }
-            Matches = temp;
         }
 
         private async Task<List<StadiumEntity>> GetCurrentStadiumsAsync()
