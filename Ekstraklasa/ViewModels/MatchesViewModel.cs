@@ -16,9 +16,6 @@ namespace Ekstraklasa
 
         public MatchesViewModel()
         {
-            ObservableCollection<MatchControl> temp = new ObservableCollection<MatchControl>();
-            temp.Add(new MatchControl());
-            Matches = temp;
             UpdateMatches();
             UpdateFilters();
         }
