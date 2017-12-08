@@ -57,6 +57,13 @@ namespace Ekstraklasa
         public static string GetPlayers = "select * from person natural join player where team_id in (select id from team where name like :name) " +
              "order by team_id, decode(position, 'BRAMKARZ', 1, '%OBROŃCA%', 2, '%POMOCNIK%', 3, '%NAPASTNIK%', 4)";
 
+        public static string GetTopScorers = "select goals, pesel,firstname,lastname,date_of_birth,nationality,weight,height,nr,position, name " +
+            "from player natural join person " +
+            "join team on team.id=team_id " +
+            "natural join(select count(*) as goals, person.pesel from goal join person on player_pesel= person.pesel " +
+            "join player on player_pesel = player.pesel join match on match_id = match.id " +
+            "where player.team_id= goal.team_id group by person.pesel) order by goals desc";
+
         public static string InsertMatch = "insert into match(start_time,score_host,score_guest,stadium_id,team_host_id,team_guest_id) " +
              "values(:start_time,:score_host,:score_guest,:stadium_id,:team_host_id,:team_guest_id)";
 

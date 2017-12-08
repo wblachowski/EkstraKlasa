@@ -10,8 +10,11 @@
               xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <TreeView Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Row="0">
                 <TreeViewItem x:Name="m_tvFilter" Style="{StaticResource MaterialDesignTreeViewItem}" ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
                     <TreeViewItem.Header>
                         <TextBlock MouseDown="Filter_Mouse_Down">Filtruj</TextBlock>
@@ -41,15 +44,16 @@
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>
-            <materialDesign:Transitioner  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
-                <materialDesign:TransitionerSlide >
-                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                        <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
-                    </materialDesign:TransitioningContent>
-                </materialDesign:TransitionerSlide>
-            </materialDesign:Transitioner>
-        </StackPanel>
-        <materialDesign:Transitioner  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+                    <materialDesign:TransitionerSlide >
+                        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                            <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
+                        </materialDesign:TransitioningContent>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+            </ScrollViewer>
+        <materialDesign:Transitioner  Grid.Row="1" SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.4}">
                     <Button Style="{StaticResource MaterialDesignFloatingActionButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right"

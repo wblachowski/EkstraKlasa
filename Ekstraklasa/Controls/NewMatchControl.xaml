@@ -79,8 +79,8 @@
         </Grid>
         <Grid Grid.Row="3" Margin="100 16 100 90"  Visibility="{Binding AreThereGoals,Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">Bramki</TextBlock>
-            <ScrollViewer Margin="0 5 0 0" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical">
+            <ScrollViewer Margin="0 20 0 0" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" Margin="0 -16 0 0">
                     <DockPanel LastChildFill="False">
                         <DockPanel DockPanel.Dock="Left" Margin="50 0 0 0">
                             <ItemsControl ItemsSource="{Binding GoalsHost}"/>
@@ -92,6 +92,8 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Button Grid.RowSpan="4" Command="{Binding AddCommand}" VerticalAlignment="Bottom"  Margin="0 0 100 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Dodaj"/>
+        <Button Grid.RowSpan="4" Command="{Binding GoBackCommand}" VerticalAlignment="Bottom"  Margin="0 0 110 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Anuluj"/>
+
+        <Button Grid.RowSpan="4" Command="{Binding AddCommand}" VerticalAlignment="Bottom"  Margin="0 0 40 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignRaisedButton}" Content="Dodaj"/>
     </Grid>
 </UserControl>

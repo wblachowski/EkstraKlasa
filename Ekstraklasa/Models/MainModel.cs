@@ -410,6 +410,46 @@ namespace Ekstraklasa
             return players;
         }
 
+        public static List<Tuple<PlayerEntity,int,string>> GetTopScorers()
+        {
+            List<Tuple<PlayerEntity,int,string>> players = new List<Tuple<PlayerEntity,int,string>>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetTopScorers;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int goals = dr.GetInt32(0);
+                                long pesel = dr.GetInt64(1);
+                                string firstname = dr.GetString(2);
+                                string lastname = dr.GetString(3);
+                                DateTime dateOfBirth = dr.GetDateTime(4);
+                                string nationality = dr.GetString(5);
+                                int weight = dr.GetInt32(6);
+                                int height = dr.GetInt32(7);
+                                int nr = dr.GetInt32(8);
+                                string position = dr.GetString(9);
+                                string team = dr.GetString(10);
+                                players.Add(new Tuple<PlayerEntity,int,string>(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position),goals,team));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return players;
+        }
+
         public static void InsertMatch(MatchEntity Match)
         {
             try
