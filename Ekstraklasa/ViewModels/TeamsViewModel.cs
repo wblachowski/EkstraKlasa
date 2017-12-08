@@ -11,8 +11,6 @@ using System.Windows.Input;
 
 namespace Ekstraklasa
 {
-    public delegate void delegateChangeControl(UserControl control);
-
     class TeamsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
@@ -68,7 +66,7 @@ namespace Ekstraklasa
                     OnPropertyChanged("SelectedValue");
                     if (ChangeContentEvent != null)
                     {
-                        ChangeContentEvent(new TeamDetailsControl(SelectedItem.Name, ChangeContentEvent));
+                        ChangeContentEvent(0,new TeamDetailsControl(SelectedItem.Name, ChangeContentEvent));
                     }
                 }
             }

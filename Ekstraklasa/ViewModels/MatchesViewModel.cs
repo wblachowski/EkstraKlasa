@@ -189,7 +189,7 @@ namespace Ekstraklasa
                     _NewMatchCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(new NewMatchControl(ChangeContentEvent));
+                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent));
                         }
                     });
                 }

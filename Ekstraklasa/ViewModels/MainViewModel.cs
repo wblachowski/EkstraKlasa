@@ -8,6 +8,8 @@ using System.Windows.Controls;
 
 namespace Ekstraklasa
 {
+    public delegate void delegateChangeControl(int index, UserControl control);
+
     class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
@@ -52,22 +54,33 @@ namespace Ekstraklasa
             }
         }
 
+        MatchesControl matchesControl;
+        TableControl tableControl;
+        TeamsControl teamsControl;
+
+        TopScorersControl topScorersControl;
+
+
         private void ChangeMainControl(int index)
         {
             switch (index)
             {
-                case 0: mainControl = new MatchesControl(ChangeControl);break;
-                case 1: mainControl = new TableControl();break;
-                case 2: mainControl = new TeamsControl(ChangeControl); break;
+                case 0: mainControl = matchesControl == null ? matchesControl = new MatchesControl(ChangeControl) : matchesControl;break;
+                case 1: mainControl = tableControl == null ? tableControl = new TableControl() : tableControl;break;
+                case 2: mainControl = teamsControl == null ? teamsControl = new TeamsControl(ChangeControl) : teamsControl; break;
 
-                case 4: mainControl = new TopScorersControl();break;
+                case 4: mainControl = topScorersControl == null? topScorersControl = new TopScorersControl() : topScorersControl;break;
             }
         }
 
-        private void ChangeControl(UserControl control)
+        private void ChangeControl(int index, UserControl control)
         {
             if (control != null) {
                 mainControl = control;
+            }
+            else
+            {
+                ChangeMainControl(index);
             }
         }
 

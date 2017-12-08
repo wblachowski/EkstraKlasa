@@ -249,7 +249,7 @@ namespace Ekstraklasa
         {
             if (ChangeContentEvent != null)
             {
-                ChangeContentEvent(new TeamsControl(ChangeContentEvent));
+                ChangeContentEvent(2,null);
             }
         }
 

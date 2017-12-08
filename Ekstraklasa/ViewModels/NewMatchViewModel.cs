@@ -32,7 +32,7 @@ namespace Ekstraklasa
                     _GoBackCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(new MatchesControl(ChangeContentEvent));
+                            ChangeContentEvent(0,null);
                         }
                     });
                 }
@@ -379,7 +379,7 @@ namespace Ekstraklasa
             });
             if (ChangeContentEvent != null)
             {
-                ChangeContentEvent(new MatchesControl());
+                ChangeContentEvent(0,null);
             }
         }
 
