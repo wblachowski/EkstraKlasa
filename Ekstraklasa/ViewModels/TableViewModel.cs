@@ -52,6 +52,11 @@ namespace Ekstraklasa
             }
         }
 
+        public void Update()
+        {
+            UpdateTable();
+        }
+
         private async void UpdateTable()
         {
             List<TableEntity> list = await GetCurrentTableAsync();

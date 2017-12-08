@@ -14,6 +14,7 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
+        public event delegateUpdateControl UpdateContentEvent = null;
 
         public NewMatchViewModel()
         {
@@ -377,6 +378,12 @@ namespace Ekstraklasa
                     MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
                 }
             });
+
+            if (UpdateContentEvent != null)
+            {
+                UpdateContentEvent(0);
+                UpdateContentEvent(1);
+            }
             if (ChangeContentEvent != null)
             {
                 ChangeContentEvent(0,null);

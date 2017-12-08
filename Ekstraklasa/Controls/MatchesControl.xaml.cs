@@ -27,11 +27,13 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
-        public MatchesControl(delegateChangeControl changeControlDelegate)
+        public MatchesControl(delegateChangeControl changeControlDelegate, delegateUpdateControl updateControlDelegate)
         {
             InitializeComponent();
             var viewModel = new MatchesViewModel();
             viewModel.ChangeContentEvent += changeControlDelegate;
+            viewModel.UpdateContentEvent += updateControlDelegate;
+
             DataContext = viewModel;
         }
 

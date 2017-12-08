@@ -14,6 +14,7 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
+        public event delegateUpdateControl UpdateContentEvent = null;
 
         public MatchesViewModel()
         {
@@ -189,12 +190,19 @@ namespace Ekstraklasa
                     _NewMatchCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent));
+                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent, UpdateContentEvent));
                         }
                     });
                 }
                 return _NewMatchCommand;
             }
+        }
+
+        public void Update()
+        {
+            UpdateMatches();
+            UpdateFilters();
+            ClearFilters();
         }
 
         private void ClearFilters()
