@@ -14,6 +14,7 @@ namespace Ekstraklasa
     class MatchViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
+        public event delegateUpdateControl UpdateContentEvent = null;
 
         public MatchViewModel()
         {
@@ -23,16 +24,9 @@ namespace Ekstraklasa
         public MatchViewModel(MatchEntity match)
         {
             Match = match;
-            //TeamA = match.Host;
-            //TeamB = match.Guest;
-            //TeamAPath = match.HostPath;
-            //TeamBPath = match.GuestPath;
             Score = String.Format("{0}:{1}", match.ScoreHost, match.ScoreGuest);
-            ID = match.ID;
             UpdateGoals();
         }
-
-        private int ID;
 
         private ICommand _OpenDialog;
         public ICommand OpenDialog
@@ -139,7 +133,7 @@ namespace Ekstraklasa
         {
             return await Task.Run(() =>
             {
-                return MainModel.GetGoalsByID(ID);
+                return MainModel.GetGoalsByID(Match.ID);
             });
 
         }
@@ -147,7 +141,23 @@ namespace Ekstraklasa
         private async void ExecuteRunDialog(object o)
         {
             var view = new DeleteMatchDialog(Match.Host + " " + Score + " " + Match.Guest);
-            await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            if(result!= null && (bool)result == true)
+            {
+                DeleteMatch();
+            }
+        }
+
+        private async void DeleteMatch()
+        {
+            await Task.WhenAll( Task.Run(()=>MainModel.DeleteGoal(Match.ID)),  Task.Run(() => MainModel.DeleteMatch(Match.ID)));
+            if (UpdateContentEvent != null)
+            {
+                UpdateContentEvent(0);
+                UpdateContentEvent(1);
+                UpdateContentEvent(4);
+            }
         }
 
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)

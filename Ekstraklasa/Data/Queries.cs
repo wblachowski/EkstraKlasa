@@ -68,5 +68,9 @@ namespace Ekstraklasa
              "values(:start_time,:score_host,:score_guest,:stadium_id,:team_host_id,:team_guest_id)";
 
         public static string InsertGoal = "insert into goal values(:minute,:pesel,:team_id,(select max(id) from match))";
+
+        public static string DeleteMatch = "delete from match where id=:id";
+
+        public static string DeleteGoal = "delete from goal where match_id=:id";
     }
 }
