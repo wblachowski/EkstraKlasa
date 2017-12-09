@@ -6,8 +6,57 @@
              xmlns:local="clr-namespace:Ekstraklasa"
              mc:Ignorable="d"
              Width="400"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Edytuj">
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Center" Height="18" Width="18"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Usuń" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                <MenuItem.CommandParameter>
+                    <StackPanel Orientation="Vertical" Margin="16">
+                        <TextBlock Text="Czy na pewno chcesz usunąć mecz? "></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding TeamA}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding ScoreA}"/>
+                            <TextBlock Text=":"/>
+                            <TextBlock Text="{Binding ScoreB}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding TeamB}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 8 8 0"
+                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>True</system:Boolean>
+                                </Button.CommandParameter>
+                                TAK
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="0 8 8 0"
+                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>False</system:Boolean>
+                                </Button.CommandParameter>
+                                NIE
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </MenuItem.CommandParameter>
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Height="18" Width="18"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Grid>
         <Expander>
             <Expander.Header>
