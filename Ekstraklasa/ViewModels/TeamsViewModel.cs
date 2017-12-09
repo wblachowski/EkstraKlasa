@@ -63,13 +63,18 @@ namespace Ekstraklasa
                 if (_SelectedItem != value)
                 {
                     _SelectedItem = value;
-                    OnPropertyChanged("SelectedValue");
-                    if (ChangeContentEvent != null)
+                    OnPropertyChanged("SelectedItem");
+                    if (_SelectedItem!= null && ChangeContentEvent != null)
                     {
                         ChangeContentEvent(0,new TeamDetailsControl(SelectedItem.Name, ChangeContentEvent));
                     }
                 }
             }
+        }
+
+        public void Initialize()
+        {
+            SelectedItem = null;
         }
 
         private async void UpdateTeams()
