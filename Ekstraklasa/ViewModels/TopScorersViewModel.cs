@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ekstraklasa
@@ -29,7 +30,7 @@ namespace Ekstraklasa
                 if (_Scorers != value)
                 {
                     _Scorers = value;
-                    OnPropertyChanged("Scorer");
+                    OnPropertyChanged("Scorers");
                 }
             }
         }
@@ -49,6 +50,11 @@ namespace Ekstraklasa
                     OnPropertyChanged("IsProgressBarVisible");
                 }
             }
+        }
+
+        public void Update()
+        {
+            UpdateScorers();
         }
 
         private async void UpdateScorers()

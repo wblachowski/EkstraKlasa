@@ -383,6 +383,7 @@ namespace Ekstraklasa
             {
                 UpdateContentEvent(0);
                 UpdateContentEvent(1);
+                UpdateContentEvent(4);
             }
             if (ChangeContentEvent != null)
             {

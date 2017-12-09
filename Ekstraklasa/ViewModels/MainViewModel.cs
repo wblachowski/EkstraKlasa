@@ -109,6 +109,15 @@ namespace Ekstraklasa
                         }
                     }
                     break;
+                case 4:
+                    {
+                        if (topScorersControl == null) { topScorersControl = new TopScorersControl(); }
+                        else
+                        {
+                            var viewModel = topScorersControl.DataContext as TopScorersViewModel; viewModel.Update();
+                        }
+                    }
+                    break;
             }
         }
 
