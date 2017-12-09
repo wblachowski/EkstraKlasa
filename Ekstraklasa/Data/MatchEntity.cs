@@ -9,16 +9,16 @@ namespace Ekstraklasa
 {
     public class MatchEntity
     {
-        public int ID;
-        public DateTime Date;
-        public string Host;
-        public int HostId;
-        public string HostPath;
-        public string Guest;
-        public int GuestId;
-        public string GuestPath;
-        public int ScoreHost;
-        public int ScoreGuest;
+        public int ID { get; set; }
+        public DateTime Date { get; set; }
+        public string Host { get; set; }
+        public int HostId { get; set; }
+        public string HostPath { get; set; }
+        public string Guest { get; set; }
+        public int GuestId { get; set; }
+        public string GuestPath { get; set; }
+        public int ScoreHost { get; set; }
+        public int ScoreGuest { get; set; }
         public StadiumEntity Stadium { get; set; }
 
         public MatchEntity(int ID,DateTime Date, string Host, int HostId, string HostPath, string Guest, int GuestId, string GuestPath, int ScoreHost, int ScoreGuest, StadiumEntity Stadium)

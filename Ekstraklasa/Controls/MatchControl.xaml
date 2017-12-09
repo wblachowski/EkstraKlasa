@@ -16,41 +16,9 @@
                     <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Center" Height="18" Width="18"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Usuń" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                <MenuItem.CommandParameter>
-                    <StackPanel Orientation="Vertical" Margin="16">
-                        <TextBlock Text="Czy na pewno chcesz usunąć mecz? "></TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding TeamA}"/>
-                            <TextBlock Text=" "/>
-                            <TextBlock Text="{Binding ScoreA}"/>
-                            <TextBlock Text=":"/>
-                            <TextBlock Text="{Binding ScoreB}"/>
-                            <TextBlock Text=" "/>
-                            <TextBlock Text="{Binding TeamB}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                        IsDefault="True"
-                                                        Margin="0 8 8 0"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>True</system:Boolean>
-                                </Button.CommandParameter>
-                                TAK
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                        IsCancel="True"
-                                                        Margin="0 8 8 0"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>False</system:Boolean>
-                                </Button.CommandParameter>
-                                NIE
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </MenuItem.CommandParameter>
+            <MenuItem Header="Usuń" 
+                      Command="{Binding OpenDialog}"
+                      IsEnabled="True">
                 <MenuItem.Icon>
                     <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Height="18" Width="18"/>
                 </MenuItem.Icon>
@@ -67,17 +35,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" VerticalAlignment="Center" Text="{Binding TeamA}"/>
+                        <TextBlock x:Name="tbTeamA" FlowDirection="RightToLeft" VerticalAlignment="Center" Text="{Binding Match.Host}"/>
                         <StackPanel Width="30" VerticalAlignment="Center"  Margin="5 0 0 0">
-                            <Image  RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25" Source="{Binding TeamAPath}"/>
+                            <Image  RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25" Source="{Binding Match.HostPath}"/>
                         </StackPanel>
                     </StackPanel>
                     <TextBlock x:Name="score" Grid.Column="1"  VerticalAlignment="Center" Margin="10 0 10 0" Text="{Binding Score}"/>
                     <StackPanel Grid.Column="2" Orientation="Horizontal">
                         <StackPanel Width="30" VerticalAlignment="Center" Margin="0 0 5 0">
-                            <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25"  Source="{Binding TeamBPath}"/>
+                            <Image RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Height="25"  Source="{Binding Match.GuestPath}"/>
                         </StackPanel>
-                        <TextBlock x:Name="tbTeamB"  VerticalAlignment="Center" Text="{Binding TeamB}" />
+                        <TextBlock x:Name="tbTeamB"  VerticalAlignment="Center" Text="{Binding Match.Guest}" />
                     </StackPanel>
                 </Grid>
             </Expander.Header>

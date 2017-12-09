@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ekstraklasa
 {
@@ -20,10 +22,11 @@ namespace Ekstraklasa
 
         public MatchViewModel(MatchEntity match)
         {
-            TeamA = match.Host;
-            TeamB = match.Guest;
-            TeamAPath = match.HostPath;
-            TeamBPath = match.GuestPath;
+            Match = match;
+            //TeamA = match.Host;
+            //TeamB = match.Guest;
+            //TeamAPath = match.HostPath;
+            //TeamBPath = match.GuestPath;
             Score = String.Format("{0}:{1}", match.ScoreHost, match.ScoreGuest);
             ID = match.ID;
             UpdateGoals();
@@ -31,70 +34,32 @@ namespace Ekstraklasa
 
         private int ID;
 
-        private string _TeamA;
-        public string TeamA
+        private ICommand _OpenDialog;
+        public ICommand OpenDialog
         {
             get
             {
-                return _TeamA;
-            }
-            set
-            {
-                if (_TeamA != value)
+                if (_OpenDialog == null)
                 {
-                    _TeamA = value;
-                    OnPropertyChanged("TeamA");
+                    _OpenDialog = new RelayCommand(param => ExecuteRunDialog(param));
                 }
+                return _OpenDialog;
             }
         }
 
-        private string _TeamAPath = ConfigurationManager.AppSettings["default_logo"];
-        public string TeamAPath
+        private MatchEntity _Match;
+        public MatchEntity Match
         {
             get
             {
-                return _TeamAPath;
+                return _Match;
             }
             set
             {
-                if (_TeamAPath != value)
+                if(_Match != value)
                 {
-                    _TeamAPath = value;
-                    OnPropertyChanged("TeamAPath");
-                }
-            }
-        }
-
-        private string _TeamB;
-        public string TeamB
-        {
-            get
-            {
-                return _TeamB;
-            }
-            set
-            {
-                if (_TeamB != value)
-                {
-                    _TeamB = value;
-                    OnPropertyChanged("TeamB");
-                }
-            }
-        }
-
-        private string _TeamBPath = ConfigurationManager.AppSettings["default_logo"];
-        public string TeamBPath
-        {
-            get
-            {
-                return _TeamBPath;
-            }
-            set
-            {
-                if (_TeamBPath != value)
-                {
-                    _TeamBPath = value;
-                    OnPropertyChanged("TeamBPath");
+                    _Match = value;
+                    OnPropertyChanged("Match");
                 }
             }
         }
@@ -159,11 +124,11 @@ namespace Ekstraklasa
             {
                 if (goal.HostGoal)
                 {
-                    tempA.Add(new GoalControl(goal,true));
+                    tempA.Add(new GoalControl(goal, true));
                 }
                 else
                 {
-                    tempB.Add(new GoalControl(goal,false));
+                    tempB.Add(new GoalControl(goal, false));
                 }
             }
             GoalsA = tempA;
@@ -177,6 +142,17 @@ namespace Ekstraklasa
                 return MainModel.GetGoalsByID(ID);
             });
 
+        }
+
+        private async void ExecuteRunDialog(object o)
+        {
+            var view = new DeleteMatchDialog(Match.Host + " " + Score + " " + Match.Guest);
+            await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+        }
+
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
 
 
