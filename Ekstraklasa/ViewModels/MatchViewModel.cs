@@ -171,12 +171,21 @@ namespace Ekstraklasa
 
         private async void DeleteMatch()
         {
-            await Task.WhenAll( Task.Run(()=>MainModel.DeleteGoal(Match.ID)),  Task.Run(() => MainModel.DeleteMatch(Match.ID)));
+            int deletedGoals = await Task.Run(() => MainModel.DeleteGoal(Match.ID));
+            int deletedMatch = await Task.Run(() => MainModel.DeleteMatch(Match.ID));
             if (UpdateContentEvent != null)
             {
                 UpdateContentEvent(0);
                 UpdateContentEvent(1);
                 UpdateContentEvent(4);
+            }
+            if(deletedGoals == GoalsA.Count + GoalsB.Count && deletedMatch == 1)
+            {
+                ShowSnackbarEvent("Usunięto mecz");
+            }
+            else
+            {
+                ShowSnackbarEvent("Błąd przy usuwaniu meczu");
             }
         }
 
