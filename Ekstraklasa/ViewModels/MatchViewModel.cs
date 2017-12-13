@@ -14,6 +14,7 @@ namespace Ekstraklasa
     class MatchViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
+        public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateContentEvent = null;
 
         public MatchViewModel()
@@ -38,6 +39,24 @@ namespace Ekstraklasa
                     _OpenDialog = new RelayCommand(param => ExecuteRunDialog(param));
                 }
                 return _OpenDialog;
+            }
+        }
+
+        private ICommand _EditMatch;
+        public ICommand EditMatch
+        {
+            get
+            {
+                if (_EditMatch == null)
+                {
+                    _EditMatch = new RelayCommand(param => {
+                        if (ChangeContentEvent != null)
+                        {
+                            ChangeContentEvent(0, new NewMatchControl(ChangeContentEvent, UpdateContentEvent));
+                        }
+                    });
+                }
+                return _EditMatch;
             }
         }
 

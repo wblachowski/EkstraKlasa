@@ -11,7 +11,7 @@
              Style="{StaticResource UserControlStyle}">
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Edytuj">
+            <MenuItem Header="Edytuj" Command="{Binding EditMatch}">
                 <MenuItem.Icon>
                     <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Center" Height="18" Width="18"/>
                 </MenuItem.Icon>
