@@ -541,5 +541,32 @@ namespace Ekstraklasa
             }
         }
 
+        public static void UpdateMatch(MatchEntity Match)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.UpdateMatch;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("start_time", Match.Date);
+                        command.Parameters.Add("score_host", Match.ScoreHost);
+                        command.Parameters.Add("score_guest", Match.ScoreGuest);
+                        command.Parameters.Add("stadium_id", Match.Stadium.Id);
+                        command.Parameters.Add("team_host_id", Match.HostId);
+                        command.Parameters.Add("team_guest_id", Match.GuestId);
+                        command.Parameters.Add("id", Match.ID);
+                        int Rows = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+ 
     }
 }

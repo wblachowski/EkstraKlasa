@@ -57,6 +57,29 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _ClearCommand;
+        public ICommand ClearCommand
+        {
+            get
+            {
+                if (_ClearCommand == null)
+                {
+                    _ClearCommand = new RelayCommand(param =>
+                    {
+                        TeamHost = null;
+                        TeamGuest = null;
+                        StadiumSelected = null;
+                        IsHostStadium = true;
+                        ScoreHost = "";
+                        ScoreGuest = "";
+                        DateSelected = "";
+                        TimeSelected = "";
+                    });
+                }
+                return _ClearCommand;
+            }
+        }
+
         private ICommand _AddCommand;
         public ICommand AddCommand
         {
@@ -64,7 +87,17 @@ namespace Ekstraklasa
             {
                 if (_AddCommand == null)
                 {
-                    _AddCommand = new RelayCommand(param => AddMatch());
+                    _AddCommand = new RelayCommand(param =>
+                    {
+                        if(UpdatedMatch == null)
+                        {
+                            AddMatch();
+                        }
+                        else
+                        {
+                            UpdateMatch();
+                        }
+                    });
                 }
                 return _AddCommand;
             }
@@ -370,6 +403,23 @@ namespace Ekstraklasa
         {
             DateTime time = DateTime.ParseExact(DateSelected + " " + TimeSelected, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
             StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
+            await Task.Run(()=>MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
+            AddGoals();
+            UpdateContent();
+        }
+
+        private async void UpdateMatch()
+        {
+            DateTime time = DateTime.ParseExact(DateSelected + " " + TimeSelected, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+            StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
+            await Task.Run(() => MainModel.UpdateMatch(new MatchEntity(UpdatedMatch.ID,time,TeamHost.Name,TeamHost.Id,"",TeamGuest.Name,TeamGuest.Id,"", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
+            await Task.Run(() => MainModel.DeleteGoal(UpdatedMatch.ID));
+            AddGoals();
+            UpdateContent();
+        }
+
+        private async void AddGoals()
+        {
             List<GoalEntity> hostGoals = new List<GoalEntity>(), guestGoals = new List<GoalEntity>();
             foreach (NewHostGoalControl control in GoalsHost)
             {
@@ -383,7 +433,6 @@ namespace Ekstraklasa
             }
             await Task.Run(() =>
             {
-                MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium));
 
                 foreach (GoalEntity hostGoal in hostGoals)
                 {
@@ -395,7 +444,10 @@ namespace Ekstraklasa
                     MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
                 }
             });
+        }
 
+        private void UpdateContent()
+        {
             if (UpdateContentEvent != null)
             {
                 UpdateContentEvent(0);
@@ -412,7 +464,7 @@ namespace Ekstraklasa
         {
             List<StadiumEntity> stadiums = await GetCurrentStadiumsAsync();
             Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
-            if(UpdatedMatch != null)
+            if (UpdatedMatch != null)
             {
                 StadiumSelected = stadiums.Find(x => x.Id == UpdatedMatch.Stadium.Id);
             }
@@ -433,7 +485,7 @@ namespace Ekstraklasa
             if (UpdatedMatch != null)
             {
                 TeamHost = teams.Find(x => x.Id == UpdatedMatch.HostId);
-                if(TeamHost.Stadium.Id == UpdatedMatch.Stadium.Id)
+                if (TeamHost.Stadium.Id == UpdatedMatch.Stadium.Id)
                 {
                     IsHostStadium = true;
                 }
@@ -499,14 +551,14 @@ namespace Ekstraklasa
 
         private async void UpdateGoals()
         {
-            if(UpdatedMatch == null)
+            if (UpdatedMatch == null)
             {
                 return;
             }
             List<GoalEntity> goals = await GetGoalsAsync();
             List<NewHostGoalControl> hostGoals = new List<NewHostGoalControl>();
             List<NewGuestGoalControl> guestGoals = new List<NewGuestGoalControl>();
-            foreach(GoalEntity goal in goals)
+            foreach (GoalEntity goal in goals)
             {
                 if (goal.HostGoal)
                 {
@@ -531,7 +583,7 @@ namespace Ekstraklasa
 
         private async Task<List<GoalEntity>> GetGoalsAsync()
         {
-            return await Task.Run(() => 
+            return await Task.Run(() =>
             {
                 return MainModel.GetGoalsByID(UpdatedMatch.ID);
             });
