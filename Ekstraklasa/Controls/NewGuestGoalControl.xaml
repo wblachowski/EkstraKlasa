@@ -15,7 +15,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <ComboBox  Margin="0 13 0 0" FontSize="13" Width="110" materialDesign:HintAssist.Hint="Strzelec" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, 
-AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest}" SelectedItem="{Binding Scorer}">
+AncestorType={x:Type UserControl}}, Path=DataContext.PlayersGuest}" SelectedItem="{Binding Scorer, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

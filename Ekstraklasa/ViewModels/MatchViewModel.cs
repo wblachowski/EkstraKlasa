@@ -52,7 +52,7 @@ namespace Ekstraklasa
                     _EditMatch = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0, new NewMatchControl(ChangeContentEvent, UpdateContentEvent));
+                            ChangeContentEvent(0, new NewMatchControl(Match, ChangeContentEvent, UpdateContentEvent));
                         }
                     });
                 }

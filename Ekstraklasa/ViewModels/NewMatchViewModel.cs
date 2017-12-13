@@ -23,6 +23,21 @@ namespace Ekstraklasa
             UpdateStadiums();
         }
 
+        public NewMatchViewModel(MatchEntity UpdatedMatch)
+        {
+            this.UpdatedMatch = UpdatedMatch;
+            this.ScoreGuest = UpdatedMatch.ScoreGuest.ToString();
+            this.ScoreHost = UpdatedMatch.ScoreHost.ToString();
+
+            DateSelected = UpdatedMatch.Date.ToString("dd.MM.yyyy");
+            TimeSelected = UpdatedMatch.Date.ToString("HH:mm");
+
+            UpdateStadiums();
+            UpdateTeams();
+        }
+
+        private MatchEntity UpdatedMatch;
+
         private ICommand _GoBackCommand;
         public ICommand GoBackCommand
         {
@@ -30,10 +45,11 @@ namespace Ekstraklasa
             {
                 if (_GoBackCommand == null)
                 {
-                    _GoBackCommand = new RelayCommand(param => {
+                    _GoBackCommand = new RelayCommand(param =>
+                    {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0,null);
+                            ChangeContentEvent(0, null);
                         }
                     });
                 }
@@ -352,10 +368,11 @@ namespace Ekstraklasa
 
         private async void AddMatch()
         {
-            DateTime time = DateTime.ParseExact(DateSelected+" "+TimeSelected,"dd.MM.yyyy HH:mm",CultureInfo.InvariantCulture);
+            DateTime time = DateTime.ParseExact(DateSelected + " " + TimeSelected, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
             StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
             List<GoalEntity> hostGoals = new List<GoalEntity>(), guestGoals = new List<GoalEntity>();
-            foreach(NewHostGoalControl control in GoalsHost){
+            foreach (NewHostGoalControl control in GoalsHost)
+            {
                 GoalViewModel viewModel = (control.DataContext as GoalViewModel);
                 hostGoals.Add(new GoalEntity(viewModel.Scorer, Convert.ToInt32(viewModel.Minute), true));
             }
@@ -368,12 +385,12 @@ namespace Ekstraklasa
             {
                 MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium));
 
-                foreach(GoalEntity hostGoal in hostGoals)
+                foreach (GoalEntity hostGoal in hostGoals)
                 {
                     MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id);
                 }
 
-                foreach(GoalEntity guestGoal in guestGoals)
+                foreach (GoalEntity guestGoal in guestGoals)
                 {
                     MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
                 }
@@ -387,13 +404,18 @@ namespace Ekstraklasa
             }
             if (ChangeContentEvent != null)
             {
-                ChangeContentEvent(0,null);
+                ChangeContentEvent(0, null);
             }
         }
 
         private async void UpdateStadiums()
         {
-            Stadiums = new ObservableCollection<StadiumEntity>(await GetCurrentStadiumsAsync());
+            List<StadiumEntity> stadiums = await GetCurrentStadiumsAsync();
+            Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
+            if(UpdatedMatch != null)
+            {
+                StadiumSelected = stadiums.Find(x => x.Id == UpdatedMatch.Stadium.Id);
+            }
         }
 
         private async Task<List<StadiumEntity>> GetCurrentStadiumsAsync()
@@ -408,6 +430,19 @@ namespace Ekstraklasa
         {
             List<TeamEntity> teams = await GetTeamsAsync();
             Teams = new ObservableCollection<TeamEntity>(teams);
+            if (UpdatedMatch != null)
+            {
+                TeamHost = teams.Find(x => x.Id == UpdatedMatch.HostId);
+                if(TeamHost.Stadium.Id == UpdatedMatch.Stadium.Id)
+                {
+                    IsHostStadium = true;
+                }
+                else
+                {
+                    IsHostStadium = false;
+                }
+                TeamGuest = teams.Find(x => x.Id == UpdatedMatch.GuestId);
+            }
         }
 
         private async Task<List<TeamEntity>> GetTeamsAsync()
@@ -434,7 +469,7 @@ namespace Ekstraklasa
             }
             List<PlayerEntity> playersGuestCopy = new List<PlayerEntity>(playersGuest);
 
-            if (playersHost.Count>0 && playersGuest.Count>0)
+            if (playersHost.Count > 0 && playersGuest.Count > 0)
             {
                 playersGuest.Add(null);
             }
@@ -451,6 +486,7 @@ namespace Ekstraklasa
 
             PlayersHost = new ObservableCollection<PlayerEntity>(playersHost);
             PlayersGuest = new ObservableCollection<PlayerEntity>(playersGuest);
+            UpdateGoals();
         }
 
         private async Task<List<PlayerEntity>> GetPlayersAsync(string teamName)
@@ -461,7 +497,45 @@ namespace Ekstraklasa
             });
         }
 
-        
+        private async void UpdateGoals()
+        {
+            if(UpdatedMatch == null)
+            {
+                return;
+            }
+            List<GoalEntity> goals = await GetGoalsAsync();
+            List<NewHostGoalControl> hostGoals = new List<NewHostGoalControl>();
+            List<NewGuestGoalControl> guestGoals = new List<NewGuestGoalControl>();
+            foreach(GoalEntity goal in goals)
+            {
+                if (goal.HostGoal)
+                {
+                    NewHostGoalControl control = new NewHostGoalControl();
+                    GoalViewModel viewModel = (control.DataContext as GoalViewModel);
+                    viewModel.Minute = goal.Minute.ToString();
+                    viewModel.Scorer = PlayersHost.FirstOrDefault(x => x == null ? false : x.Pesel == goal.Scorer.Pesel);
+                    hostGoals.Add(control);
+                }
+                else
+                {
+                    NewGuestGoalControl control = new NewGuestGoalControl();
+                    GoalViewModel viewModel = (control.DataContext as GoalViewModel);
+                    viewModel.Minute = goal.Minute.ToString();
+                    viewModel.Scorer = PlayersGuest.FirstOrDefault(x => x == null ? false : x.Pesel == goal.Scorer.Pesel);
+                    guestGoals.Add(control);
+                }
+            }
+            GoalsHost = new ObservableCollection<NewHostGoalControl>(hostGoals);
+            GoalsGuest = new ObservableCollection<NewGuestGoalControl>(guestGoals);
+        }
+
+        private async Task<List<GoalEntity>> GetGoalsAsync()
+        {
+            return await Task.Run(() => 
+            {
+                return MainModel.GetGoalsByID(UpdatedMatch.ID);
+            });
+        }
 
 
         virtual protected void OnPropertyChanged(string propName)
