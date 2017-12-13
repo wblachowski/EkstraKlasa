@@ -450,7 +450,7 @@ namespace Ekstraklasa
             return players;
         }
 
-        public static void InsertMatch(MatchEntity Match)
+        public static int InsertMatch(MatchEntity Match)
         {
             try
             {
@@ -466,7 +466,7 @@ namespace Ekstraklasa
                         command.Parameters.Add("stadium_id", Match.Stadium.Id);
                         command.Parameters.Add("team_host_id", Match.HostId);
                         command.Parameters.Add("team_guest_id", Match.GuestId);
-                        int Rows = command.ExecuteNonQuery();
+                        return command.ExecuteNonQuery();
                     }
                 }
             }
@@ -474,9 +474,10 @@ namespace Ekstraklasa
             {
                 Console.WriteLine(ex.Message);
             }
+            return 0;
         }
 
-        public static void InsertGoal(int minute, string pesel,int team_id)
+        public static int InsertGoal(int minute, string pesel,int team_id)
         {
             try
             {
@@ -489,7 +490,7 @@ namespace Ekstraklasa
                         command.Parameters.Add("minute", minute);
                         command.Parameters.Add("pesel", pesel);
                         command.Parameters.Add("team_id", team_id);
-                        int Rows = command.ExecuteNonQuery();
+                        return command.ExecuteNonQuery();
                     }
                 }
             }
@@ -497,9 +498,10 @@ namespace Ekstraklasa
             {
                 Console.WriteLine(ex.Message);
             }
+            return 0;
         }
 
-        public static void DeleteGoal(int id)
+        public static int DeleteGoal(int id)
         {
             try
             {
@@ -510,7 +512,7 @@ namespace Ekstraklasa
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("id", id);
-                        int Rows = command.ExecuteNonQuery();
+                        return command.ExecuteNonQuery();
                     }
                 }
             }
@@ -518,9 +520,10 @@ namespace Ekstraklasa
             {
                 Console.WriteLine(ex.Message);
             }
+            return 0;
         }
 
-        public static void DeleteMatch(int id)
+        public static int DeleteMatch(int id)
         {
             try
             {
@@ -531,7 +534,7 @@ namespace Ekstraklasa
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("id", id);
-                        int Rows = command.ExecuteNonQuery();
+                        return command.ExecuteNonQuery();
                     }
                 }
             }
@@ -539,9 +542,10 @@ namespace Ekstraklasa
             {
                 Console.WriteLine(ex.Message);
             }
+            return 0;
         }
 
-        public static void UpdateMatch(MatchEntity Match)
+        public static int UpdateMatch(MatchEntity Match)
         {
             try
             {
@@ -558,7 +562,7 @@ namespace Ekstraklasa
                         command.Parameters.Add("team_host_id", Match.HostId);
                         command.Parameters.Add("team_guest_id", Match.GuestId);
                         command.Parameters.Add("id", Match.ID);
-                        int Rows = command.ExecuteNonQuery();
+                        return command.ExecuteNonQuery();
                     }
                 }
             }
@@ -566,6 +570,7 @@ namespace Ekstraklasa
             {
                 Console.WriteLine(ex.Message);
             }
+            return 0;
         }
  
     }
