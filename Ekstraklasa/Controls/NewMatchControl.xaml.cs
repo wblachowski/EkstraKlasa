@@ -27,22 +27,24 @@ namespace Ekstraklasa
             DataContext = viewModel;
         }
 
-        public NewMatchControl(delegateChangeControl changeContentDelegate, delegateUpdateControl updateContentDelegate)
+        public NewMatchControl(delegateChangeControl changeContentDelegate, delegateUpdateControl updateContentDelegate, delegateShowSnackbar showSnackbarDelegate)
         {
             InitializeComponent();
             var viewModel = new NewMatchViewModel();
             viewModel.ChangeContentEvent += changeContentDelegate;
             viewModel.UpdateContentEvent += updateContentDelegate;
+            viewModel.ShowSnackbarEvent += showSnackbarDelegate;
 
             DataContext = viewModel;
         }
 
-        public NewMatchControl(MatchEntity UpdatedMatch, delegateChangeControl changeContentDelegate, delegateUpdateControl updateContentDelegate)
+        public NewMatchControl(MatchEntity UpdatedMatch, delegateChangeControl changeContentDelegate, delegateUpdateControl updateContentDelegate, delegateShowSnackbar showSnackbarDelegate)
         {
             InitializeComponent();
             var viewModel = new NewMatchViewModel(UpdatedMatch);
             viewModel.ChangeContentEvent += changeContentDelegate;
             viewModel.UpdateContentEvent += updateContentDelegate;
+            viewModel.ShowSnackbarEvent += showSnackbarDelegate;
 
             DataContext = viewModel;
         }

@@ -16,6 +16,7 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateContentEvent = null;
+        public event delegateShowSnackbar ShowSnackbarEvent = null;
 
         public MatchViewModel()
         {
@@ -52,7 +53,7 @@ namespace Ekstraklasa
                     _EditMatch = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0, new NewMatchControl(Match, ChangeContentEvent, UpdateContentEvent));
+                            ChangeContentEvent(0, new NewMatchControl(Match, ChangeContentEvent, UpdateContentEvent,ShowSnackbarEvent));
                         }
                     });
                 }
@@ -183,7 +184,6 @@ namespace Ekstraklasa
         {
             Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
-
 
         virtual protected void OnPropertyChanged(string propName)
         {

@@ -10,6 +10,7 @@ namespace Ekstraklasa
 {
     public delegate void delegateChangeControl(int index, UserControl control);
     public delegate void delegateUpdateControl(int index);
+    public delegate void delegateShowSnackbar(string message);
 
     class MainViewModel : INotifyPropertyChanged
     {

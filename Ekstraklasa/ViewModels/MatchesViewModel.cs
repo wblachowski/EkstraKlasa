@@ -190,11 +190,45 @@ namespace Ekstraklasa
                     _NewMatchCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent, UpdateContentEvent));
+                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent, UpdateContentEvent,ShowSnackbar));
                         }
                     });
                 }
                 return _NewMatchCommand;
+            }
+        }
+
+        private bool _IsSnabkbarActive;
+        public bool IsSnackbarActive
+        {
+            get
+            {
+                return _IsSnabkbarActive;
+            }
+            set
+            {
+                if(_IsSnabkbarActive != value)
+                {
+                    _IsSnabkbarActive = value;
+                    OnPropertyChanged("IsSnackbarActive");
+                }
+            }
+        }
+
+        private string _SnackbarMessage;
+        public string SnackbarMessage
+        {
+            get
+            {
+                return _SnackbarMessage;
+            }
+            set
+            {
+                if(_SnackbarMessage != value)
+                {
+                    _SnackbarMessage = value;
+                    OnPropertyChanged("SnackbarMessage");
+                }
             }
         }
 
@@ -255,6 +289,17 @@ namespace Ekstraklasa
             return await Task.Run(() =>
             {
                 return MainModel.GetCurrentMatches(HostSelected,GuestSelected,StadiumSelected,DateSelected);
+            });
+        }
+
+        private async void ShowSnackbar(string Message)
+        {
+            await Task.Run(() => Thread.Sleep(500));
+            SnackbarMessage = Message;
+            IsSnackbarActive = true;
+            await Task.Run(() => {
+                Thread.Sleep(3000);
+                IsSnackbarActive = false;
             });
         }
 

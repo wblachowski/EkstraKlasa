@@ -15,6 +15,7 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateContentEvent = null;
+        public event delegateShowSnackbar ShowSnackbarEvent = null;
 
         public NewMatchViewModel()
         {
@@ -405,7 +406,7 @@ namespace Ekstraklasa
             StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
             await Task.Run(()=>MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
             AddGoals();
-            UpdateContent();
+            UpdateContent("Poprawnie dodano nowy mecz");
         }
 
         private async void UpdateMatch()
@@ -415,7 +416,7 @@ namespace Ekstraklasa
             await Task.Run(() => MainModel.UpdateMatch(new MatchEntity(UpdatedMatch.ID,time,TeamHost.Name,TeamHost.Id,"",TeamGuest.Name,TeamGuest.Id,"", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
             await Task.Run(() => MainModel.DeleteGoal(UpdatedMatch.ID));
             AddGoals();
-            UpdateContent();
+            UpdateContent("Poprawnie edytowano mecz");
         }
 
         private async void AddGoals()
@@ -446,7 +447,7 @@ namespace Ekstraklasa
             });
         }
 
-        private void UpdateContent()
+        private void UpdateContent(string message)
         {
             if (UpdateContentEvent != null)
             {
@@ -457,6 +458,11 @@ namespace Ekstraklasa
             if (ChangeContentEvent != null)
             {
                 ChangeContentEvent(0, null);
+            }
+
+            if (ShowSnackbarEvent != null)
+            {
+                ShowSnackbarEvent(message);
             }
         }
 
