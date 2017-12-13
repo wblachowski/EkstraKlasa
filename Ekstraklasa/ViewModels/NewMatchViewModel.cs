@@ -404,22 +404,37 @@ namespace Ekstraklasa
         {
             DateTime time = DateTime.ParseExact(DateSelected + " " + TimeSelected, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
             StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
-            await Task.Run(()=>MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
-            AddGoals();
-            UpdateContent("Poprawnie dodano nowy mecz");
+            int addedMatch = await Task.Run(()=>MainModel.InsertMatch(new MatchEntity(0, time, TeamHost.Name, TeamHost.Id, "", TeamGuest.Name, TeamGuest.Id, "", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
+            int addedGoals = await AddGoals();
+            if(addedMatch + addedGoals == GoalsHost.Count + GoalsGuest.Count + 1)
+            {
+                UpdateContent("Dodano nowy mecz");
+            }
+            else
+            {
+                UpdateContent("Błąd przy dodawaniu nowego meczu");
+            }
         }
 
         private async void UpdateMatch()
         {
             DateTime time = DateTime.ParseExact(DateSelected + " " + TimeSelected, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
             StadiumEntity stadium = IsHostStadium ? TeamHost.Stadium : StadiumSelected;
-            await Task.Run(() => MainModel.UpdateMatch(new MatchEntity(UpdatedMatch.ID,time,TeamHost.Name,TeamHost.Id,"",TeamGuest.Name,TeamGuest.Id,"", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
-            await Task.Run(() => MainModel.DeleteGoal(UpdatedMatch.ID));
-            AddGoals();
-            UpdateContent("Poprawnie edytowano mecz");
+            int updatedMatch = await Task.Run(() => MainModel.UpdateMatch(new MatchEntity(UpdatedMatch.ID,time,TeamHost.Name,TeamHost.Id,"",TeamGuest.Name,TeamGuest.Id,"", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
+            int deletedGoals = await Task.Run(() => MainModel.DeleteGoal(UpdatedMatch.ID));
+            int addedGoals = await AddGoals();
+            if(updatedMatch == 1 && deletedGoals == addedGoals && addedGoals == GoalsHost.Count + GoalsGuest.Count)
+            {
+                UpdateContent("Edytowano mecz");
+            }
+            else
+            {
+                UpdateContent("Błąd przy edycji meczu");
+
+            }
         }
 
-        private async void AddGoals()
+        private async Task<int> AddGoals()
         {
             List<GoalEntity> hostGoals = new List<GoalEntity>(), guestGoals = new List<GoalEntity>();
             foreach (NewHostGoalControl control in GoalsHost)
@@ -432,18 +447,19 @@ namespace Ekstraklasa
                 GoalViewModel viewModel = (control.DataContext as GoalViewModel);
                 guestGoals.Add(new GoalEntity(viewModel.Scorer, Convert.ToInt32(viewModel.Minute), false));
             }
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
-
+                int inserted = 0;
                 foreach (GoalEntity hostGoal in hostGoals)
                 {
-                    MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id);
+                    inserted += MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id);
                 }
 
                 foreach (GoalEntity guestGoal in guestGoals)
                 {
-                    MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
+                    inserted += MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
                 }
+                return inserted;
             });
         }
 

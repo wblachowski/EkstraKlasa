@@ -264,7 +264,7 @@ namespace Ekstraklasa
             Matches.Clear();
             foreach (MatchEntity match in matches)
             {
-                Matches.Add(new MatchControl(match, UpdateContentEvent, ChangeContentEvent));
+                Matches.Add(new MatchControl(match, UpdateContentEvent, ChangeContentEvent, ShowSnackbar));
             }
         }
 

@@ -66,6 +66,6 @@
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
-        <materialDesign:Snackbar Grid.Row="1" Message="{Binding SnackbarMessage}" IsActive="{Binding IsSnackbarActive}" VerticalAlignment="Bottom" Width="300"/>
+        <materialDesign:Snackbar Grid.Row="1" Message="{Binding SnackbarMessage}" IsActive="{Binding IsSnackbarActive}" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
