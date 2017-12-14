@@ -10,29 +10,47 @@
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=Scorers}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <materialDesign:Card Padding="0 8 0 9" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+                        <Grid>
+                            <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=Scorers}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
-                                    CellStyle="{StaticResource MaterialDesignDataGridCell}">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Bramki" SortMemberPath="Item2">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Item2}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn  Binding="{Binding Item1.Firstname}"
+                                    CellStyle="{StaticResource MaterialDesignDataGridCell}"
+                                        Background="White">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn 
+                                        Header=""
+                                        MaxWidth="8"/>
+                                    <DataGridTemplateColumn Header="Bramki" SortMemberPath="Item2">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Item2}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn  Binding="{Binding Item1.Firstname}"
                                      Header="Imię"
                                      />
-                <DataGridTextColumn  Binding="{Binding Item1.Lastname}"
+                                    <DataGridTextColumn  Binding="{Binding Item1.Lastname}"
                                      Header="Nazwisko"
                                      />
-                <DataGridTextColumn Binding="{Binding Item3}"
+                                    <DataGridTextColumn Binding="{Binding Item3}"
                                     Header="Drużyna"
                                    />
+                                    <DataGridTextColumn 
+                                        Header=""
+                                        MaxWidth="8"/>
 
-            </DataGrid.Columns>
-        </DataGrid>
-        <ProgressBar  Visibility="{Binding IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  Height="1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <ProgressBar  Visibility="{Binding IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  Height="1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
     </Grid>
 </UserControl>

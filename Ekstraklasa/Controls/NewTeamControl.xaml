@@ -10,7 +10,16 @@
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="38" LastChildFill="False" >
             <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
                 <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
             </Button>
@@ -19,6 +28,25 @@
                     <Button Content="Wyczyść wartości" Command="{Binding ClearCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
-        </DockPanel>    
+        </DockPanel>
+            <materialDesign:Card  Grid.Row="1" Grid.ColumnSpan="2" Margin="8 8 8 0 " materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Orientation="Horizontal">
+                    <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="C:\Users\wblachowski\Documents\Visual Studio 2017\Projects\Ekstraklasa\Logos\Image.png"/>
+                    <StackPanel Margin="0 15 0 0" Orientation="Vertical" Width="150">
+                        <TextBox Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
+                        <DatePicker materialDesign:HintAssist.Hint="Data założenia" Margin="0 4 0 0" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="2" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Margin="0 0 0 40" Orientation="Horizontal">
+                    <RadioButton Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center" Tag="True">
+                        Istniejący stadion
+                    </RadioButton>
+                    <RadioButton Margin="16 0 0 0" Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center">
+                        Nowy stadion
+                    </RadioButton>
+                </StackPanel>
+            </materialDesign:Card>
     </Grid>
 </UserControl>

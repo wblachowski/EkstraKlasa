@@ -44,15 +44,19 @@
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
-                    <materialDesign:TransitionerSlide >
-                        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+        <materialDesign:Transitioner Grid.Row="1"  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <materialDesign:Card Grid.Row="1" Padding="8" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
                             <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
-                        </materialDesign:TransitioningContent>
-                    </materialDesign:TransitionerSlide>
-                </materialDesign:Transitioner>
-            </ScrollViewer>
+                        </ScrollViewer>
+                    </materialDesign:Card>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+
+
         <materialDesign:Transitioner  Grid.Row="1" SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.4}">

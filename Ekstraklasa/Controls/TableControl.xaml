@@ -16,16 +16,20 @@
         <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                    <Grid>
+                    <materialDesign:Card Padding="0 8 0 8" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
                         <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
-                                    CellStyle="{StaticResource MaterialDesignDataGridCell}">
+                                    CellStyle="{StaticResource MaterialDesignDataGridCell}"
+                                    Background="White">
                             <DataGrid.Columns>
-                                <DataGridTextColumn  Binding="{Binding Nr}"
+                                    <DataGridTextColumn 
+                                        Header=""
+                                        MaxWidth="8"/>
+                                    <DataGridTextColumn  Binding="{Binding Nr}"
                                         Header="Lp."
-                                        Width="52"
-                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                                        Width="52"/>
+                                    <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
                                 <DataGridTemplateColumn  Header="Nazwa zespołu" Width="*" SortMemberPath="Name">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -74,24 +78,9 @@
                         </DataGrid>
                         <ProgressBar  Visibility="{Binding Path=IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  Height="1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
                     </Grid>
+                    </materialDesign:Card>
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
-        <dragablz:TabablzControl Visibility="Hidden" Margin="50,300,122,0"  FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
-            <dragablz:TabablzControl.Resources>
-                <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="SlateGray"/>
-                <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
-            </dragablz:TabablzControl.Resources>
-            <TabItem Header="Zawodnicy">
-                <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Hello World</TextBlock>
-            </TabItem>
-            <TabItem Header="Mecze">
-                <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Material Design</TextBlock>
-            </TabItem>
-            <TabItem Header="Stadion">
-                <TextBlock Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
-            </TabItem>
-        </dragablz:TabablzControl>
-        <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Left" Height="5" Margin="50,340,0,0"  VerticalAlignment="Top" Width="500"/>
     </Grid>
 </UserControl>

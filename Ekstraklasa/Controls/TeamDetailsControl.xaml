@@ -13,49 +13,57 @@
              Language="pl-PL"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
-            <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
-                <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
-            </Button>
-            <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
-                <StackPanel>
-                    <Button Content="Edytuj"/>
-                    <Button Content="Usuń" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
-                        <Button.CommandParameter>
-                            <StackPanel Orientation="Vertical" Margin="16">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Czy na pewno chcesz usunąć drużynę "></TextBlock>
-                                    <TextBlock Text="{Binding Name}"/>
-                                    <TextBlock Text="?"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0 0 0 1" BorderBrush="#cdcfd1">
+            <DockPanel  Grid.Row="0" VerticalAlignment="Top" Height="38" LastChildFill="False" Background="White" >
+                <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
+                    <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
+                </Button>
+                <TextBlock Text="O drużynie" Style="{StaticResource MaterialDesignSubheadingTextBlock}" VerticalAlignment="Center" Margin="16 0 0 0"></TextBlock>
+                <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
+                    <StackPanel>
+                        <Button Content="Edytuj"/>
+                        <Button Content="Usuń" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                            <Button.CommandParameter>
+                                <StackPanel Orientation="Vertical" Margin="16">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Czy na pewno chcesz usunąć drużynę "></TextBlock>
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="?"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
                                                         Margin="0 8 8 0"
                                                         Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>True</system:Boolean>
-                                        </Button.CommandParameter>
-                                        TAK
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                            <Button.CommandParameter>
+                                                <system:Boolean>True</system:Boolean>
+                                            </Button.CommandParameter>
+                                            TAK
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsCancel="True"
                                                         Margin="0 8 8 0"
                                                         Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>False</system:Boolean>
-                                        </Button.CommandParameter>
-                                        NIE
-                                    </Button>
+                                            <Button.CommandParameter>
+                                                <system:Boolean>False</system:Boolean>
+                                            </Button.CommandParameter>
+                                            NIE
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </Button.CommandParameter>
-                    </Button>
-                </StackPanel>
-            </materialDesign:PopupBox>
-        </DockPanel>
-        <DockPanel LastChildFill="False" Height="140" Margin="100 30 100 0" VerticalAlignment="Top">
-            <Grid>
+                            </Button.CommandParameter>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </DockPanel>
+        </Border>
+        <materialDesign:Card  Grid.Row="1" Padding="8" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="*"/>
@@ -85,90 +93,94 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-        </DockPanel>
-        <Grid VerticalAlignment="Top"  Margin="100,180,100,0">
-            <dragablz:TabablzControl FixedHeaderCount="3" BorderBrush="{StaticResource MaterialDesignPaper}" >
-                <dragablz:TabablzControl.Resources>
-                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" Opacity="0.87"/>
-                    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
-                </dragablz:TabablzControl.Resources>
-                <TabItem Header="Zawodnicy">
-                    <DataGrid   IsReadOnly="True" ItemsSource="{Binding Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+            </materialDesign:Card>
+        <materialDesign:Card  Padding="8" Grid.Row="2"  Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <dragablz:TabablzControl FixedHeaderCount="3" BorderBrush="White" Background="White">
+                    <dragablz:TabablzControl.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" Opacity="0.87"/>
+                        <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
+                    </dragablz:TabablzControl.Resources>
+                    <TabItem Header="Zawodnicy">
+                        <DataGrid   IsReadOnly="True" ItemsSource="{Binding Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
                                 CellStyle="{StaticResource MaterialDesignDataGridCell}"    
+                                  Background="White"
                                 >
-                        <DataGrid.Columns >
+                            <DataGrid.Columns >
 
-                            <DataGridTextColumn  Binding="{Binding Nr}"
+                                <DataGridTextColumn  Binding="{Binding Nr}"
                                         Header="Nr"
                                         Width="52"/>
-                            <DataGridTextColumn  Binding="{Binding Firstname}"
+                                <DataGridTextColumn  Binding="{Binding Firstname}"
                                         Header="Imię"
                                         Width="*"/>
-                            <DataGridTextColumn  Binding="{Binding Lastname}"
+                                <DataGridTextColumn  Binding="{Binding Lastname}"
                                         Header="Nazwisko"
                                         Width="*"/>
-                            <DataGridTextColumn  Binding="{Binding Nationality}"
+                                <DataGridTextColumn  Binding="{Binding Nationality}"
                                         Header="Narodowość"
                                         Width="*"/>
-                            <DataGridTextColumn  Binding="{Binding Position}"
+                                <DataGridTextColumn  Binding="{Binding Position}"
                                         Header="Pozycja"
                                         Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </TabItem>
-                <TabItem Header="Mecze">
-                    <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
-                </TabItem>
-                <TabItem Header="Trener">
-                    <Grid Margin="8 15 0 0">
-                        <Grid.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Foreground" Value="{StaticResource MaterialDesignBody}" />
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Vertical">
-                            <TextBlock  FontWeight="DemiBold" Text="Imię:"/>
-                            <TextBlock  FontWeight="DemiBold" Text="Nazwisko:"/>
-                            <TextBlock  FontWeight="DemiBold" Text="Data urodzenia:"/>
-                            <TextBlock  FontWeight="DemiBold" Text="Narodowość:"/>
-                            <TextBlock  Margin="0 10 0 0" FontWeight="DemiBold" Text="Data zatrudnienia:"/>
-                        </StackPanel>
-                        <StackPanel Margin="4 0 0 0" Grid.Column="1" Orientation="Vertical">
-                            <TextBlock  Text="{Binding Coach.Firstname}"/>
-                            <TextBlock  Text="{Binding Coach.Lastname}"/>
-                            <TextBlock  Text="{Binding Coach.DateOfBirth, StringFormat='{}{0:dd MMMM yyyy}', ConverterCulture=pl}"/>
-                            <TextBlock  Text="{Binding Coach.Nationality}"/>
-                            <TextBlock  Margin="0 10 0 0" Text="{Binding Coach.DateOfHiring, StringFormat='{}{0:dd MMMM yyyy}', ConverterCulture=pl}"/>
-                        </StackPanel>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Forma">
-                    <Grid Height="200" Margin="0 10 0 0">
-                        <oxy:Plot Background="Transparent" DefaultTrackerTemplate="{x:Null}">
-                            <oxy:Plot.Axes>
-                                <oxy:LinearAxis IsZoomEnabled="False" Position="Left" Minimum="-0.5" Maximum="3.5" MajorStep="1" MinorStep="1"/>
-                                <oxy:DateTimeAxis IsZoomEnabled="False" Position="Bottom"  LabelFormatter="formatter" Minimum="{Binding MinDate}" Maximum="{Binding MaxDate}"/>
-                            </oxy:Plot.Axes>
-                            <oxy:Plot.Series>
-                                <oxy:LineSeries ItemsSource="{Binding Points}"
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="Mecze">
+                        <ItemsControl Margin="0 10 0 0 " ItemsSource="{Binding Matches}"/>
+                    </TabItem>
+                    <TabItem Header="Trener">
+                        <Grid Margin="8 15 0 0">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{StaticResource MaterialDesignBody}" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <TextBlock  FontWeight="DemiBold" Text="Imię:"/>
+                                <TextBlock  FontWeight="DemiBold" Text="Nazwisko:"/>
+                                <TextBlock  FontWeight="DemiBold" Text="Data urodzenia:"/>
+                                <TextBlock  FontWeight="DemiBold" Text="Narodowość:"/>
+                                <TextBlock  Margin="0 10 0 0" FontWeight="DemiBold" Text="Data zatrudnienia:"/>
+                            </StackPanel>
+                            <StackPanel Margin="4 0 0 0" Grid.Column="1" Orientation="Vertical">
+                                <TextBlock  Text="{Binding Coach.Firstname}"/>
+                                <TextBlock  Text="{Binding Coach.Lastname}"/>
+                                <TextBlock  Text="{Binding Coach.DateOfBirth, StringFormat='{}{0:dd MMMM yyyy}', ConverterCulture=pl}"/>
+                                <TextBlock  Text="{Binding Coach.Nationality}"/>
+                                <TextBlock  Margin="0 10 0 0" Text="{Binding Coach.DateOfHiring, StringFormat='{}{0:dd MMMM yyyy}', ConverterCulture=pl}"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Forma">
+                        <Grid Height="200" Margin="0 10 0 0">
+                            <oxy:Plot Background="Transparent" DefaultTrackerTemplate="{x:Null}">
+                                <oxy:Plot.Axes>
+                                    <oxy:LinearAxis IsZoomEnabled="False" Position="Left" Minimum="-0.5" Maximum="3.5" MajorStep="1" MinorStep="1"/>
+                                    <oxy:DateTimeAxis IsZoomEnabled="False" Position="Bottom"  LabelFormatter="formatter" Minimum="{Binding MinDate}" Maximum="{Binding MaxDate}"/>
+                                </oxy:Plot.Axes>
+                                <oxy:Plot.Series>
+                                    <oxy:LineSeries ItemsSource="{Binding Points}"
                                                 MarkerType="Circle"
                                                 MarkerStroke="{StaticResource Primary400}"
                                                 MarkerStrokeThickness="2"
                                                 Color="{StaticResource Primary400}"
                                                 MarkerFill="#fafafa" 
                                                 />
-                            </oxy:Plot.Series>
-                        </oxy:Plot>
-                    </Grid>
-                </TabItem>
-            </dragablz:TabablzControl>
-            <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="1" VerticalAlignment="Bottom" />
-            <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="5" Margin="0,40,-100,0"  VerticalAlignment="Top" />
-        </Grid>
+                                </oxy:Plot.Series>
+                            </oxy:Plot>
+                        </Grid>
+                    </TabItem>
+                </dragablz:TabablzControl>
+                <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="1" VerticalAlignment="Bottom" />
+                <Rectangle Fill="White" HorizontalAlignment="Stretch" Height="5" Margin="0 40 0 0"  VerticalAlignment="Top" />
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
