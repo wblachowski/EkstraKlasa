@@ -27,5 +27,10 @@ namespace Ekstraklasa
             viewModel.ChangeContentEvent += ChangeContent; 
             DataContext = viewModel;
         }
+
+        private void coach_clicked(Object sender, EventArgs a)
+        {
+            Console.WriteLine("Coach clicked");
+        }
     }
 }

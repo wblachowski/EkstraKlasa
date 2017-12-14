@@ -29,24 +29,84 @@
                 </StackPanel>
             </materialDesign:PopupBox>
         </DockPanel>
-            <materialDesign:Card  Grid.Row="1" Grid.ColumnSpan="2" Margin="8 8 8 0 " materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <materialDesign:Card  Grid.Row="1" Grid.Column="0" Padding="8" Margin="8 8 4 0" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal">
                     <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="C:\Users\wblachowski\Documents\Visual Studio 2017\Projects\Ekstraklasa\Logos\Image.png"/>
-                    <StackPanel Margin="0 15 0 0" Orientation="Vertical" Width="150">
+                    <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
                         <TextBox Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
-                        <DatePicker materialDesign:HintAssist.Hint="Data założenia" Margin="0 4 0 0" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
-                    </StackPanel>
+                        <DatePicker Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+                    <TextBox Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" GotFocus="coach_clicked"/>
+                </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Row="2" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Margin="0 0 0 40" Orientation="Horizontal">
-                    <RadioButton Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center" Tag="True">
+        <materialDesign:Card Grid.Row="1" Grid.Column="1" Padding="8 8 8 8" VerticalAlignment="Stretch" Margin="4 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Margin="0 20 0 0" Orientation="Horizontal" VerticalAlignment="Top">
+                    <RadioButton Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center" IsChecked="{Binding IsExistingStadium, Mode=TwoWay}">
                         Istniejący stadion
                     </RadioButton>
-                    <RadioButton Margin="16 0 0 0" Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center">
+                    <RadioButton  Margin="16 0 0 0" Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center" IsChecked="{Binding IsNotExistingStadium,Mode=TwoWay}">
                         Nowy stadion
                     </RadioButton>
                 </StackPanel>
-            </materialDesign:Card>
+                <Grid>
+                    <ComboBox VerticalAlignment="Top" Margin="4 3 10 0" materialDesign:HintAssist.Hint="Obiekt" Visibility="{Binding IsExistingStadium,Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Stadiums}" SelectedItem="{Binding StadiumSelected}" DisplayMemberPath="Name"/>
+                    <Grid Margin="4 6 10 0" Visibility="{Binding IsNotExistingStadium,Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa"/>
+                        <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pojemność" Margin="8 0 0 0"/>
+                        <TextBox Margin="0 8 0 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Miasto"/>
+                        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Ulica" Margin="8 0 0 0"/>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Padding="8 8 8 8" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <Grid>
+                <DataGrid   IsReadOnly="True" ItemsSource="{Binding Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
+                                CellStyle="{StaticResource MaterialDesignDataGridCell}"    
+                                  Background="White">
+                    <DataGrid.Columns >
+
+                        <DataGridTextColumn  Binding="{Binding Nr}"
+                                            Header="Nr"
+                                            Width="52"/>
+                        <DataGridTextColumn  Binding="{Binding Firstname}"
+                                            Header="Imię"
+                                            Width="*"/>
+                        <DataGridTextColumn  Binding="{Binding Lastname}"
+                                            Header="Nazwisko"
+                                            Width="*"/>
+                        <DataGridTextColumn  Binding="{Binding Nationality}"
+                                            Header="Narodowość"
+                                            Width="*"/>
+                        <DataGridTextColumn  Binding="{Binding Position}"
+                                            Header="Pozycja"
+                                            Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0 60 5 0"
+                            ToolTip="Dodaj nowego piłkarza"
+                            Command="{Binding NewMatchCommand}"
+                            Height="40"
+                            Width="40"
+                            >
+                    <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                </Button>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
