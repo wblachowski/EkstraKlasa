@@ -10,6 +10,15 @@
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <TextBlock>DODAJ NOWĄ DRUŻYNĘ!</TextBlock>
+        <DockPanel VerticalAlignment="Top" Height="38" LastChildFill="False" >
+            <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
+                <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
+            </Button>
+            <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
+                <StackPanel>
+                    <Button Content="Wyczyść wartości" Command="{Binding ClearCommand}"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </DockPanel>    
     </Grid>
 </UserControl>

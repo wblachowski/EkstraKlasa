@@ -452,12 +452,12 @@ namespace Ekstraklasa
                 int inserted = 0;
                 foreach (GoalEntity hostGoal in hostGoals)
                 {
-                    inserted += MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id);
+                    inserted += UpdatedMatch == null ? MainModel.InsertGoal(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id) : MainModel.InsertGoalWithId(hostGoal.Minute, hostGoal.Scorer.Pesel, TeamHost.Id,UpdatedMatch.ID);
                 }
 
                 foreach (GoalEntity guestGoal in guestGoals)
                 {
-                    inserted += MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id);
+                    inserted += UpdatedMatch == null ? MainModel.InsertGoal(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id) : MainModel.InsertGoalWithId(guestGoal.Minute, guestGoal.Scorer.Pesel, TeamGuest.Id,UpdatedMatch.ID);
                 }
                 return inserted;
             });

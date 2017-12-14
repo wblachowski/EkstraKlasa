@@ -501,6 +501,31 @@ namespace Ekstraklasa
             return 0;
         }
 
+        public static int InsertGoalWithId(int minute, string pesel, int team_id, int matchId)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertGoalWithId;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("minute", minute);
+                        command.Parameters.Add("pesel", pesel);
+                        command.Parameters.Add("team_id", team_id);
+                        command.Parameters.Add("id", matchId);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
         public static int DeleteGoal(int id)
         {
             try

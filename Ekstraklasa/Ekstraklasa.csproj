@@ -222,6 +222,7 @@
     <Compile Include="ViewModels\MatchesViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\NewMatchViewModel.cs" />
+    <Compile Include="ViewModels\NewTeamViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />

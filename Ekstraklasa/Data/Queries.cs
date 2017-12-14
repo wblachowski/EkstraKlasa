@@ -69,6 +69,8 @@ namespace Ekstraklasa
 
         public static string InsertGoal = "insert into goal values(:minute,:pesel,:team_id,(select max(id) from match))";
 
+        public static string InsertGoalWithId = "insert into goal values(:minute,:pesel,:team_id,:id)";
+
         public static string DeleteMatch = "delete from match where id=:id";
 
         public static string DeleteGoal = "delete from goal where match_id=:id";
