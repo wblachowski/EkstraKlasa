@@ -14,9 +14,9 @@
         <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                    <materialDesign:Card Padding="0 8 0 9" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <materialDesign:Card Padding="0 0 0 0" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-                        <ListView ItemsSource="{Binding Teams}" SelectedItem="{Binding SelectedItem}" SizeChanged="ListViewSizeChanged">
+                        <ListView Margin="0 -16 0 0" ItemsSource="{Binding Teams}" SelectedItem="{Binding SelectedItem}" SizeChanged="ListViewSizeChanged">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed" />

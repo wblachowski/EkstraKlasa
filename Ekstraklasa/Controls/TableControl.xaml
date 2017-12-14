@@ -16,7 +16,7 @@
         <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
-                    <materialDesign:Card Padding="0 8 0 8" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <materialDesign:Card Padding="0 8 0 4" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
                         <Grid>
                         <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=TableEntities}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
@@ -77,7 +77,8 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <ProgressBar  Visibility="{Binding Path=IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  Height="1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-                    </Grid>
+                        <Rectangle Fill="White" Height="1" VerticalAlignment="Bottom"/>
+                        </Grid>
                     </materialDesign:Card>
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
