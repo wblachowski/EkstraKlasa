@@ -21,6 +21,24 @@ namespace Ekstraklasa
             UpdateTeams();
         }
 
+        private ICommand _NewTeamCommand;
+        public ICommand NewTeamCommand
+        {
+            get
+            {
+                if(_NewTeamCommand == null)
+                {
+                    _NewTeamCommand = new RelayCommand(param => {
+                        if (ChangeContentEvent != null)
+                    {
+                        ChangeContentEvent(0, new NewTeamControl());
+                    }
+                    });
+                }
+                return _NewTeamCommand;
+            }
+        }
+
         private ICommand _DeleteCommand;
         public ICommand DeleteCommand
         {
