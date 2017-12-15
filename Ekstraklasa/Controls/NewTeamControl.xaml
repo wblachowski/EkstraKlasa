@@ -33,9 +33,9 @@
                 <StackPanel Orientation="Horizontal">
                     <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="C:\Users\wblachowski\Documents\Visual Studio 2017\Projects\Ekstraklasa\Logos\Image.png"/>
                     <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
-                        <TextBox Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
-                        <DatePicker Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
-                    <TextBox Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" GotFocus="coach_clicked"/>
+                        <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
+                        <DatePicker Text="{Binding Date}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+                        <TextBox Text="{Binding CoachCaption}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" GotFocus="coach_clicked"/>
                 </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
@@ -100,7 +100,7 @@
                 <Button Style="{StaticResource MaterialDesignFloatingActionButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                             Margin="0 60 5 0"
                             ToolTip="Dodaj nowego piłkarza"
-                            Command="{Binding NewMatchCommand}"
+                            Command="{Binding AddNewPlayer}"
                             Height="40"
                             Width="40"
                             >

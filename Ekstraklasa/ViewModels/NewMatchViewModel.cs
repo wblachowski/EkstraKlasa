@@ -423,15 +423,7 @@ namespace Ekstraklasa
             int updatedMatch = await Task.Run(() => MainModel.UpdateMatch(new MatchEntity(UpdatedMatch.ID,time,TeamHost.Name,TeamHost.Id,"",TeamGuest.Name,TeamGuest.Id,"", Convert.ToInt32(ScoreHost), Convert.ToInt32(ScoreGuest), stadium)));
             int deletedGoals = await Task.Run(() => MainModel.DeleteGoal(UpdatedMatch.ID));
             int addedGoals = await AddGoals();
-            if(updatedMatch == 1 && deletedGoals == addedGoals && addedGoals == GoalsHost.Count + GoalsGuest.Count)
-            {
-                UpdateContent("Edytowano mecz");
-            }
-            else
-            {
-                UpdateContent("Błąd przy edycji meczu");
-
-            }
+            UpdateContent("Edytowano mecz");
         }
 
         private async Task<int> AddGoals()

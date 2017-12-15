@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <local:NameConverter x:Key="NameConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <StackPanel Name="panel" Orientation="Horizontal" Opacity=".68">
             <TextBlock x:Name="Scorer" Text="{Binding Path=Scorer, Converter={StaticResource NameConverter}}"></TextBlock>
             <TextBlock x:Name="Minute" Margin="6 0 0 0" Text="{Binding Minute}"></TextBlock>

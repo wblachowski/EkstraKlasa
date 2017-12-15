@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Ekstraklasa.NewPlayerDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ekstraklasa"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             mc:Ignorable="d" 
+             Height="350"
+             Width="280"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Style="{StaticResource UserControlStyle}">
+    <Grid Margin="16">
+        <StackPanel Orientation="Vertical" Margin="0 16 0 0">
+            <TextBox Text="{Binding DialogPlayer.Firstname}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Imię"/>
+            <TextBox Text="{Binding DialogPlayer.Lastname}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwisko"/>
+            <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
+                <TextBox Width="120" Margin="0 0 4 0" Text="{Binding DialogPlayer.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel"/>
+            <DatePicker Width="120" Margin="4 0 0 0" Text="{Binding DialogPlayer.DateOfBirth, Mode=OneWayToSource, TargetNullValue=''}" materialDesign:HintAssist.Hint="Data urodzenia" HorizontalAlignment="Stretch"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+            </StackPanel>
+            <TextBox Text="{Binding DialogPlayer.Nationality}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Narodowość"/>
+            <StackPanel Orientation="Horizontal" Margin="0 32 0 0">
+                <TextBox Width="185" Text="{Binding DialogPlayer.Position}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pozycja"/>
+                <TextBox Width="55" Margin="8 0 0 0" Text="{Binding DialogPlayer.Nr,Mode=OneWayToSource,TargetNullValue=''}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nr"/>
+            </StackPanel>
+            <DockPanel  Margin="0 8 0 0">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Width="109">
+                    <TextBox  Width="60" Text="{Binding DialogPlayer.Height, Mode=OneWayToSource,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Wzrost"/>
+                    <TextBlock Margin="8 0 0 0" Text="cm" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBox    Width="60" Text="{Binding DialogPlayer.Weight, Mode=OneWayToSource,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Waga"/>
+                    <TextBlock Margin="8 0 0 0" Text="kg" VerticalAlignment="Center"/>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+            <Button.CommandParameter>
+                <system:Boolean>True</system:Boolean>
+            </Button.CommandParameter>
+            DODAJ
+        </Button>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="RIGHt" IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+            <Button.CommandParameter>
+                <system:Boolean>False</system:Boolean>
+            </Button.CommandParameter>
+            ANULUJ
+        </Button>
+    </Grid>
+</UserControl>
