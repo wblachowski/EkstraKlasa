@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -151,6 +151,9 @@
     <Compile Include="Dialogs\DeleteMatchDialog.xaml.cs">
       <DependentUpon>DeleteMatchDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\NewCoachDialog.xaml.cs">
+      <DependentUpon>NewCoachDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\NewPlayerDialog.xaml.cs">
       <DependentUpon>NewPlayerDialog.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\DeleteMatchDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\NewCoachDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

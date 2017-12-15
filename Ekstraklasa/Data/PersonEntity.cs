@@ -16,7 +16,7 @@ namespace Ekstraklasa
 
         public PersonEntity() { }
 
-        public PersonEntity(string Pesel, string Firstname, string Lastname, DateTime DateOfBirth, string Nationality)
+        public PersonEntity(string Pesel, string Firstname, string Lastname, DateTime? DateOfBirth, string Nationality)
         {
             this.Pesel = Pesel;
             this.Firstname = Firstname;

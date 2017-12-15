@@ -16,7 +16,7 @@ namespace Ekstraklasa
 
         public PlayerEntity() : base() { }
 
-        public PlayerEntity(string Pesel, string Firstname, string Lastname, DateTime DateOfBirth, string Nationality, int Weight, int Height, int Nr, string Position)
+        public PlayerEntity(string Pesel, string Firstname, string Lastname, DateTime? DateOfBirth, string Nationality, int Weight, int Height, int Nr, string Position)
             : base(Pesel, Firstname, Lastname, DateOfBirth, Nationality)
         {
             this.Weight = Weight;

@@ -24,13 +24,19 @@ namespace Ekstraklasa
         {
             InitializeComponent();
             var viewModel = new NewTeamViewModel();
-            viewModel.ChangeContentEvent += ChangeContent; 
+            viewModel.ChangeContentEvent += ChangeContent;
             DataContext = viewModel;
+        }
+
+        private void PreviewTextCoach(object sender, TextCompositionEventArgs e)
+        {
+            (DataContext as NewTeamViewModel).ExecuteCoachDialog(null);
+            e.Handled = false;
         }
 
         private void coach_clicked(Object sender, EventArgs a)
         {
-            Console.WriteLine("Coach clicked");
+                (DataContext as NewTeamViewModel).ExecuteCoachDialog(null);
         }
     }
 }

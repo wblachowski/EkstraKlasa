@@ -19,6 +19,7 @@ namespace Ekstraklasa
         public NewTeamViewModel()
         {
             IsExistingStadium = true;
+            UpdateStadiums();
         }
 
         private ICommand _GoBackCommand;
@@ -26,9 +27,10 @@ namespace Ekstraklasa
         {
             get
             {
-                if(_GoBackCommand == null)
+                if (_GoBackCommand == null)
                 {
-                    _GoBackCommand = new RelayCommand(param => {
+                    _GoBackCommand = new RelayCommand(param =>
+                    {
                         if (ChangeContentEvent != null)
                         {
                             ChangeContentEvent(2, null);
@@ -44,11 +46,28 @@ namespace Ekstraklasa
         {
             get
             {
-                if(_AddNewPlayer == null)
+                if (_AddNewPlayer == null)
                 {
-                    _AddNewPlayer = new RelayCommand(param => ExecuteRunDialog(param));
+                    _AddNewPlayer = new RelayCommand(param => ExecutePlayerDialog(param));
                 }
                 return _AddNewPlayer;
+            }
+        }
+
+        private ObservableCollection<StadiumEntity> _Stadiums;
+        public ObservableCollection<StadiumEntity> Stadiums
+        {
+            get
+            {
+                return _Stadiums;
+            }
+            set
+            {
+                if (_Stadiums != value)
+                {
+                    _Stadiums = value;
+                    OnPropertyChanged("Stadiums");
+                }
             }
         }
 
@@ -61,7 +80,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(_Players != value)
+                if (_Players != value)
                 {
                     _Players = value;
                     OnPropertyChanged("Players");
@@ -95,7 +114,7 @@ namespace Ekstraklasa
             }
             set
             {
-                if(!_IsExistingStadium != value)
+                if (!_IsExistingStadium != value)
                 {
                     _IsExistingStadium = !value;
                     OnPropertyChanged("IsNotExistingStadium");
@@ -121,15 +140,80 @@ namespace Ekstraklasa
             }
         }
 
-        private async void ExecuteRunDialog(object o)
+        private CoachEntity _DialogCoach = new CoachEntity();
+        public CoachEntity DialogCoach
+        {
+            get
+            {
+                return _DialogCoach;
+            }
+            set
+            {
+                if (_DialogCoach != value)
+                {
+                    _DialogCoach = value;
+                    OnPropertyChanged("CoachCaption");
+                    OnPropertyChanged("DialogCoach");
+                }
+            }
+        }
+
+        public string CoachCaption
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(DialogCoach.Firstname) && !String.IsNullOrEmpty(DialogCoach.Lastname))
+                {
+                    return _DialogCoach.Firstname + " " + _DialogCoach.Lastname;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                CoachCaption = value;
+            }
+        }
+
+        private async void UpdateStadiums()
+        {
+            List<StadiumEntity> stadiums = await Task.Run(() =>
+            {
+                return MainModel.GetStadiums();
+            });
+            Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
+        }
+
+        private async void ExecutePlayerDialog(object o)
         {
             DialogPlayer = new PlayerEntity();
             var view = new NewPlayerDialog();
             view.DataContext = this;
             var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-            if((bool)result == true)
+            if ((bool)result == true)
             {
                 Players.Add(DialogPlayer);
+            }
+        }
+
+        private bool opened = false;
+        public async void ExecuteCoachDialog(object o)
+        {
+            if (!opened)
+            {
+                opened = true;
+                CoachEntity CoachCopy = new CoachEntity(DialogCoach.Pesel, DialogCoach.Firstname, DialogCoach.Lastname, DialogCoach.DateOfBirth, DialogCoach.Nationality, DialogCoach.DateOfHiring);
+                var view = new NewCoachDialog();
+                view.DataContext = this;
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                if ((bool)result == false)
+                {
+                    DialogCoach = CoachCopy;
+                }
+                OnPropertyChanged("CoachCaption");
+                opened = false;
             }
         }
 

@@ -35,7 +35,7 @@
                     <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
                         <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
                         <DatePicker Text="{Binding Date}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
-                        <TextBox Text="{Binding CoachCaption}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" GotFocus="coach_clicked"/>
+                    <TextBox Text="{Binding CoachCaption, Mode=OneWay}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" PreviewMouseDown="coach_clicked" PreviewTextInput="PreviewTextCoach"/>
                 </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
