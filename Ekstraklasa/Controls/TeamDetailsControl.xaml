@@ -62,7 +62,7 @@
                 </materialDesign:PopupBox>
             </DockPanel>
         </Border>
-        <materialDesign:Card  Grid.Row="1" Padding="8" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+        <materialDesign:Card  Grid.Row="1" Padding="16" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140"/>

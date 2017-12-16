@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace Ekstraklasa
         {
             IsExistingStadium = true;
             UpdateStadiums();
+        }
+
+        private ICommand _OpenImageDialogCommand;
+        public ICommand OpenImageDialogCommand
+        {
+            get
+            {
+                if (_OpenImageDialogCommand == null)
+                {
+                    _OpenImageDialogCommand = new RelayCommand(param => OpenImageDialog());
+                }
+                return _OpenImageDialogCommand;
+            }
         }
 
         private ICommand _GoBackCommand;
@@ -238,6 +252,23 @@ namespace Ekstraklasa
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
         {
 
+        }
+
+        private void OpenImageDialog()
+        {
+            System.IO.Stream myStream = null;
+            System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "All files (*.*)|*.*|Image Files(*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Console.WriteLine(openFileDialog1.FileName);
+                ImagePath = openFileDialog1.FileName;
+            }
         }
 
         virtual protected void OnPropertyChanged(string propName)
