@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,23 @@ namespace Ekstraklasa
                     _AddNewPlayer = new RelayCommand(param => ExecutePlayerDialog(param));
                 }
                 return _AddNewPlayer;
+            }
+        }
+
+        private string _ImagePath = ConfigurationManager.AppSettings["default_logo"];
+        public string ImagePath
+        {
+            get
+            {
+                return _ImagePath;
+            }
+            set
+            {
+                if (_ImagePath != value)
+                {
+                    _ImagePath = value;
+                    OnPropertyChanged("ImagePath");
+                }
             }
         }
 
@@ -219,7 +237,7 @@ namespace Ekstraklasa
 
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
         {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
+
         }
 
         virtual protected void OnPropertyChanged(string propName)

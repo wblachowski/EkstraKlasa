@@ -30,9 +30,15 @@
             </materialDesign:PopupBox>
         </DockPanel>
             <materialDesign:Card  Grid.Row="1" Grid.Column="0" Padding="8" Margin="8 8 4 0" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal">
-                    <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="C:\Users\wblachowski\Documents\Visual Studio 2017\Projects\Ekstraklasa\Logos\Image.png"/>
-                    <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
+            <StackPanel Orientation="Horizontal">
+                <Button Height="120" Click="open_file_browser">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="{Binding ImagePath}"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
                         <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
                         <DatePicker Text="{Binding Date}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
                     <TextBox Text="{Binding CoachCaption, Mode=OneWay}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" PreviewMouseDown="coach_clicked" PreviewTextInput="PreviewTextCoach"/>
@@ -108,5 +114,9 @@
                 </Button>
             </Grid>
         </materialDesign:Card>
+        <Button Grid.RowSpan="3" Grid.ColumnSpan="2" Command="{Binding GoBackCommand}" VerticalAlignment="Bottom"  Margin="0 0 110 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Anuluj"/>
+
+        <Button Grid.RowSpan="3"  Grid.ColumnSpan="2" Command="{Binding AddCommand}" VerticalAlignment="Bottom"  Margin="0 0 40 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignRaisedButton}" Content="Dodaj"/>
+
     </Grid>
 </UserControl>

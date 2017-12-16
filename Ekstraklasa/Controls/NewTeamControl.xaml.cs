@@ -38,5 +38,34 @@ namespace Ekstraklasa
         {
                 (DataContext as NewTeamViewModel).ExecuteCoachDialog(null);
         }
+
+        private void open_file_browser(Object sender, EventArgs a)
+        {
+            System.IO.Stream myStream = null;
+            System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "All files (*.*)|*.*|Image Files(*.PNG,*.BMP;*.JPG;*.GIF)|*.PNG,*.BMP;*.JPG;*.GIF";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+                            // Insert code to read the stream here.
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+        }
     }
 }
