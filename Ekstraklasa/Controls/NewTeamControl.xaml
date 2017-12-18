@@ -31,7 +31,7 @@
         </DockPanel>
             <materialDesign:Card  Grid.Row="1" Grid.Column="0" Padding="8" Margin="8 8 4 0" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel Orientation="Horizontal">
-                <Button Height="120" Command="{Binding OpenImageDialogCommand}">
+                <Button Height="120" MaxWidth="120" Command="{Binding OpenImageDialogCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <Image RenderOptions.BitmapScalingMode="Fant" Opacity="0.87" HorizontalAlignment="Center" Height="120" Source="{Binding ImagePath}"/>
