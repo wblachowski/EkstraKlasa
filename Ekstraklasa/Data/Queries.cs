@@ -74,7 +74,7 @@ namespace Ekstraklasa
         public static string DeleteMatch = "delete from match where id=:id";
 
         public static string DeleteGoal = "delete from goal where match_id=:id";
-
+        
         public static string UpdateMatch = "update match set start_time=:start_time,score_host=:score_host,score_guest=:score_guest,stadium_id=:stadium_id, " + 
             "team_host_id=:team_host_id,team_guest_id=:team_guest_id where id=:id";
     }

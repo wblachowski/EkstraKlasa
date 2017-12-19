@@ -99,7 +99,8 @@ ALTER TABLE coach
 
 ALTER TABLE goal
     ADD CONSTRAINT goal_match_fk FOREIGN KEY ( match_id )
-        REFERENCES match ( id );
+        REFERENCES match ( id )
+		ON DELETE CASCADE;
 
 ALTER TABLE goal
     ADD CONSTRAINT goal_player_fk FOREIGN KEY ( player_pesel )

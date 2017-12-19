@@ -171,7 +171,6 @@ namespace Ekstraklasa
 
         private async void DeleteMatch()
         {
-            int deletedGoals = await Task.Run(() => MainModel.DeleteGoal(Match.ID));
             int deletedMatch = await Task.Run(() => MainModel.DeleteMatch(Match.ID));
             if (UpdateContentEvent != null)
             {
@@ -179,7 +178,7 @@ namespace Ekstraklasa
                 UpdateContentEvent(1);
                 UpdateContentEvent(4);
             }
-            if(deletedGoals == GoalsA.Count + GoalsB.Count && deletedMatch == 1)
+            if(deletedMatch == 1)
             {
                 ShowSnackbarEvent("Usunięto mecz");
             }

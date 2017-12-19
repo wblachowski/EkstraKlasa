@@ -38,8 +38,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <StackPanel Margin="10 11 0 0" Orientation="Vertical" Width="150">
-                        <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny"/>
+                <StackPanel Margin="10 11 0 0" Width="150" Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny" HorizontalAlignment="Stretch"/>
                         <DatePicker Text="{Binding Date}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
                     <TextBox Text="{Binding CoachCaption, Mode=OneWay}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" PreviewMouseDown="coach_clicked" PreviewTextInput="PreviewTextCoach"/>
                 </StackPanel>
