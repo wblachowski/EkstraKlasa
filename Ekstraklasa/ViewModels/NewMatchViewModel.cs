@@ -330,11 +330,12 @@ namespace Ekstraklasa
         {
             get
             {
-                string sg = ScoreGuest == null ? "" : ScoreGuest.Trim();
-                string sh = ScoreHost == null ? "" : ScoreHost.Trim();
-                if ((sh.Length > 0 && sh != "0") || (sg.Length > 0 && sg != "0"))
+                string sg = ScoreGuest == null ? "0" : ScoreGuest.Trim();
+                string sh = ScoreHost == null ? "0" : ScoreHost.Trim();
+                int sgi, shi;
+                if(Int32.TryParse(sg,out sgi) && Int32.TryParse(sh, out shi))
                 {
-                    return true;
+                    return sgi > 0 || shi > 0;
                 }
                 else
                 {
