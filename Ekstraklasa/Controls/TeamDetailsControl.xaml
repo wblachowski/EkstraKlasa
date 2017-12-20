@@ -102,7 +102,7 @@
                         <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black" Opacity="0.87"/>
                         <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Primary400}"/>
                     </dragablz:TabablzControl.Resources>
-                    <TabItem Header="Zawodnicy">
+                    <TabItem Header="  Zawodnicy  " >
                         <DataGrid   IsReadOnly="True" ItemsSource="{Binding Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
                                 CellStyle="{StaticResource MaterialDesignDataGridCell}"    
