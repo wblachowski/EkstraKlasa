@@ -161,7 +161,7 @@ namespace Ekstraklasa
         private async void ExecuteRunDialog(object o)
         {
             var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć mecz " + Match.Host + " " + Score + " " + Match.Guest +"?");
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, "RootDialog");
             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
             if(result!= null && (bool)result == true)
             {
@@ -186,11 +186,6 @@ namespace Ekstraklasa
             {
                 ShowSnackbarEvent("Błąd przy usuwaniu meczu");
             }
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
 
         virtual protected void OnPropertyChanged(string propName)

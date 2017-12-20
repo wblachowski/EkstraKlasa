@@ -124,12 +124,8 @@ namespace Ekstraklasa
         private async void ExecuteRunDialog(object o)
         {
             var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć drużynę " + o as string + "?");
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, "RootDialog");
 
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
         }
 
         private void DeleteTeam(object obj)
