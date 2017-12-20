@@ -148,8 +148,8 @@
     <Compile Include="Data\TableEntity.cs" />
     <Compile Include="Data\TeamEntity.cs" />
     <Compile Include="Data\TimeFormatRule.cs" />
-    <Compile Include="Dialogs\DeleteMatchDialog.xaml.cs">
-      <DependentUpon>DeleteMatchDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\SimpleYesNoDialog.xaml.cs">
+      <DependentUpon>SimpleYesNoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\NewCoachDialog.xaml.cs">
       <DependentUpon>NewCoachDialog.xaml</DependentUpon>
@@ -205,7 +205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\DeleteMatchDialog.xaml">
+    <Page Include="Dialogs\SimpleYesNoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

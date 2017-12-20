@@ -52,6 +52,19 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _OpenDialog;
+        public ICommand OpenDialog
+        {
+            get
+            {
+                if(_OpenDialog == null)
+                {
+                    _OpenDialog = new RelayCommand(param => ExecuteRunDialog(param)) ;
+                }
+                return _OpenDialog;
+            }
+        }
+
         private ObservableCollection<TeamEntity> _Teams = new ObservableCollection<TeamEntity>();
         public ObservableCollection<TeamEntity> Teams
         {
@@ -106,6 +119,17 @@ namespace Ekstraklasa
             return await Task.Run(()=> {
                 return MainModel.GetTeamDetails();
             });
+        }
+
+        private async void ExecuteRunDialog(object o)
+        {
+            var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć drużynę " + o as string + "?");
+            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+
+        }
+
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
         }
 
         private void DeleteTeam(object obj)
