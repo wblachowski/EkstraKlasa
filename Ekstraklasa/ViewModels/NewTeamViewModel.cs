@@ -24,6 +24,19 @@ namespace Ekstraklasa
             UpdateStadiums();
         }
 
+        private ICommand _AddCommand;
+        public ICommand AddCommand
+        {
+            get
+            {
+                if (_AddCommand == null)
+                {
+                    _AddCommand = new RelayCommand(param => AddTeam());
+                }
+                return _AddCommand;
+            }
+        }
+
         private ICommand _OpenImageDialogCommand;
         public ICommand OpenImageDialogCommand
         {
@@ -67,6 +80,27 @@ namespace Ekstraklasa
                 }
                 return _AddNewPlayer;
             }
+        }
+
+        private string _Name;
+        public string Name
+        {
+            set
+            {
+                _Name = value;
+            }
+        }
+
+        private string _Date;
+        public string Date
+        {
+            set { _Date = value; }
+        }
+
+        private StadiumEntity _StadiumSelected;
+        public StadiumEntity StadiumSelected
+        {
+            set { _StadiumSelected = value; }
         }
 
         private string _ImagePath = ConfigurationManager.AppSettings["default_logo"];
@@ -190,7 +224,7 @@ namespace Ekstraklasa
             }
         }
 
-        public string CoachCaption
+        private string CoachCaption
         {
             get
             {
@@ -223,7 +257,7 @@ namespace Ekstraklasa
             DialogPlayer = new PlayerEntity();
             var view = new NewPlayerDialog();
             view.DataContext = this;
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            var result = await DialogHost.Show(view, "RootDialog");
             if ((bool)result == true)
             {
                 Players.Add(DialogPlayer);
@@ -239,7 +273,7 @@ namespace Ekstraklasa
                 CoachEntity CoachCopy = new CoachEntity(DialogCoach.Pesel, DialogCoach.Firstname, DialogCoach.Lastname, DialogCoach.DateOfBirth, DialogCoach.Nationality, DialogCoach.DateOfHiring);
                 var view = new NewCoachDialog();
                 view.DataContext = this;
-                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                var result = await DialogHost.Show(view, "RootDialog");
                 if ((bool)result == false)
                 {
                     DialogCoach = CoachCopy;
@@ -247,11 +281,6 @@ namespace Ekstraklasa
                 OnPropertyChanged("CoachCaption");
                 opened = false;
             }
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-
         }
 
         private void OpenImageDialog()
@@ -269,6 +298,40 @@ namespace Ekstraklasa
                 Console.WriteLine(openFileDialog1.FileName);
                 ImagePath = openFileDialog1.FileName;
             }
+        }
+
+        private async void AddTeam()
+        {
+            string LogoPath = await Task.Run(()=>CopyImage());
+            DateTime foundedDate;
+            DateTime.TryParse(_Date, out foundedDate);
+            TeamEntity team = new TeamEntity(0, _Name, "", foundedDate, null, null);
+            team.LogoPath = LogoPath;
+            int insertedTeam = await Task.Run(() => MainModel.InsertTeam(team, _StadiumSelected.Id));
+/*
+            if (ChangeContentEvent != null)
+            {
+                ChangeContentEvent(2, null);
+            }
+            UpdateControlEvent(1);
+            UpdateControlEvent(2);
+            */
+        }
+
+        private string CopyImage()
+        {
+            if (ImagePath != ConfigurationManager.AppSettings["default_logo"])
+            {
+                if (System.IO.File.Exists(ImagePath))
+                {
+
+                    string fileName = _Name == null ? "" : _Name.Replace(' ', '_') + ".png";
+                    string destFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\", fileName);
+                    System.IO.File.Copy(ImagePath, destFile, true);
+                    return fileName;
+                }
+            }
+            return "";
         }
 
         virtual protected void OnPropertyChanged(string propName)

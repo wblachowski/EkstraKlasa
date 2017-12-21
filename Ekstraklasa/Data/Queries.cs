@@ -71,6 +71,18 @@ namespace Ekstraklasa
 
         public static string InsertGoalWithId = "insert into goal values(:minute,:pesel,:team_id,:id)";
 
+        public static string InsertStadium = "insert into stadium(name,city,address,capacity) values(:name,:city,:address,:capacity)";
+
+        public static string InsertTeam = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,:stadium_id)";
+
+        public static string InsertPerson = "insert into person values(:pesel,:firstname,:lastname,:date_of_birth,:nationality)";
+
+        public static string InsertCoach = "insert into coach values(:pesel,:hiring_date,:team_id)";
+
+        public static string InsertPlayer = "insert into player values(:pesel,:weight,:height,:nr,:team_id,:position)";
+
+        public static string InsertPlayerLatestTeam = "insert into player values(:pesel,:weight,:height,:nr,select max(id) from team,:position)";
+
         public static string DeleteMatch = "delete from match where id=:id";
 
         public static string DeleteGoal = "delete from goal where match_id=:id";

@@ -106,7 +106,7 @@ namespace Ekstraklasa
                                 int loses = dr.GetInt32(5);
                                 string goals = dr.GetInt32(6).ToString() + ":" + dr.GetInt32(7).ToString();
                                 int points = dr.GetInt32(8);
-                                TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points,path));
+                                TableList.Add(new TableEntity(nr, name, matches, wins, ties, loses, goals, points, path));
                                 nr++;
                             }
                         }
@@ -122,7 +122,7 @@ namespace Ekstraklasa
 
         public static List<MatchEntity> GetCurrentMatches(string host_name, string guest_name, string stadium_name, string start_date)
         {
-            
+
             List<MatchEntity> Matches = new List<MatchEntity>();
             try
             {
@@ -156,7 +156,7 @@ namespace Ekstraklasa
                                 string address = dr.GetString(12);
                                 int capacity = dr.GetInt32(13);
                                 int Sid = dr.GetInt32(14);
-                                Matches.Add(new MatchEntity(id, date, host,hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest,new StadiumEntity(Sid,stadium,address,city,capacity)));
+                                Matches.Add(new MatchEntity(id, date, host, hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest, new StadiumEntity(Sid, stadium, address, city, capacity)));
                             }
                         }
                     }
@@ -170,7 +170,7 @@ namespace Ekstraklasa
         }
 
         public static List<MatchEntity> GetCurrentMatchesTeam(string TeamName)
-        { 
+        {
             List<MatchEntity> Matches = new List<MatchEntity>();
             try
             {
@@ -201,7 +201,7 @@ namespace Ekstraklasa
                                 string address = dr.GetString(12);
                                 int capacity = dr.GetInt32(13);
                                 int Sid = dr.GetInt32(14);
-                                Matches.Add(new MatchEntity(id, date, host, hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest, new StadiumEntity(Sid,stadium,address,city,capacity)));
+                                Matches.Add(new MatchEntity(id, date, host, hostId, hostPath, guest, guestId, guestPath, scoreHost, scoreGuest, new StadiumEntity(Sid, stadium, address, city, capacity)));
                             }
                         }
                     }
@@ -242,7 +242,7 @@ namespace Ekstraklasa
                                 int nr = dr.GetInt32(8);
                                 string position = dr.GetString(9);
                                 bool hostGoal = dr.GetInt32(10) == 1 ? true : false;
-                                goals.Add(new GoalEntity(new PlayerEntity(pesel,firstname,lastname,dateOfBirth,nationality,weight,height,nr,position),minute,hostGoal));
+                                goals.Add(new GoalEntity(new PlayerEntity(pesel, firstname, lastname, dateOfBirth, nationality, weight, height, nr, position), minute, hostGoal));
                             }
                         }
                     }
@@ -309,13 +309,13 @@ namespace Ekstraklasa
                                 string address = dr.GetString(3);
                                 int capacity = dr.GetInt32(4);
 
-                                stadiums.Add(new StadiumEntity(id,name,address,city,capacity));
+                                stadiums.Add(new StadiumEntity(id, name, address, city, capacity));
                             }
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -323,7 +323,7 @@ namespace Ekstraklasa
             return stadiums;
         }
 
-        public static List<TeamEntity> GetTeamDetails(string TeamName ="")
+        public static List<TeamEntity> GetTeamDetails(string TeamName = "")
         {
             List<TeamEntity> teams = new List<TeamEntity>();
             try
@@ -355,7 +355,7 @@ namespace Ekstraklasa
                                 DateTime dateOfBirth = dr.GetDateTime(12);
                                 string nationality = dr.GetString(13);
                                 DateTime hiringDate = dr.GetDateTime(14);
-                                teams.Add(new TeamEntity(Id, name,path, foundedDate, new CoachEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, hiringDate), new StadiumEntity(stadiumId, stadiumName, stadiumAddress, stadiumCity, stadiumCapacity)));
+                                teams.Add(new TeamEntity(Id, name, path, foundedDate, new CoachEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, hiringDate), new StadiumEntity(stadiumId, stadiumName, stadiumAddress, stadiumCity, stadiumCapacity)));
                             }
                         }
                     }
@@ -394,8 +394,9 @@ namespace Ekstraklasa
                                 int weight = dr.GetInt32(5);
                                 int height = dr.GetInt32(6);
                                 int nr = dr.GetInt32(7);
+                                int team_id = dr.GetInt32(8);
                                 string position = dr.GetString(9);
-                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position));
+                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, team_id, position));
                             }
                         }
                     }
@@ -410,9 +411,9 @@ namespace Ekstraklasa
             return players;
         }
 
-        public static List<Tuple<PlayerEntity,int,string>> GetTopScorers()
+        public static List<Tuple<PlayerEntity, int, string>> GetTopScorers()
         {
-            List<Tuple<PlayerEntity,int,string>> players = new List<Tuple<PlayerEntity,int,string>>();
+            List<Tuple<PlayerEntity, int, string>> players = new List<Tuple<PlayerEntity, int, string>>();
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
@@ -437,7 +438,7 @@ namespace Ekstraklasa
                                 int nr = dr.GetInt32(8);
                                 string position = dr.GetString(9);
                                 string team = dr.GetString(10);
-                                players.Add(new Tuple<PlayerEntity,int,string>(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position),goals,team));
+                                players.Add(new Tuple<PlayerEntity, int, string>(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position), goals, team));
                             }
                         }
                     }
@@ -477,7 +478,7 @@ namespace Ekstraklasa
             return 0;
         }
 
-        public static int InsertGoal(int minute, string pesel,int team_id)
+        public static int InsertGoal(int minute, string pesel, int team_id)
         {
             try
             {
@@ -525,6 +526,120 @@ namespace Ekstraklasa
             }
             return 0;
         }
+
+        public static int InsertStadium(StadiumEntity stadium)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertStadium;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("name", stadium.Name);
+                        command.Parameters.Add("city", stadium.City);
+                        command.Parameters.Add("address", stadium.Address);
+                        command.Parameters.Add("capacity", stadium.Capacity);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int InsertTeam(TeamEntity team, int stadium_id)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql;
+                    //nowy stadion
+                    if (stadium_id == -1) {
+                        sql = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,select max(id) from stadium)";
+                    }
+                    //juz istniejacy stadion
+                    else
+                    {
+                        sql = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,:stadium_id)";
+                    }
+
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("name", team.Name);
+                        command.Parameters.Add("founded_date", team.FoundedDate);
+                        command.Parameters.Add("logo_path", team.LogoPath);
+                        if(stadium_id!=-1)
+                        command.Parameters.Add("stadium_id", stadium_id);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+
+        }
+
+        public static int InsertPerson(PersonEntity Person)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertPerson;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("pesel", Person.Pesel);
+                        command.Parameters.Add("firstname", Person.Firstname);
+                        command.Parameters.Add("lastname", Person.Lastname);
+                        command.Parameters.Add("date_of_birth", Person.DateOfBirth);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int InsertPlayer(PlayerEntity Player)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertPlayerLatestTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("pesel", Player.Pesel);
+                        command.Parameters.Add("weight", Player.Weight);
+                        command.Parameters.Add("height", Player.Height);
+                        command.Parameters.Add("nr", Player.Nr);
+                        command.Parameters.Add("position", Player.Position);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
 
         public static int DeleteGoal(int id)
         {
