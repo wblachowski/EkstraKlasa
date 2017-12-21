@@ -30,7 +30,7 @@
                 </StackPanel>
             </materialDesign:PopupBox>
         </DockPanel>
-        <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Padding="8" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+        <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Padding="8" Margin="8 4 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <Grid Margin="80 0 80 10" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>

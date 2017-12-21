@@ -29,7 +29,7 @@
                 </StackPanel>
             </materialDesign:PopupBox>
         </DockPanel>
-            <materialDesign:Card  Grid.Row="1" Grid.Column="0" Padding="8" Margin="8 8 4 0" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <materialDesign:Card  Grid.Row="1" Grid.Column="0" Padding="8" Margin="8 4 4 0" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel Orientation="Horizontal">
                 <Button Height="120" MaxWidth="120" Command="{Binding OpenImageDialogCommand}">
                     <Button.Template>
@@ -45,7 +45,7 @@
                 </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
-        <materialDesign:Card Grid.Row="1" Grid.Column="1" Padding="8 8 8 8" VerticalAlignment="Stretch" Margin="4 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+        <materialDesign:Card Grid.Row="1" Grid.Column="1" Padding="8 8 8 8" VerticalAlignment="Stretch" Margin="4 4 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel Orientation="Vertical">
                 <StackPanel Margin="0 20 0 0" Orientation="Horizontal" VerticalAlignment="Top">
                     <RadioButton Style="{StaticResource MaterialDesignRadioButton}" VerticalAlignment="Center" IsChecked="{Binding IsExistingStadium, Mode=TwoWay}">
