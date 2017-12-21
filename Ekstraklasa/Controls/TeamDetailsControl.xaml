@@ -18,12 +18,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="0 0 0 1" BorderBrush="#cdcfd1">
-            <DockPanel  Grid.Row="0" VerticalAlignment="Top" Height="38" LastChildFill="False" Background="White" >
+            <DockPanel  Grid.Row="0" VerticalAlignment="Top" Height="38" LastChildFill="False"  >
                 <Button Foreground="Black" Command="{Binding GoBackCommand}" Style="{StaticResource ButtonTransparent}" Padding="3" DockPanel.Dock="Left" Margin="10 0 0 0">
                     <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" />
                 </Button>
-                <TextBlock Text="O drużynie" Style="{StaticResource MaterialDesignSubheadingTextBlock}" VerticalAlignment="Center" Margin="16 0 0 0"></TextBlock>
                 <materialDesign:PopupBox DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 5 0" Height="38">
                     <StackPanel>
                         <Button Content="Edytuj"/>
@@ -61,7 +59,6 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </DockPanel>
-        </Border>
         <materialDesign:Card  Grid.Row="1" Padding="16" Margin="8 8 8 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <Grid>
                 <Grid.ColumnDefinitions>
@@ -164,7 +161,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Forma">
-                        <Grid Height="200" Margin="8 10 8 8">
+                        <Grid Height="200" Margin="8 10 20 8">
                             <oxy:Plot Background="Transparent" DefaultTrackerTemplate="{x:Null}">
                                 <oxy:Plot.Axes>
                                     <oxy:LinearAxis IsZoomEnabled="False" Position="Left" Minimum="-0.5" Maximum="3.5" MajorStep="1" MinorStep="1"/>
@@ -183,7 +180,7 @@
                         </Grid>
                     </TabItem>
                 </dragablz:TabablzControl>
-                <Rectangle Fill="{StaticResource MaterialDesignPaper}" HorizontalAlignment="Stretch" Height="1" VerticalAlignment="Bottom" />
+                <Rectangle Fill="White" HorizontalAlignment="Stretch" Height="2" VerticalAlignment="Bottom" />
                 <Rectangle Fill="White" HorizontalAlignment="Stretch" Height="5" Margin="0 40 0 0"  VerticalAlignment="Top" />
             </Grid>
         </materialDesign:Card>
