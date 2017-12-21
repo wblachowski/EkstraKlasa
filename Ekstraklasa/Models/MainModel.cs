@@ -394,9 +394,8 @@ namespace Ekstraklasa
                                 int weight = dr.GetInt32(5);
                                 int height = dr.GetInt32(6);
                                 int nr = dr.GetInt32(7);
-                                int team_id = dr.GetInt32(8);
                                 string position = dr.GetString(9);
-                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, team_id, position));
+                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position));
                             }
                         }
                     }
@@ -621,13 +620,14 @@ namespace Ekstraklasa
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql = Queries.InsertPlayerLatestTeam;
+                    string sql = Queries.InsertPlayer;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("pesel", Player.Pesel);
                         command.Parameters.Add("weight", Player.Weight);
                         command.Parameters.Add("height", Player.Height);
                         command.Parameters.Add("nr", Player.Nr);
+                        //command.Parameters.Add("team_id", Player.t);
                         command.Parameters.Add("position", Player.Position);
                         return command.ExecuteNonQuery();
                     }
