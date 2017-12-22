@@ -46,7 +46,7 @@
                                                     <Button Foreground="Black" Opacity="0.54" Style="{StaticResource MaterialDesignFlatButton}" 
                                                             Command="{Binding DataContext.OpenDialog, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                                                             ToolTip="Usuń drużynę" Padding="3"
-                                                            CommandParameter="{Binding Name}">
+                                                            CommandParameter="{Binding}">
                                                         <materialDesign:PackIcon Kind="Delete" Height="18" Width="18" />
                                                     </Button>
                                                 </StackPanel>

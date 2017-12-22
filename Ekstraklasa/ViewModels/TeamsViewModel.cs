@@ -15,6 +15,7 @@ namespace Ekstraklasa
     {
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
+        public event delegateUpdateControl UpdateContentEvent = null;
 
         public TeamsViewModel()
         {
@@ -31,7 +32,7 @@ namespace Ekstraklasa
                     _NewTeamCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                     {
-                        ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent));
+                        ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent,UpdateContentEvent));
                     }
                     });
                 }
@@ -123,14 +124,21 @@ namespace Ekstraklasa
 
         private async void ExecuteRunDialog(object o)
         {
-            var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć drużynę " + o as string + "?");
+            var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć drużynę " + (o as TeamEntity).Name + "?");
             var result = await DialogHost.Show(view, "RootDialog");
-
+            if((bool)result == true)
+            {
+                Task.Run(() => MainModel.DeleteTeam((o as TeamEntity).Id));
+            }
         }
 
         private void DeleteTeam(object obj)
         {
            
+        }
+
+        public void Update() {
+            UpdateTeams();
         }
 
         virtual protected void OnPropertyChanged(string propName)

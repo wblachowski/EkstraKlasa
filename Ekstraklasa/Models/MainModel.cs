@@ -602,6 +602,7 @@ namespace Ekstraklasa
                         command.Parameters.Add("firstname", Person.Firstname);
                         command.Parameters.Add("lastname", Person.Lastname);
                         command.Parameters.Add("date_of_birth", Person.DateOfBirth);
+                        command.Parameters.Add("nationality", Person.Nationality);
                         return command.ExecuteNonQuery();
                     }
                 }
@@ -620,15 +621,38 @@ namespace Ekstraklasa
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql = Queries.InsertPlayer;
+                    string sql = Queries.InsertPlayerLatestTeam;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("pesel", Player.Pesel);
                         command.Parameters.Add("weight", Player.Weight);
                         command.Parameters.Add("height", Player.Height);
                         command.Parameters.Add("nr", Player.Nr);
-                        //command.Parameters.Add("team_id", Player.t);
                         command.Parameters.Add("position", Player.Position);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int InsertCoach(CoachEntity Coach)
+        {
+            InsertPerson(Coach);
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.InsertCoachLatestTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("pesel", Coach.Pesel);
+                        command.Parameters.Add("hiring_date", Coach.DateOfHiring);
                         return command.ExecuteNonQuery();
                     }
                 }
@@ -671,6 +695,74 @@ namespace Ekstraklasa
                 {
                     connection.Open();
                     string sql = Queries.DeleteMatch;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("id", id);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int DeletePlayers(int id)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.DeletePlayersFromTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("id", id);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int DeleteCoach(int id)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.DeleteCoachFromTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("id", id);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int DeleteTeam(int id)
+        {
+            DeleteCoach(id);
+            DeletePlayers(id);
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.DeleteTeam;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("id", id);

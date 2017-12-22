@@ -224,7 +224,7 @@ namespace Ekstraklasa
             }
         }
 
-        private string CoachCaption
+        public string CoachCaption
         {
             get
             {
@@ -302,20 +302,23 @@ namespace Ekstraklasa
 
         private async void AddTeam()
         {
-            string LogoPath = await Task.Run(()=>CopyImage());
+            string LogoPath = await Task.Run(() => CopyImage());
             DateTime foundedDate;
             DateTime.TryParse(_Date, out foundedDate);
             TeamEntity team = new TeamEntity(0, _Name, "", foundedDate, null, null);
             team.LogoPath = LogoPath;
             int insertedTeam = await Task.Run(() => MainModel.InsertTeam(team, _StadiumSelected.Id));
-/*
+            int insertedCoach = await Task.Run(() => MainModel.InsertCoach(DialogCoach));
+
             if (ChangeContentEvent != null)
             {
                 ChangeContentEvent(2, null);
             }
-            UpdateControlEvent(1);
-            UpdateControlEvent(2);
-            */
+            if (UpdateControlEvent != null)
+            {
+                UpdateControlEvent(1);
+                UpdateControlEvent(2);
+            }
         }
 
         private string CopyImage()

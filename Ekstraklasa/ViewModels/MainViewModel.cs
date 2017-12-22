@@ -69,7 +69,7 @@ namespace Ekstraklasa
             {
                 case 0: mainControl = matchesControl == null ? matchesControl = new MatchesControl(ChangeControl, UpdateControl) : matchesControl; break;
                 case 1: mainControl = tableControl == null ? tableControl = new TableControl() : tableControl; break;
-                case 2: {mainControl =  teamsControl == null ? teamsControl = new TeamsControl(ChangeControl) : teamsControl;
+                case 2: {mainControl =  teamsControl == null ? teamsControl = new TeamsControl(ChangeControl,UpdateControl) : teamsControl;
                          var viewModel = teamsControl.DataContext as TeamsViewModel; viewModel.Initialize();
                     } break;
 
@@ -109,6 +109,15 @@ namespace Ekstraklasa
                         else
                         {
                             var viewModel = tableControl.DataContext as TableViewModel; viewModel.Update();
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (teamsControl == null) { teamsControl = new TeamsControl(); }
+                        else
+                        {
+                            var viewModel = teamsControl.DataContext as TeamsViewModel; viewModel.Update();
                         }
                     }
                     break;

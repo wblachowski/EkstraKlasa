@@ -79,14 +79,23 @@ namespace Ekstraklasa
 
         public static string InsertCoach = "insert into coach values(:pesel,:hiring_date,:team_id)";
 
+        public static string InsertCoachLatestTeam = "insert into coach values(:pesel,:hiring_date,(select max(id) from team))";
+
         public static string InsertPlayer = "insert into player values(:pesel,:weight,:height,:nr,:team_id,:position)";
 
-        public static string InsertPlayerLatestTeam = "insert into player values(:pesel,:weight,:height,:nr,select max(id) from team,:position)";
+        public static string InsertPlayerLatestTeam = "insert into player values(:pesel,:weight,:height,:nr,(select max(id) from team,:position))";
 
         public static string DeleteMatch = "delete from match where id=:id";
 
         public static string DeleteGoal = "delete from goal where match_id=:id";
-        
+
+        public static string DeletePlayersFromTeam = "delete from person where pesel in (select pesel from person natural join player where team_id=:id)";
+
+        public static string DeleteCoachFromTeam = "delete from person where pesel in (select pesel from person natural join coach where team_id=:id)";
+
+        //usuwa mecze, trenera i zawodników, zostają krotki w Person i Stadium
+        public static string DeleteTeam = "delete from team where id=:id";
+
         public static string UpdateMatch = "update match set start_time=:start_time,score_host=:score_host,score_guest=:score_guest,stadium_id=:stadium_id, " + 
             "team_host_id=:team_host_id,team_guest_id=:team_guest_id where id=:id";
     }
