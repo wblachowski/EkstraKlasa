@@ -102,11 +102,13 @@ ALTER TABLE goal
 
 ALTER TABLE goal
     ADD CONSTRAINT goal_player_fk FOREIGN KEY ( player_pesel )
-        REFERENCES player ( pesel );
+        REFERENCES player ( pesel )
+		ON DELETE CASCADE;
 
 ALTER TABLE goal
     ADD CONSTRAINT goal_team_fk FOREIGN KEY ( team_id )
-        REFERENCES team ( id );
+        REFERENCES team ( id )
+		ON DELETE CASCADE;
 
 ALTER TABLE match
     ADD CONSTRAINT match_stadium_fk FOREIGN KEY ( stadium_id )
@@ -124,11 +126,13 @@ ALTER TABLE player
 
 ALTER TABLE match
     ADD CONSTRAINT team_guest_fk FOREIGN KEY ( team_guest_id )
-        REFERENCES team ( id );
+        REFERENCES team ( id )
+		ON DELETE CASCADE;
 
 ALTER TABLE match
     ADD CONSTRAINT team_host_fk FOREIGN KEY ( team_host_id )
-        REFERENCES team ( id );
+        REFERENCES team ( id )
+		ON DELETE CASCADE;
 
 ALTER TABLE team
     ADD CONSTRAINT team_stadium_fk FOREIGN KEY ( stadium_id )
