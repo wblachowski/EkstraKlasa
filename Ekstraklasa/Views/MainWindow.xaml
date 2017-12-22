@@ -60,6 +60,7 @@
                 </StackPanel>
             </Border>
             <ContentControl FocusVisualStyle="{x:Null}" Grid.Column="2" Content="{Binding mainControl}"/>
+            <materialDesign:Snackbar Grid.Column="1" Message="{Binding SnackbarMessage}" IsActive="{Binding IsSnackbarActive}" VerticalAlignment="Bottom"/>
         </Grid>
     </materialDesign:DialogHost>
 </Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -56,6 +57,40 @@ namespace Ekstraklasa
             }
         }
 
+        private bool _IsSnabkbarActive;
+        public bool IsSnackbarActive
+        {
+            get
+            {
+                return _IsSnabkbarActive;
+            }
+            set
+            {
+                if (_IsSnabkbarActive != value)
+                {
+                    _IsSnabkbarActive = value;
+                    OnPropertyChanged("IsSnackbarActive");
+                }
+            }
+        }
+
+        private string _SnackbarMessage;
+        public string SnackbarMessage
+        {
+            get
+            {
+                return _SnackbarMessage;
+            }
+            set
+            {
+                if (_SnackbarMessage != value)
+                {
+                    _SnackbarMessage = value;
+                    OnPropertyChanged("SnackbarMessage");
+                }
+            }
+        }
+
         MatchesControl matchesControl;
         TableControl tableControl;
         TeamsControl teamsControl;
@@ -67,9 +102,9 @@ namespace Ekstraklasa
         {
             switch (index)
             {
-                case 0: mainControl = matchesControl == null ? matchesControl = new MatchesControl(ChangeControl, UpdateControl) : matchesControl; break;
+                case 0: mainControl = matchesControl == null ? matchesControl = new MatchesControl(ChangeControl, UpdateControl, ShowSnackbar) : matchesControl; break;
                 case 1: mainControl = tableControl == null ? tableControl = new TableControl() : tableControl; break;
-                case 2: {mainControl =  teamsControl == null ? teamsControl = new TeamsControl(ChangeControl,UpdateControl) : teamsControl;
+                case 2: {mainControl =  teamsControl == null ? teamsControl = new TeamsControl(ChangeControl,UpdateControl, ShowSnackbar) : teamsControl;
                          var viewModel = teamsControl.DataContext as TeamsViewModel; viewModel.Initialize();
                     } break;
 
@@ -96,7 +131,7 @@ namespace Ekstraklasa
             {
                 case 0:
                     {
-                        if (matchesControl == null) { matchesControl = new MatchesControl(ChangeControl, UpdateControl); }
+                        if (matchesControl == null) { matchesControl = new MatchesControl(ChangeControl, UpdateControl,ShowSnackbar); }
                         else
                         {
                             var viewModel = matchesControl.DataContext as MatchesViewModel; viewModel.Update();
@@ -114,7 +149,7 @@ namespace Ekstraklasa
                     break;
                 case 2:
                     {
-                        if (teamsControl == null) { teamsControl = new TeamsControl(); }
+                        if (teamsControl == null) { teamsControl = new TeamsControl(ChangeControl, UpdateControl, ShowSnackbar); }
                         else
                         {
                             var viewModel = teamsControl.DataContext as TeamsViewModel; viewModel.Update();
@@ -131,6 +166,17 @@ namespace Ekstraklasa
                     }
                     break;
             }
+        }
+
+        private async void ShowSnackbar(string Message)
+        {
+            await Task.Run(() => Thread.Sleep(500));
+            SnackbarMessage = Message;
+            IsSnackbarActive = true;
+            await Task.Run(() => {
+                Thread.Sleep(3000);
+                IsSnackbarActive = false;
+            });
         }
 
         virtual protected void OnPropertyChanged(string propName)

@@ -16,6 +16,7 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateContentEvent = null;
+        public event delegateShowSnackbar ShowSnackbarEvent = null;
 
         public TeamsViewModel()
         {
@@ -128,7 +129,18 @@ namespace Ekstraklasa
             var result = await DialogHost.Show(view, "RootDialog");
             if((bool)result == true)
             {
-                Task.Run(() => MainModel.DeleteTeam((o as TeamEntity).Id));
+                int deleted = await Task.Run(() => MainModel.DeleteTeam((o as TeamEntity).Id));
+                if (ShowSnackbarEvent != null)
+                {
+                    ShowSnackbarEvent("Usunięto drużynę");
+                }
+                if (UpdateContentEvent != null)
+                {
+                    UpdateContentEvent(0);
+                    UpdateContentEvent(1);
+                    UpdateContentEvent(2);
+                    UpdateContentEvent(4);
+                }
             }
         }
 

@@ -15,6 +15,7 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateContentEvent = null;
+        public event delegateShowSnackbar ShowSnackbarEvent = null;
 
         public MatchesViewModel()
         {
@@ -190,45 +191,11 @@ namespace Ekstraklasa
                     _NewMatchCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                         {
-                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent, UpdateContentEvent,ShowSnackbar));
+                            ChangeContentEvent(0,new NewMatchControl(ChangeContentEvent, UpdateContentEvent,ShowSnackbarEvent));
                         }
                     });
                 }
                 return _NewMatchCommand;
-            }
-        }
-
-        private bool _IsSnabkbarActive;
-        public bool IsSnackbarActive
-        {
-            get
-            {
-                return _IsSnabkbarActive;
-            }
-            set
-            {
-                if(_IsSnabkbarActive != value)
-                {
-                    _IsSnabkbarActive = value;
-                    OnPropertyChanged("IsSnackbarActive");
-                }
-            }
-        }
-
-        private string _SnackbarMessage;
-        public string SnackbarMessage
-        {
-            get
-            {
-                return _SnackbarMessage;
-            }
-            set
-            {
-                if(_SnackbarMessage != value)
-                {
-                    _SnackbarMessage = value;
-                    OnPropertyChanged("SnackbarMessage");
-                }
             }
         }
 
@@ -264,7 +231,7 @@ namespace Ekstraklasa
             Matches.Clear();
             foreach (MatchEntity match in matches)
             {
-                Matches.Add(new MatchControl(match, UpdateContentEvent, ChangeContentEvent, ShowSnackbar));
+                Matches.Add(new MatchControl(match, UpdateContentEvent, ChangeContentEvent, ShowSnackbarEvent));
             }
         }
 
@@ -289,17 +256,6 @@ namespace Ekstraklasa
             return await Task.Run(() =>
             {
                 return MainModel.GetCurrentMatches(HostSelected,GuestSelected,StadiumSelected,DateSelected);
-            });
-        }
-
-        private async void ShowSnackbar(string Message)
-        {
-            await Task.Run(() => Thread.Sleep(500));
-            SnackbarMessage = Message;
-            IsSnackbarActive = true;
-            await Task.Run(() => {
-                Thread.Sleep(3000);
-                IsSnackbarActive = false;
             });
         }
 
