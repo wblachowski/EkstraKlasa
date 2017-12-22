@@ -12,9 +12,11 @@ namespace Ekstraklasa
         public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public int Capacity { get; set; }
+        public int? Capacity { get; set; }
 
-        public StadiumEntity(int Id,string Name, string Address, string City, int Capacity)
+        public StadiumEntity() { }
+
+        public StadiumEntity(int Id,string Name, string Address, string City, int? Capacity)
         {
             this.Id = Id;
             this.Name = Name;

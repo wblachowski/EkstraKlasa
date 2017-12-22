@@ -83,7 +83,7 @@ namespace Ekstraklasa
 
         public static string InsertPlayer = "insert into player values(:pesel,:weight,:height,:nr,:team_id,:position)";
 
-        public static string InsertPlayerLatestTeam = "insert into player values(:pesel,:weight,:height,:nr,(select max(id) from team,:position))";
+        public static string InsertPlayerLatestTeam = "insert into player values(:pesel,:weight,:height,:nr,(select max(id) from team),:position)";
 
         public static string DeleteMatch = "delete from match where id=:id";
 

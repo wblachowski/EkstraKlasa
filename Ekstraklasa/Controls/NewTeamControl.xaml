@@ -70,10 +70,10 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa"/>
-                        <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pojemność" Margin="8 0 0 0"/>
-                        <TextBox Margin="0 8 0 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Miasto"/>
-                        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Ulica" Margin="8 0 0 0"/>
+                        <TextBox Text="{Binding NewStadium.Name, Mode=OneWayToSource}"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa"/>
+                        <TextBox Text="{Binding NewStadium.Capacity, Mode=OneWayToSource,TargetNullValue=''}" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pojemność" Margin="8 0 0 0"/>
+                        <TextBox Text="{Binding NewStadium.City, Mode=OneWayToSource}" Margin="0 8 0 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Miasto"/>
+                        <TextBox Text="{Binding NewStadium.Address, Mode=OneWayToSource}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Ulica" Margin="8 0 0 0"/>
                     </Grid>
                 </Grid>
             </StackPanel>

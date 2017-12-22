@@ -561,7 +561,7 @@ namespace Ekstraklasa
                     string sql;
                     //nowy stadion
                     if (stadium_id == -1) {
-                        sql = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,select max(id) from stadium)";
+                        sql = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,(select max(id) from stadium))";
                     }
                     //juz istniejacy stadion
                     else
@@ -616,6 +616,7 @@ namespace Ekstraklasa
 
         public static int InsertPlayer(PlayerEntity Player)
         {
+            InsertPerson(Player);
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))

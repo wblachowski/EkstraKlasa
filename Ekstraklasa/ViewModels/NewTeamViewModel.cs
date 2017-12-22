@@ -155,6 +155,13 @@ namespace Ekstraklasa
             }
         }
 
+        private StadiumEntity _NewStadium = new StadiumEntity();
+        public StadiumEntity NewStadium
+        {
+            get { return _NewStadium; }
+            set { if (value != null) _NewStadium = value; }
+        }
+
         private bool _IsExistingStadium = true;
         public bool IsExistingStadium
         {
@@ -308,8 +315,22 @@ namespace Ekstraklasa
             DateTime.TryParse(_Date, out foundedDate);
             TeamEntity team = new TeamEntity(0, _Name, "", foundedDate, null, null);
             team.LogoPath = LogoPath;
-            int insertedTeam = await Task.Run(() => MainModel.InsertTeam(team, _StadiumSelected.Id));
+            int stadiumIndex=-1;
+            if (IsNotExistingStadium)
+            {
+                int insertedStadium = await Task.Run(() => MainModel.InsertStadium(NewStadium));
+            }
+            else
+            {
+                stadiumIndex = _StadiumSelected != null ? _StadiumSelected.Id : -1;
+            }
+            int insertedTeam = await Task.Run(() => MainModel.InsertTeam(team, stadiumIndex));
             int insertedCoach = await Task.Run(() => MainModel.InsertCoach(DialogCoach));
+
+            foreach(PlayerEntity player in Players)
+            {
+                Task.Run(() => MainModel.InsertPlayer(player));
+            }
 
             if (ChangeContentEvent != null)
             {
