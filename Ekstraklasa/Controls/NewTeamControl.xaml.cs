@@ -20,12 +20,13 @@ namespace Ekstraklasa
     /// </summary>
     public partial class NewTeamControl : UserControl
     {
-        public NewTeamControl(delegateChangeControl ChangeContent = null, delegateUpdateControl UpdateContent = null)
+        public NewTeamControl(delegateChangeControl ChangeContent = null, delegateUpdateControl UpdateContent = null, delegateShowSnackbar ShowSnackbar = null)
         {
             InitializeComponent();
             var viewModel = new NewTeamViewModel();
             viewModel.ChangeContentEvent += ChangeContent;
             viewModel.UpdateControlEvent += UpdateContent;
+            viewModel.ShowSnackbarEvent += ShowSnackbar;
             DataContext = viewModel;
         }
 

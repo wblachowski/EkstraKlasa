@@ -17,6 +17,7 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateControlEvent = null;
+        public event delegateShowSnackbar ShowSnackbarEvent = null;
 
         public NewTeamViewModel()
         {
@@ -318,6 +319,11 @@ namespace Ekstraklasa
             {
                 UpdateControlEvent(1);
                 UpdateControlEvent(2);
+            }
+
+            if (ShowSnackbarEvent != null)
+            {
+                ShowSnackbarEvent("Dodano drużynę");
             }
         }
 

@@ -33,7 +33,7 @@ namespace Ekstraklasa
                     _NewTeamCommand = new RelayCommand(param => {
                         if (ChangeContentEvent != null)
                     {
-                        ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent,UpdateContentEvent));
+                        ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent,UpdateContentEvent,ShowSnackbarEvent));
                     }
                     });
                 }
