@@ -11,7 +11,10 @@
              Style="{StaticResource UserControlStyle}">
     <UserControl.Resources>
         <ContextMenu  x:Key="RowMenu">
-            <MenuItem Header="Edytuj" Command="{Binding EditPlayer}" CommandParameter="{Binding Pesel}">
+            <MenuItem Header="Edytuj" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type UserControl}},
+                                                         Path=DataContext.EditPlayer}"
+                      CommandParameter="{Binding}">
                 <MenuItem.Icon>
                     <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Center" Height="18" Width="18"/>
                 </MenuItem.Icon>

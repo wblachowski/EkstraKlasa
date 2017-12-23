@@ -99,6 +99,24 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _EditPlayer;
+        public ICommand EditPlayer
+        {
+            get
+            {
+                if (_EditPlayer == null)
+                {
+                    _EditPlayer = new RelayCommand(param =>
+                    {
+                        PlayerEntity edited = param as PlayerEntity;
+                        DialogPlayer = new PlayerEntity(edited.Pesel, edited.Firstname, edited.Lastname, edited.DateOfBirth, edited.Nationality, edited.Weight, edited.Height, edited.Nr, edited.Position);
+                        ExecutePlayerDialog(param);
+                    });
+                }
+                return _EditPlayer;
+            }
+        }
+
         private string _Name;
         public string Name
         {
@@ -276,16 +294,27 @@ namespace Ekstraklasa
             Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
         }
 
+        //o jest typu PlayerEntity czyli edytujemy istniejący
         private async void ExecutePlayerDialog(object o)
         {
-            DialogPlayer = new PlayerEntity();
+            if (o == null || o.GetType() != typeof(PlayerEntity))
+            {
+                DialogPlayer = new PlayerEntity();
+            }
             var view = new NewPlayerDialog();
             view.DataContext = this;
             var result = await DialogHost.Show(view, "RootDialog");
-            if ((bool)result == true)
+            if ((bool)result == true && (o == null || o.GetType() != typeof(PlayerEntity)))
             {
                 Players.Add(DialogPlayer);
+            }else if((bool)result == true && o!=null && o.GetType() == typeof(PlayerEntity))
+            {
+                int index = Players.IndexOf(o as PlayerEntity);
+                Players.RemoveAt(index);
+                PlayerEntity edited = new PlayerEntity(DialogPlayer.Pesel, DialogPlayer.Firstname, DialogPlayer.Lastname, DialogPlayer.DateOfBirth, DialogPlayer.Nationality, DialogPlayer.Weight, DialogPlayer.Height, DialogPlayer.Nr, DialogPlayer.Position);
+                Players.Insert(index, edited);
             }
+
         }
 
         private bool opened = false;

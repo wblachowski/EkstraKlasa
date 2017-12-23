@@ -17,20 +17,20 @@
             <TextBox Text="{Binding DialogPlayer.Lastname}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwisko"/>
             <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
                 <TextBox Width="120" Margin="0 0 4 0" Text="{Binding DialogPlayer.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel"/>
-            <DatePicker Width="120" Margin="4 0 0 0" Text="{Binding DialogPlayer.DateOfBirth, Mode=OneWayToSource, TargetNullValue=''}" materialDesign:HintAssist.Hint="Data urodzenia" HorizontalAlignment="Stretch"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+            <DatePicker Width="120" Margin="4 0 0 0" Text="{Binding DialogPlayer.DateOfBirth, TargetNullValue=''}" materialDesign:HintAssist.Hint="Data urodzenia" HorizontalAlignment="Stretch"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
             </StackPanel>
             <TextBox Text="{Binding DialogPlayer.Nationality}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Narodowość"/>
             <StackPanel Orientation="Horizontal" Margin="0 32 0 0">
                 <TextBox Width="185" Text="{Binding DialogPlayer.Position}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pozycja"/>
-                <TextBox Width="55" Margin="8 0 0 0" Text="{Binding DialogPlayer.Nr,Mode=OneWayToSource,TargetNullValue=''}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nr"/>
+                <TextBox Width="55" Margin="8 0 0 0" Text="{Binding DialogPlayer.Nr,TargetNullValue=''}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nr"/>
             </StackPanel>
             <DockPanel  Margin="0 8 0 0">
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Width="109">
-                    <TextBox  Width="60" Text="{Binding DialogPlayer.Height, Mode=OneWayToSource,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Wzrost"/>
+                    <TextBox  Width="60" Text="{Binding DialogPlayer.Height, TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Wzrost"/>
                     <TextBlock Margin="8 0 0 0" Text="cm" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBox    Width="60" Text="{Binding DialogPlayer.Weight, Mode=OneWayToSource,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Waga"/>
+                    <TextBox    Width="60" Text="{Binding DialogPlayer.Weight,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Waga"/>
                     <TextBlock Margin="8 0 0 0" Text="kg" VerticalAlignment="Center"/>
                 </StackPanel>
             </DockPanel>
