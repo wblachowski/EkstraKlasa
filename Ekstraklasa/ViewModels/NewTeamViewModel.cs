@@ -83,6 +83,22 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _DeletePlayer;
+        public ICommand DeletePlayer
+        {
+            get
+            {
+                if (_DeletePlayer == null)
+                {
+                    _DeletePlayer = new RelayCommand(param =>
+                    {
+                        Players.Remove(param as PlayerEntity);
+                    });
+                }
+                return _DeletePlayer;
+            }
+        }
+
         private string _Name;
         public string Name
         {
@@ -315,7 +331,7 @@ namespace Ekstraklasa
             DateTime.TryParse(_Date, out foundedDate);
             TeamEntity team = new TeamEntity(0, _Name, "", foundedDate, null, null);
             team.LogoPath = LogoPath;
-            int stadiumIndex=-1;
+            int stadiumIndex = -1;
             if (IsNotExistingStadium)
             {
                 int insertedStadium = await Task.Run(() => MainModel.InsertStadium(NewStadium));
@@ -327,7 +343,7 @@ namespace Ekstraklasa
             int insertedTeam = await Task.Run(() => MainModel.InsertTeam(team, stadiumIndex));
             int insertedCoach = await Task.Run(() => MainModel.InsertCoach(DialogCoach));
 
-            foreach(PlayerEntity player in Players)
+            foreach (PlayerEntity player in Players)
             {
                 Task.Run(() => MainModel.InsertPlayer(player));
             }
