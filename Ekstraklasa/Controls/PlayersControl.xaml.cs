@@ -26,5 +26,15 @@ namespace Ekstraklasa
             DataContext = viewModel;
             InitializeComponent();
         }
+
+        private void Filter_Mouse_Down(object sender, MouseButtonEventArgs e)
+        {
+            m_tvFilter.IsExpanded = !m_tvFilter.IsExpanded;
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            m_tvFilter.IsExpanded = false;
+        }
     }
 }

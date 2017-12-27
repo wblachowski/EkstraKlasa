@@ -10,7 +10,32 @@
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Row="0">
+            <TreeViewItem x:Name="m_tvFilter" Style="{StaticResource MaterialDesignTreeViewItem}" ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                <TreeViewItem.Header>
+                    <TextBlock MouseDown="Filter_Mouse_Down">Filtruj</TextBlock>
+                </TreeViewItem.Header>
+                <StackPanel  Margin="-9 -10 0 6" Orientation="Horizontal">
+                    <ComboBox materialDesign:HintAssist.Hint="Drużyna" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Teams}" Text="{Binding TeamSelected}">
+                    </ComboBox>
+                    <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Pozycja" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Positions}"  Text="{Binding PositionSelected}">
+                    </ComboBox>
+                    <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Narodowość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Nationalities}"  Text="{Binding NationalitySeleced}">
+                    </ComboBox>
+                    <Button VerticalAlignment="Bottom" Margin="24 0 0 3" Foreground="Black" Opacity="0.54" Style="{StaticResource ButtonTransparent}" Command="{Binding clearCommand}" Padding="0" Click="Clear_Click">
+                        <materialDesign:PackIcon Kind="Close" Height="18" Width="18" />
+                    </Button>
+                </StackPanel>
+            </TreeViewItem>
+        </TreeView>
+        <materialDesign:Transitioner Grid.Row="1" SelectedIndex="0" AutoApplyTransitionOrigins="True" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <materialDesign:Card Padding="0 8 0 4" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">

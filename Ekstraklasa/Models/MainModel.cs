@@ -287,6 +287,68 @@ namespace Ekstraklasa
             return teams;
         }
 
+        public static List<string> GetPositions()
+        {
+            List<string> positions = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetPositions;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string position = dr.GetString(0);
+                                positions.Add(position);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return positions;
+        }
+
+        public static List<string> GetNationalities()
+        {
+            List<string> nationalities = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetNationalities;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string nation = dr.GetString(0);
+                                nationalities.Add(nation);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return nationalities;
+        }
+
         public static List<StadiumEntity> GetStadiums()
         {
             List<StadiumEntity> stadiums = new List<StadiumEntity>();

@@ -50,6 +50,14 @@ namespace Ekstraklasa
 
         public static string GetStadiums = "select * from stadium order by name desc";
 
+        public static string GetPositions = "select distinct position from player order by (case when upper(position) like '%BRAMKARZ%' then 1 " +
+            "when upper(position) like '%OBROŃCA%' then 2 " +
+            "when upper(position) like '%POMOCNIK%' then 3 " +
+            "when upper(position) like '%NAPASTNIK%' then 4 " +
+            "end)";
+
+        public static string GetNationalities = "select distinct nationality from person natural join player order by nationality asc";
+
         public static string GetTeamsDetails = "select team.id, team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, stadium.id, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";

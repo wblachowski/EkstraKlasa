@@ -15,6 +15,7 @@ namespace Ekstraklasa
         public PlayersViewModel()
         {
             UpdatePlayers();
+            PrepareFilters();
         }
 
         private ObservableCollection<PlayerEntity> _Players;
@@ -49,6 +50,58 @@ namespace Ekstraklasa
                     OnPropertyChanged("IsProgressBarVisible");
                 }
             }
+        }
+
+        private ObservableCollection<string> _Teams;
+        public ObservableCollection<string> Teams
+        {
+            get { return _Teams; }
+            set
+            {
+                if (_Teams != value)
+                {
+                    _Teams = value;
+                    OnPropertyChanged("Teams");
+                }
+            }
+        }
+
+        private ObservableCollection<string> _Positions;
+        public ObservableCollection<string> Positions
+        {
+            get { return _Positions; }
+            set
+            {
+                if (_Positions != value)
+                {
+                    _Positions = value;
+                    OnPropertyChanged("Positions");
+                }
+            }
+        }
+
+        private ObservableCollection<string> _Nationalities;
+        public ObservableCollection<string> Nationalities
+        {
+            get { return _Nationalities; }
+            set
+            {
+                if (_Nationalities != value)
+                {
+                    _Nationalities = value;
+                    OnPropertyChanged("Nationalities");
+                }
+            }
+        }
+
+
+        private async void PrepareFilters()
+        {
+            Teams = new ObservableCollection<string>(await Task.Run(() => MainModel.GetTeams()));
+
+            Positions = new ObservableCollection<string>(await Task.Run(() => MainModel.GetPositions()));
+
+            Nationalities = new ObservableCollection<string>(await Task.Run(() => MainModel.GetNationalities()));
         }
 
         private async void UpdatePlayers()
