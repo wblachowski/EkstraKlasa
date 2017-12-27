@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -127,6 +127,9 @@
     <Compile Include="Controls\NewTeamControl.xaml.cs">
       <DependentUpon>NewTeamControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlayersControl.xaml.cs">
+      <DependentUpon>PlayersControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TeamDetailsControl.xaml.cs">
       <DependentUpon>TeamDetailsControl.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PlayersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TeamDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +244,7 @@
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\NewMatchViewModel.cs" />
     <Compile Include="ViewModels\NewTeamViewModel.cs" />
+    <Compile Include="ViewModels\PlayersViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />

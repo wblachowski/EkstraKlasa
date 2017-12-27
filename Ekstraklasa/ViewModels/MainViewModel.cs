@@ -94,7 +94,7 @@ namespace Ekstraklasa
         MatchesControl matchesControl;
         TableControl tableControl;
         TeamsControl teamsControl;
-
+        PlayersControl playersControl;
         TopScorersControl topScorersControl;
 
 
@@ -107,7 +107,7 @@ namespace Ekstraklasa
                 case 2: {mainControl =  teamsControl == null ? teamsControl = new TeamsControl(ChangeControl,UpdateControl, ShowSnackbar) : teamsControl;
                          var viewModel = teamsControl.DataContext as TeamsViewModel; viewModel.Initialize();
                     } break;
-
+                case 3: mainControl = playersControl == null ? playersControl = new PlayersControl() : playersControl; break;
                 case 4: mainControl = topScorersControl == null ? topScorersControl = new TopScorersControl() : topScorersControl; break;
             }
         }

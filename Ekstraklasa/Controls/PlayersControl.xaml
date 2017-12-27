@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Ekstraklasa.PlayersControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ekstraklasa"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="600"            
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+             Style="{StaticResource UserControlStyle}">
+    <Grid>
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
+                    <materialDesign:Card Padding="0 8 0 4" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
+                                    CellStyle="{StaticResource MaterialDesignDataGridCell}"
+                                        Background="White">
+                                <DataGrid.Columns >
+                                    <DataGridTextColumn 
+                                        Header=""
+                                        MaxWidth="8"/>
+                                    <DataGridTextColumn  Binding="{Binding Nr}"
+                                        Header="Nr"
+                                        Width="52"/>
+                                    <DataGridTextColumn  Binding="{Binding Firstname}"
+                                        Header="Imię"
+                                        Width="*"/>
+                                    <DataGridTextColumn  Binding="{Binding Lastname}"
+                                        Header="Nazwisko"
+                                        Width="*"/>
+                                    <DataGridTextColumn  Binding="{Binding Nationality}"
+                                        Header="Narodowość"
+                                        Width="*"/>
+                                    <DataGridTextColumn  Binding="{Binding Position}"
+                                        Header="Pozycja"
+                                        Width="*"/>
+                                    <DataGridTextColumn  Binding="{Binding Position}"
+                                        Header="Drużyna"
+                                        Width="*"/>
+                                    <DataGridTextColumn 
+                                        Header=""
+                                        MaxWidth="8"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <ProgressBar  Visibility="{Binding IsProgressBarVisible,Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" materialDesign:TransitionAssist.DisableTransitions="True"  Height="1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                            <Rectangle Fill="White" Height="2" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+    </Grid>
+</UserControl>
