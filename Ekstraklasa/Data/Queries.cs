@@ -58,6 +58,10 @@ namespace Ekstraklasa
 
         public static string GetNationalities = "select distinct nationality from person natural join player order by nationality asc";
 
+        public static string GetMinMaxHeight = "select min(height), max(height) from player";
+
+        public static string GetMinMaxWeight = "select min(weight), max(weight) from player";
+
         public static string GetTeamsDetails = "select team.id, team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, stadium.id, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";

@@ -349,6 +349,70 @@ namespace Ekstraklasa
             return nationalities;
         }
 
+        public static Tuple<int,int> GetMinMaxHeight()
+        {
+            List<string> nationalities = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetMinMaxHeight;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int min = dr.GetInt32(0);
+                                int max = dr.GetInt32(1);
+                                return new Tuple<int, int>(min, max);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new Tuple<int,int>(150,250);
+        }
+
+        public static Tuple<int, int> GetMinMaxWeight()
+        {
+            List<string> nationalities = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetMinMaxWeight;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int min = dr.GetInt32(0);
+                                int max = dr.GetInt32(1);
+                                return new Tuple<int, int>(min, max);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new Tuple<int, int>(50, 150);
+        }
+
         public static List<StadiumEntity> GetStadiums()
         {
             List<StadiumEntity> stadiums = new List<StadiumEntity>();
