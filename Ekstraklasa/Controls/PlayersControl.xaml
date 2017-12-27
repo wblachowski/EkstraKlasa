@@ -38,7 +38,7 @@
                                     <DataGridTextColumn  Binding="{Binding Position}"
                                         Header="Pozycja"
                                         Width="*"/>
-                                    <DataGridTextColumn  Binding="{Binding Position}"
+                                    <DataGridTextColumn  Binding="{Binding Team}"
                                         Header="Drużyna"
                                         Width="*"/>
                                     <DataGridTextColumn 

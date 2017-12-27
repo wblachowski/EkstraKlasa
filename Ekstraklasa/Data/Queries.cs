@@ -54,8 +54,12 @@ namespace Ekstraklasa
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
 
-        public static string GetPlayers = "select * from person natural join player where team_id in (select id from team where name like :name) " +
-             "order by team_id, decode(position, 'BRAMKARZ', 1, '%OBROŃCA%', 2, '%POMOCNIK%', 3, '%NAPASTNIK%', 4)";
+        public static string GetPlayers = "select * from person natural join player join team on team.id=team_id where team_id in (select id from team where name like :name) " +
+            "order by team_id, (case when upper(position) like '%BRAMKARZ%' then 1 " +
+            "when upper(position) like '%OBROŃCA%' then 2 " +
+            "when upper(position) like '%POMOCNIK%' then 3 " +
+            "when upper(position) like '%NAPASTNIK%' then 4 " +
+            "end),nr";
 
         public static string GetTopScorers = "select goals, pesel,firstname,lastname,date_of_birth,nationality,weight,height,nr,position, name " +
             "from player natural join person " +
@@ -96,7 +100,7 @@ namespace Ekstraklasa
         //usuwa mecze, trenera i zawodników, zostają krotki w Person i Stadium
         public static string DeleteTeam = "delete from team where id=:id";
 
-        public static string UpdateMatch = "update match set start_time=:start_time,score_host=:score_host,score_guest=:score_guest,stadium_id=:stadium_id, " + 
+        public static string UpdateMatch = "update match set start_time=:start_time,score_host=:score_host,score_guest=:score_guest,stadium_id=:stadium_id, " +
             "team_host_id=:team_host_id,team_guest_id=:team_guest_id where id=:id";
     }
 }

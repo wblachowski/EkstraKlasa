@@ -13,16 +13,18 @@ namespace Ekstraklasa
         public int? Nr { get; set; }
         public string Position { get; set; }
         public string Display { get; set; }
+        public string Team { get; set; }
 
         public PlayerEntity() : base() { }
 
-        public PlayerEntity(string Pesel, string Firstname, string Lastname, DateTime? DateOfBirth, string Nationality, int? Weight, int? Height, int? Nr, string Position)
+        public PlayerEntity(string Pesel, string Firstname, string Lastname, DateTime? DateOfBirth, string Nationality, int? Weight, int? Height, int? Nr, string Position, string Team="")
             : base(Pesel, Firstname, Lastname, DateOfBirth, Nationality)
         {
             this.Weight = Weight;
             this.Height = Height;
             this.Nr = Nr;
             this.Position = Position;
+            this.Team = Team;
             this.Display = Firstname.Substring(0, 1) + '.' + Lastname;
         }
     }

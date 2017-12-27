@@ -395,7 +395,8 @@ namespace Ekstraklasa
                                 int height = dr.GetInt32(6);
                                 int nr = dr.GetInt32(7);
                                 string position = dr.GetString(9);
-                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position));
+                                string team = dr.GetString(11);
+                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position,team));
                             }
                         }
                     }
