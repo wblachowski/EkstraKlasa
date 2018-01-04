@@ -10,8 +10,8 @@
         Style="{StaticResource WindowStyle}"
         ResizeMode="CanMinimize "
         Focusable="False">
-    <Grid>
-        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+    <Grid >
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" Focusable="False">
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="Logowanie" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top"/>
@@ -21,7 +21,7 @@
         <StackPanel Orientation="Vertical" Width="220" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <materialDesign:PackIcon Kind="Account" Margin="0 4 6 0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" />
-                <TextBox TabIndex="0" Style="{StaticResource MaterialDesignTextBox}"  x:Name="PhoneTextBox" IsEnabled="{Binding IsLogingFieldEnabled}" Text="{Binding Username,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Użytkownik" Width="158" />
+                <TextBox TabIndex="0" Style="{StaticResource MaterialDesignTextBox}"  x:Name="PhoneTextBox" IsEnabled="{Binding IsLogingFieldEnabled}" Text="{Binding Username,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Użytkownik" Width="158" KeyboardNavigation.TabIndex="0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                 <materialDesign:PackIcon Margin="0 4 6 0" Kind="LockOutline" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" />
@@ -31,7 +31,8 @@
                      local:PasswordBoxAssistant.BindPassword="true" 
                      local:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, 
                                                              UpdateSourceTrigger=PropertyChanged}"
-					 materialDesign:HintAssist.Hint="Hasło"  Width="158" />
+					 materialDesign:HintAssist.Hint="Hasło"  Width="158"
+                             KeyboardNavigation.TabIndex="1"/>
             </StackPanel>
             <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True" Focusable="False">
                 <materialDesign:TransitionerSlide  Visibility="{Binding Path=ShowBadLogin, Converter={StaticResource BooleanToVisibilityConverter}}">
