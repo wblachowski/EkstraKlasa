@@ -44,7 +44,7 @@
                     </StackPanel>
                 </TreeViewItem>
             </TreeView>
-        <materialDesign:Transitioner Grid.Row="1"  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+        <materialDesign:Transitioner Grid.Row="1"  SelectedIndex="0" AutoApplyTransitionOrigins="True" KeyboardNavigation.TabNavigation="None" >
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.4}">
                     <materialDesign:Card Grid.Row="1" Padding="8" Margin="8 8 8 8" materialDesign:ShadowAssist.ShadowDepth="Depth1">
@@ -57,7 +57,7 @@
         </materialDesign:Transitioner>
 
 
-        <materialDesign:Transitioner  Grid.Row="1" SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+        <materialDesign:Transitioner  Grid.Row="1" SelectedIndex="0" AutoApplyTransitionOrigins="True" KeyboardNavigation.TabNavigation="None">
             <materialDesign:TransitionerSlide >
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.4}">
                     <Button Style="{StaticResource MaterialDesignFloatingActionButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
