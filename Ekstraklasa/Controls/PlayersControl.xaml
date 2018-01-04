@@ -21,22 +21,31 @@
                 </TreeViewItem.Header>
                 <StackPanel Orientation="Vertical">
                     <StackPanel  Margin="-9 -10 0 6" Orientation="Horizontal">
-                        <ComboBox materialDesign:HintAssist.Hint="Drużyna" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Teams}" Text="{Binding TeamSelected}">
+                        <TextBox Text="{Binding SelectedFirstname, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" materialDesign:HintAssist.Hint="Imię" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <TextBox Text="{Binding SelectedLastname, UpdateSourceTrigger=PropertyChanged}" Margin="15 0 0 0" materialDesign:HintAssist.Hint="Nazwisko" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Drużyna" Width="110" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Teams}" Text="{Binding SelectedTeam, UpdateSourceTrigger=PropertyChanged}">
                         </ComboBox>
-                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Pozycja" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Positions}"  Text="{Binding PositionSelected}">
+                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Pozycja" Width="110" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Positions}"  Text="{Binding SelectedPosition, UpdateSourceTrigger=PropertyChanged}">
                         </ComboBox>
-                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Narodowość" Width="120" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Nationalities}"  Text="{Binding NationalitySeleced}">
+                        <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Narodowość" Width="110" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Nationalities}"  Text="{Binding SelectedNationality, UpdateSourceTrigger=PropertyChanged}">
                         </ComboBox>
-                        <Button VerticalAlignment="Bottom" Margin="24 0 0 3" Foreground="Black" Opacity="0.54" Style="{StaticResource ButtonTransparent}" Command="{Binding clearCommand}" Padding="0" Click="Clear_Click">
-                            <materialDesign:PackIcon Kind="Close" Height="18" Width="18" />
-                        </Button>
                     </StackPanel>
                     <StackPanel  Orientation="Horizontal" Margin="-8 8 0 0">
-                        <TextBlock Margin="0 4 0 0">Wzrost</TextBlock>
-                        <Grid Width="200" Margin="8 -35 0 0">
+                        <TextBlock Margin="0 4 0 0">Wiek</TextBlock>
+                        <Grid Width="140" Margin="0 -32 0 0" VerticalAlignment="Top">
+                            <Rectangle Margin="12 40 14 0" Height="2" Fill="#747474"/>
+                            <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding UpperWidthAge}" HorizontalAlignment="Left" Fill="#3f51b5"/>
+                            <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding LowerWidthAge}" HorizontalAlignment="Left" Fill="#747474"/>
+                            <Slider  Margin="0 0 11 0" Style="{StaticResource MyMaterialDesignDiscreteSlider}" 
+                                Minimum="{Binding MinimumAge}" Maximum="{Binding MaximumAge}" Value="{Binding LowerValueAge}"  ></Slider>
+                            <Slider Margin="11 0 0 0" Style="{StaticResource MyMaterialDesignDiscreteSlider}" 
+                                Minimum="{Binding MinimumAge}" Maximum="{Binding MaximumAge}" Value="{Binding UpperValueAge}" ></Slider>
+                        </Grid>
+                        <TextBlock Margin="24 4 0 0">Wzrost</TextBlock>
+                        <Grid Width="140" Margin="0 -32 0 0" VerticalAlignment="Top">
                             <Rectangle Margin="12 40 14 0" Height="2" Fill="#747474"/>
                             <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding UpperWidthHeight}" HorizontalAlignment="Left" Fill="#3f51b5"/>
                             <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding LowerWidthHeight}" HorizontalAlignment="Left" Fill="#747474"/>
@@ -45,8 +54,8 @@
                             <Slider Margin="11 0 0 0" Style="{StaticResource MyMaterialDesignDiscreteSlider}" 
                                 Minimum="{Binding MinimumHeight}" Maximum="{Binding MaximumHeight}" Value="{Binding UpperValueHeight}" ></Slider>
                         </Grid>
-                        <TextBlock Margin="100 4 0 0">Waga</TextBlock>
-                        <Grid Width="200" Margin="8 -35 0 0">
+                        <TextBlock Margin="24 4 0 0">Waga</TextBlock>
+                        <Grid Width="140" Margin="0 -32 0 0" VerticalAlignment="Top">
                             <Rectangle Margin="12 40 14 0" Height="2" Fill="#747474"/>
                             <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding UpperWidthWeight}" HorizontalAlignment="Left" Fill="#3f51b5"/>
                             <Rectangle Margin="12 40 14 0" Height="2" Width="{Binding LowerWidthWeight}" HorizontalAlignment="Left" Fill="#747474"/>
@@ -55,6 +64,9 @@
                             <Slider Margin="11 0 0 0" Style="{StaticResource MyMaterialDesignDiscreteSlider}" 
                                 Minimum="{Binding MinimumWeight}" Maximum="{Binding MaximumWeight}" Value="{Binding UpperValueWeight}" ></Slider>
                         </Grid>
+                        <Button VerticalAlignment="Bottom" Margin="18 2 0 3" Foreground="Black" Opacity="0.54" Style="{StaticResource ButtonTransparent}" Command="{Binding clearCommand}" Padding="0" Click="Clear_Click" Height="22">
+                            <materialDesign:PackIcon Kind="Close" Height="18" Width="18" RenderTransformOrigin="0.5,0.5" />
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </TreeViewItem>

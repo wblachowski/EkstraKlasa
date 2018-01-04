@@ -62,11 +62,14 @@ namespace Ekstraklasa
 
         public static string GetMinMaxWeight = "select min(weight), max(weight) from player";
 
+        public static string GetMinMaxAge = "select min(floor(months_between(SYSDATE,date_of_birth)/12)),max(floor(months_between(SYSDATE,date_of_birth)/12)) from player natural join person";
+
         public static string GetTeamsDetails = "select team.id, team.name,logo_path,founded_date,stadium.name as stadium, city, address, capacity, stadium.id, coach.pesel, " +
             "firstname,lastname,date_of_birth,nationality,hiring_date  from team join stadium on stadium_id=stadium.id " +
             "join coach on team.id=coach.team_id join person on person.pesel=coach.pesel where team.name like :name";
 
-        public static string GetPlayers = "select * from person natural join player join team on team.id=team_id where team_id in (select id from team where name like :name) " +
+        public static string GetPlayers = "select * from person natural join player join team on team.id=team_id where team_id in (select id from team where upper(name) like upper(:name)) " +
+            "and upper(firstname) like upper(:firstname) and upper(lastname) like upper(:lastname) and upper(position) like upper(:position) and upper(nationality) like upper(:nationality) "+
             "order by team_id, (case when upper(position) like '%BRAMKARZ%' then 1 " +
             "when upper(position) like '%OBROŃCA%' then 2 " +
             "when upper(position) like '%POMOCNIK%' then 3 " +

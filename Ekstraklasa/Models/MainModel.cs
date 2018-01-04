@@ -349,7 +349,7 @@ namespace Ekstraklasa
             return nationalities;
         }
 
-        public static Tuple<int,int> GetMinMaxHeight()
+        public static Tuple<int, int> GetMinMaxHeight()
         {
             List<string> nationalities = new List<string>();
             try
@@ -378,7 +378,7 @@ namespace Ekstraklasa
                 Console.WriteLine(ex.Message);
             }
 
-            return new Tuple<int,int>(150,250);
+            return new Tuple<int, int>(150, 250);
         }
 
         public static Tuple<int, int> GetMinMaxWeight()
@@ -411,6 +411,38 @@ namespace Ekstraklasa
             }
 
             return new Tuple<int, int>(50, 150);
+        }
+
+        public static Tuple<int, int> GetMinMaxAge()
+        {
+            List<string> nationalities = new List<string>();
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.GetMinMaxAge;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        OracleDataReader dr = command.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                int min = dr.GetInt32(0);
+                                int max = dr.GetInt32(1);
+                                return new Tuple<int, int>(min, max);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new Tuple<int, int>(15, 45);
         }
 
         public static List<StadiumEntity> GetStadiums()
@@ -495,7 +527,7 @@ namespace Ekstraklasa
             return teams;
         }
 
-        public static List<PlayerEntity> GetPlayers(string TeamName = "")
+        public static List<PlayerEntity> GetPlayers(string TeamName = "", string Firstname = "", string Lastname = "", string Position = "", string Nationality = "")
         {
             List<PlayerEntity> players = new List<PlayerEntity>();
             try
@@ -506,7 +538,12 @@ namespace Ekstraklasa
                     string sql = Queries.GetPlayers;
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
-                        command.Parameters.Add("name", String.IsNullOrEmpty(TeamName) ? "%" : TeamName);
+                        command.Parameters.Add("name", String.IsNullOrEmpty(TeamName) ? "%" : "%" + TeamName + "%");
+                        command.Parameters.Add("firstname", String.IsNullOrEmpty(Firstname) ? "%" : "%" + Firstname + "%");
+                        command.Parameters.Add("lastname", String.IsNullOrEmpty(Lastname) ? "%" : "%" + Lastname + "%");
+                        command.Parameters.Add("position", String.IsNullOrEmpty(Position) ? "%" : "%" + Position + "%");
+                        command.Parameters.Add("nationality", String.IsNullOrEmpty(Nationality) ? "%" : "%" + Nationality + "%");
+
                         OracleDataReader dr = command.ExecuteReader();
                         if (dr.HasRows)
                         {
@@ -522,7 +559,7 @@ namespace Ekstraklasa
                                 int nr = dr.GetInt32(7);
                                 string position = dr.GetString(9);
                                 string team = dr.GetString(11);
-                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position,team));
+                                players.Add(new PlayerEntity(Convert.ToString(pesel), firstname, lastname, dateOfBirth, nationality, weight, height, nr, position, team));
                             }
                         }
                     }
@@ -687,7 +724,8 @@ namespace Ekstraklasa
                     connection.Open();
                     string sql;
                     //nowy stadion
-                    if (stadium_id == -1) {
+                    if (stadium_id == -1)
+                    {
                         sql = "insert into team(name,founded_date,logo_path,stadium_id) values(:name,:founded_date,:logo_path,(select max(id) from stadium))";
                     }
                     //juz istniejacy stadion
@@ -701,8 +739,8 @@ namespace Ekstraklasa
                         command.Parameters.Add("name", team.Name);
                         command.Parameters.Add("founded_date", team.FoundedDate);
                         command.Parameters.Add("logo_path", team.LogoPath);
-                        if(stadium_id!=-1)
-                        command.Parameters.Add("stadium_id", stadium_id);
+                        if (stadium_id != -1)
+                            command.Parameters.Add("stadium_id", stadium_id);
                         return command.ExecuteNonQuery();
                     }
                 }
@@ -932,6 +970,6 @@ namespace Ekstraklasa
             }
             return 0;
         }
- 
+
     }
 }

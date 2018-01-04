@@ -14,8 +14,8 @@ namespace Ekstraklasa
 
         public PlayersViewModel()
         {
-            UpdatePlayers();
             PrepareFilters();
+            UpdatePlayers();
         }
 
         private ObservableCollection<PlayerEntity> _Players;
@@ -94,6 +94,41 @@ namespace Ekstraklasa
             }
         }
 
+        private string _SelectedFirstname = "";
+        public string SelectedFirstname
+        {
+            get { return _SelectedFirstname; }
+            set { _SelectedFirstname = value; OnPropertyChanged("SelectedFirstname"); UpdatePlayers(); }
+        }
+
+        private string _SelectedLastname = "";
+        public string SelectedLastname
+        {
+            get { return _SelectedLastname; }
+            set { _SelectedLastname = value; OnPropertyChanged("SelectedLastname"); UpdatePlayers(); }
+        }
+
+        private string _SelectedTeam = "";
+        public string SelectedTeam
+        {
+            get { return _SelectedTeam; }
+            set { _SelectedTeam = value; OnPropertyChanged("SelectedTeam"); UpdatePlayers(); }
+        }
+
+        private string _SelectedPosition = "";
+        public string SelectedPosition
+        {
+            get { return _SelectedPosition; }
+            set { _SelectedPosition = value; OnPropertyChanged("SelectedPosition"); UpdatePlayers(); }
+        }
+
+        private string _SelectedNationality = "";
+        public string SelectedNationality
+        {
+            get { return _SelectedNationality; }
+            set { _SelectedNationality = value; OnPropertyChanged("SelectedNationality"); UpdatePlayers(); }
+        }
+
         private int _LowerValueHeight = 150;
         public int LowerValueHeight
         {
@@ -128,14 +163,14 @@ namespace Ekstraklasa
         {
             get
             {
-                return (int)((double)(LowerValueHeight - MinimumHeight) / (double)(MaximumHeight - MinimumHeight) * 165.0);
+                return (int)((double)(LowerValueHeight - MinimumHeight) / (double)(MaximumHeight - MinimumHeight) * 105.0);
             }
         }
         public int UpperWidthHeight
         {
             get
             {
-                return (int)((double)(UpperValueHeight - MinimumHeight) / (double)(MaximumHeight - MinimumHeight) * 165.0)+11;
+                return (int)((double)(UpperValueHeight - MinimumHeight) / (double)(MaximumHeight - MinimumHeight) * 105.0) + 11;
             }
         }
 
@@ -195,14 +230,14 @@ namespace Ekstraklasa
         {
             get
             {
-                return (int)((double)(LowerValueWeight - MinimumWeight) / (double)(MaximumWeight - MinimumWeight) * 165.0);
+                return (int)((double)(LowerValueWeight - MinimumWeight) / (double)(MaximumWeight - MinimumWeight) * 105.0);
             }
         }
         public int UpperWidthWeight
         {
             get
             {
-                return (int)((double)(UpperValueWeight - MinimumWeight) / (double)(MaximumWeight - MinimumWeight) * 165.0) + 11;
+                return (int)((double)(UpperValueWeight - MinimumWeight) / (double)(MaximumWeight - MinimumWeight) * 105.0) + 11;
             }
         }
 
@@ -227,7 +262,73 @@ namespace Ekstraklasa
                 OnPropertyChanged("MaximumWeight");
             }
         }
+        //**********************************************//
+        private int _LowerValueAge = 15;
+        public int LowerValueAge
+        {
+            get { return _LowerValueAge; }
+            set
+            {
+                _LowerValueAge = value;
+                _UpperValueAge = Math.Max(_UpperValueAge, value);
+                OnPropertyChanged("LowerValueAge");
+                OnPropertyChanged("LowerWidthAge");
+                OnPropertyChanged("UpperWidthAge");
+                OnPropertyChanged("UpperValueAge");
+            }
+        }
 
+        private int _UpperValueAge = 45;
+        public int UpperValueAge
+        {
+            get { return _UpperValueAge; }
+            set
+            {
+                _UpperValueAge = value;
+                _LowerValueAge = Math.Min(_LowerValueAge, value);
+                OnPropertyChanged("UpperValueAge");
+                OnPropertyChanged("UpperWidthAge");
+                OnPropertyChanged("LowerWidthAge");
+                OnPropertyChanged("LowerValueAge");
+            }
+        }
+
+        public int LowerWidthAge
+        {
+            get
+            {
+                return (int)((double)(LowerValueAge - MinimumAge) / (double)(MaximumAge - MinimumAge) * 105.0);
+            }
+        }
+        public int UpperWidthAge
+        {
+            get
+            {
+                return (int)((double)(UpperValueAge - MinimumAge) / (double)(MaximumAge - MinimumAge) * 105.0) + 11;
+            }
+        }
+
+        private int _MinimumAge = 15;
+        public int MinimumAge
+        {
+            get { return _MinimumAge; }
+            set
+            {
+                _MinimumAge = value;
+                OnPropertyChanged("MinimumAge");
+            }
+        }
+
+        private int _MaximumAge = 45;
+        public int MaximumAge
+        {
+            get { return _MaximumAge; }
+            set
+            {
+                _MaximumAge = value;
+                OnPropertyChanged("MaximumAge");
+            }
+        }
 
         private async void PrepareFilters()
         {
@@ -239,6 +340,7 @@ namespace Ekstraklasa
 
             Tuple<int, int> MinMaxHeight = await Task.Run(() => MainModel.GetMinMaxHeight());
             Tuple<int, int> MinMaxWeight = await Task.Run(() => MainModel.GetMinMaxWeight());
+            Tuple<int, int> MinMaxAge = await Task.Run(() => MainModel.GetMinMaxAge());
 
             MinimumHeight = MinMaxHeight.Item1;
             MaximumHeight = MinMaxHeight.Item2;
@@ -249,11 +351,16 @@ namespace Ekstraklasa
             MaximumWeight = MinMaxWeight.Item2;
             LowerValueWeight = MinMaxWeight.Item1;
             UpperValueWeight = MinMaxWeight.Item2;
+
+            MinimumAge = MinMaxAge.Item1;
+            MaximumAge = MinMaxAge.Item2;
+            LowerValueAge = MinMaxAge.Item1;
+            UpperValueAge = MinMaxAge.Item2;
         }
 
         private async void UpdatePlayers()
         {
-            List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers());
+            List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers(SelectedTeam,SelectedFirstname,SelectedLastname,SelectedPosition,SelectedNationality));
             Players = new ObservableCollection<PlayerEntity>(players);
             IsProgressBarVisible = false;
         }
