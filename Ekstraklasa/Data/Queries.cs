@@ -70,6 +70,8 @@ namespace Ekstraklasa
 
         public static string GetPlayers = "select * from person natural join player join team on team.id=team_id where team_id in (select id from team where upper(name) like upper(:name)) " +
             "and upper(firstname) like upper(:firstname) and upper(lastname) like upper(:lastname) and upper(position) like upper(:position) and upper(nationality) like upper(:nationality) "+
+            "and floor(months_between(SYSDATE,date_of_birth)/12)>=:minAge and floor(months_between(SYSDATE,date_of_birth)/12)<=:maxAge "+
+            "and height>=:minHeight and height<=:maxHeight and weight>=:minWeight and weight<=:maxWeight "+
             "order by team_id, (case when upper(position) like '%BRAMKARZ%' then 1 " +
             "when upper(position) like '%OBROŃCA%' then 2 " +
             "when upper(position) like '%POMOCNIK%' then 3 " +

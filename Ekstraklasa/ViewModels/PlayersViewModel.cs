@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ekstraklasa
 {
@@ -16,6 +17,23 @@ namespace Ekstraklasa
         {
             PrepareFilters();
             UpdatePlayers();
+        }
+
+        private ICommand _clearCommand;
+        public ICommand clearCommand
+        {
+            get
+            {
+                if (_clearCommand == null)
+                {
+                    _clearCommand = new RelayCommand(param =>
+                    {
+                        ClearFilters();
+                        UpdatePlayers();
+                    });
+                }
+                return _clearCommand;
+            }
         }
 
         private ObservableCollection<PlayerEntity> _Players;
@@ -141,6 +159,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("LowerWidthHeight");
                 OnPropertyChanged("UpperWidthHeight");
                 OnPropertyChanged("UpperValueHeight");
+                UpdatePlayers();
             }
         }
 
@@ -156,6 +175,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("UpperWidthHeight");
                 OnPropertyChanged("LowerWidthHeight");
                 OnPropertyChanged("LowerValueHeight");
+                UpdatePlayers();
             }
         }
 
@@ -208,6 +228,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("LowerWidthWeight");
                 OnPropertyChanged("UpperWidthWeight");
                 OnPropertyChanged("UpperValueWeight");
+                UpdatePlayers();
             }
         }
 
@@ -223,6 +244,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("UpperWidthWeight");
                 OnPropertyChanged("LowerWidthWeight");
                 OnPropertyChanged("LowerValueWeight");
+                UpdatePlayers();
             }
         }
 
@@ -275,6 +297,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("LowerWidthAge");
                 OnPropertyChanged("UpperWidthAge");
                 OnPropertyChanged("UpperValueAge");
+                UpdatePlayers();
             }
         }
 
@@ -290,6 +313,7 @@ namespace Ekstraklasa
                 OnPropertyChanged("UpperWidthAge");
                 OnPropertyChanged("LowerWidthAge");
                 OnPropertyChanged("LowerValueAge");
+                UpdatePlayers();
             }
         }
 
@@ -358,9 +382,40 @@ namespace Ekstraklasa
             UpperValueAge = MinMaxAge.Item2;
         }
 
+        private void ClearFilters()
+        {
+            _SelectedFirstname = _SelectedLastname = _SelectedNationality = _SelectedPosition = _SelectedTeam = "";
+            _LowerValueAge = _MinimumAge;
+            _UpperValueAge = _MaximumAge;
+            _LowerValueHeight = _MinimumHeight;
+            _UpperValueHeight = _MaximumHeight;
+            _LowerValueWeight = _MinimumWeight;
+            _UpperValueWeight = _MaximumWeight;
+
+            OnPropertyChanged("SelectedFirstname");
+            OnPropertyChanged("SelectedLastname");
+            OnPropertyChanged("SelectedNationality");
+            OnPropertyChanged("SelectedPosition");
+            OnPropertyChanged("SelectedTeam");
+
+            OnPropertyChanged("LowerWidthAge");
+            OnPropertyChanged("UpperWidthAge");
+            OnPropertyChanged("LowerWidthHeight");
+            OnPropertyChanged("UpperWidthHeight");
+            OnPropertyChanged("LowerWidthWidth");
+            OnPropertyChanged("UpperWidthWidth");
+
+            OnPropertyChanged("LowerValueAge");
+            OnPropertyChanged("UpperValueAge");
+            OnPropertyChanged("LowerValueHeight");
+            OnPropertyChanged("UpperValueHeight");
+            OnPropertyChanged("LowerValueWeight");
+            OnPropertyChanged("UpperValueWeight");
+        }
+
         private async void UpdatePlayers()
         {
-            List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers(SelectedTeam,SelectedFirstname,SelectedLastname,SelectedPosition,SelectedNationality));
+            List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers(SelectedTeam, SelectedFirstname, SelectedLastname, SelectedPosition, SelectedNationality, LowerValueAge, UpperValueAge, LowerValueHeight, UpperValueHeight, LowerValueWeight, UpperValueWeight));
             Players = new ObservableCollection<PlayerEntity>(players);
             IsProgressBarVisible = false;
         }

@@ -527,7 +527,7 @@ namespace Ekstraklasa
             return teams;
         }
 
-        public static List<PlayerEntity> GetPlayers(string TeamName = "", string Firstname = "", string Lastname = "", string Position = "", string Nationality = "")
+        public static List<PlayerEntity> GetPlayers(string TeamName = "", string Firstname = "", string Lastname = "", string Position = "", string Nationality = "",int MinAge=-1,int MaxAge=Int32.MaxValue,int MinHeight=-1,int MaxHeight=Int32.MaxValue,int MinWeight=-1,int MaxWeight=Int32.MaxValue)
         {
             List<PlayerEntity> players = new List<PlayerEntity>();
             try
@@ -543,6 +543,12 @@ namespace Ekstraklasa
                         command.Parameters.Add("lastname", String.IsNullOrEmpty(Lastname) ? "%" : "%" + Lastname + "%");
                         command.Parameters.Add("position", String.IsNullOrEmpty(Position) ? "%" : "%" + Position + "%");
                         command.Parameters.Add("nationality", String.IsNullOrEmpty(Nationality) ? "%" : "%" + Nationality + "%");
+                        command.Parameters.Add("minAge", MinAge);
+                        command.Parameters.Add("maxAge", MaxAge);
+                        command.Parameters.Add("minHeight", MinHeight);
+                        command.Parameters.Add("maxHeight", MaxHeight);
+                        command.Parameters.Add("minWeight", MinWeight);
+                        command.Parameters.Add("maxWeight", MaxWeight);
 
                         OracleDataReader dr = command.ExecuteReader();
                         if (dr.HasRows)
