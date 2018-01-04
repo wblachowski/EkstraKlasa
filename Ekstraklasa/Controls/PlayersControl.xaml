@@ -19,7 +19,7 @@
                 <TreeViewItem.Header>
                     <TextBlock MouseDown="Filter_Mouse_Down">Filtruj</TextBlock>
                 </TreeViewItem.Header>
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" KeyboardNavigation.TabNavigation="Cycle">
                     <StackPanel  Margin="-9 -10 0 6" Orientation="Horizontal">
                         <TextBox Text="{Binding SelectedFirstname, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" materialDesign:HintAssist.Hint="Imię" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}" KeyboardNavigation.TabIndex="0"/>
                         <TextBox Text="{Binding SelectedLastname, UpdateSourceTrigger=PropertyChanged}" Margin="15 0 0 0" materialDesign:HintAssist.Hint="Nazwisko" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}" KeyboardNavigation.TabIndex="1"/>
@@ -33,7 +33,7 @@
 				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Nationalities}"  Text="{Binding SelectedNationality, UpdateSourceTrigger=PropertyChanged}" KeyboardNavigation.TabIndex="4">
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel  Orientation="Horizontal" Margin="-8 8 0 0">
+                    <StackPanel  Orientation="Horizontal" Margin="-8 8 0 0" KeyboardNavigation.TabNavigation="None">
                         <TextBlock Margin="0 4 0 0">Wiek</TextBlock>
                         <Grid Width="140" Margin="0 -32 0 0" VerticalAlignment="Top">
                             <Rectangle Margin="12 40 14 0" Height="2" Fill="#747474"/>
