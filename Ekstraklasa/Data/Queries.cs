@@ -119,5 +119,9 @@ namespace Ekstraklasa
 
         public static string UpdateMatch = "update match set start_time=:start_time,score_host=:score_host,score_guest=:score_guest,stadium_id=:stadium_id, " +
             "team_host_id=:team_host_id,team_guest_id=:team_guest_id where id=:id";
+
+        public static string UpdatePerson = "update person set firstname = :firstname , lastname = :lastname , date_of_birth = :date_of_birth , nationality = :nationality  where pesel = :pesel";
+
+        public static string UpdatePlayer = "update player set weight = :weight, height = :height, nr = :nr, position = :position where pesel = :pesel";
     }
 }

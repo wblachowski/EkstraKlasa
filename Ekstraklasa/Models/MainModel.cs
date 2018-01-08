@@ -527,7 +527,7 @@ namespace Ekstraklasa
             return teams;
         }
 
-        public static List<PlayerEntity> GetPlayers(string TeamName = "", string Firstname = "", string Lastname = "", string Position = "", string Nationality = "",int MinAge=-1,int MaxAge=Int32.MaxValue,int MinHeight=-1,int MaxHeight=Int32.MaxValue,int MinWeight=-1,int MaxWeight=Int32.MaxValue)
+        public static List<PlayerEntity> GetPlayers(string TeamName = "", string Firstname = "", string Lastname = "", string Position = "", string Nationality = "", int MinAge = -1, int MaxAge = Int32.MaxValue, int MinHeight = -1, int MaxHeight = Int32.MaxValue, int MinWeight = -1, int MaxWeight = Int32.MaxValue)
         {
             List<PlayerEntity> players = new List<PlayerEntity>();
             try
@@ -976,6 +976,60 @@ namespace Ekstraklasa
             }
             return 0;
         }
+
+        public static int UpdatePerson(PersonEntity Person)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.UpdatePerson;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("firstname", Person.Firstname);
+                        command.Parameters.Add("lastname", Person.Lastname);
+                        command.Parameters.Add("date_of_birth", Person.DateOfBirth);
+                        command.Parameters.Add("nationality", Person.Nationality);
+                        command.Parameters.Add("pesel", Person.Pesel);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int UpdatePlayer(PlayerEntity Player)
+        {
+            UpdatePerson(Player);
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Queries.UpdatePlayer;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("weight", Player.Weight);
+                        command.Parameters.Add("height", Player.Height);
+                        command.Parameters.Add("nr", Player.Nr);
+                        command.Parameters.Add("position", Player.Position);
+                        command.Parameters.Add("pesel", Player.Pesel);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+        }
+
 
     }
 }

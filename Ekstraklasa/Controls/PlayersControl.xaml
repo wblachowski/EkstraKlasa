@@ -9,6 +9,31 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              Style="{StaticResource UserControlStyle}">
+    <UserControl.Resources>
+        <ContextMenu  x:Key="RowMenu">
+            <MenuItem Header="Edytuj" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type UserControl}},
+                                                         Path=DataContext.EditPlayer}"
+                      CommandParameter="{Binding}">
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Center" Height="18" Width="18"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Usuń" 
+                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type UserControl}},
+                                                         Path=DataContext.DeletePlayer}" 
+                      CommandParameter="{Binding}"
+                      IsEnabled="True">
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Height="18" Width="18"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+        <Style x:Key="RowStyleWithContext" TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource RowMenu}" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -79,7 +104,8 @@
                             <DataGrid   IsReadOnly="True" ItemsSource="{Binding Path=Players}" CanUserSortColumns="True" CanUserAddRows="False" CanUserResizeColumns="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Focusable="False"
                                     CellStyle="{StaticResource MaterialDesignDataGridCell}"
-                                        Background="White">
+                                    RowStyle="{StaticResource RowStyleWithContext}"
+                                    Background="White">
                                 <DataGrid.Columns >
                                     <DataGridTextColumn 
                                         Header=""
@@ -114,5 +140,19 @@
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
+        <materialDesign:Transitioner Grid.RowSpan="2" SelectedIndex="0" AutoApplyTransitionOrigins="True" >
+            <materialDesign:TransitionerSlide >
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.4}">
+                    <Button Style="{StaticResource MaterialDesignFloatingActionButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0 0 40 40"
+                            ToolTip="Dodaj nowego zawodnika"
+                            Command="{Binding AddNewPlayer}"
+                            >
+                        <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
+                    </Button>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+
     </Grid>
 </UserControl>

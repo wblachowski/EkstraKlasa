@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -33,6 +34,36 @@ namespace Ekstraklasa
                     });
                 }
                 return _clearCommand;
+            }
+        }
+
+        private ICommand _EditPlayer;
+        public ICommand EditPlayer
+        {
+            get
+            {
+                if (_EditPlayer == null)
+                {
+                    _EditPlayer = new RelayCommand(param => {
+                        PlayerEntity edited = param as PlayerEntity;
+                        DialogPlayer = new PlayerEntity(edited.Pesel, edited.Firstname, edited.Lastname, edited.DateOfBirth, edited.Nationality, edited.Weight, edited.Height, edited.Nr, edited.Position);
+                        ExecutePlayerDialog(param);
+                    });
+                }
+                return _EditPlayer;
+            }
+        }
+
+        private ICommand _AddNewPlayer;
+        public ICommand AddNewPlayer
+        {
+            get
+            {
+                if (_AddNewPlayer == null)
+                {
+                    _AddNewPlayer = new RelayCommand(param => ExecutePlayerDialog(param));
+                }
+                return _AddNewPlayer;
             }
         }
 
@@ -354,6 +385,24 @@ namespace Ekstraklasa
             }
         }
 
+        private PlayerEntity _DialogPlayer = new PlayerEntity();
+        public PlayerEntity DialogPlayer
+        {
+            get
+            {
+                return _DialogPlayer;
+            }
+            set
+            {
+                if (_DialogPlayer != value)
+                {
+                    _DialogPlayer = value;
+                    OnPropertyChanged("DialogPlayer");
+                }
+            }
+        }
+
+
         private async void PrepareFilters()
         {
             Teams = new ObservableCollection<string>(await Task.Run(() => MainModel.GetTeams()));
@@ -415,9 +464,33 @@ namespace Ekstraklasa
 
         private async void UpdatePlayers()
         {
+            IsProgressBarVisible = true;
             List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers(SelectedTeam, SelectedFirstname, SelectedLastname, SelectedPosition, SelectedNationality, LowerValueAge, UpperValueAge, LowerValueHeight, UpperValueHeight, LowerValueWeight, UpperValueWeight));
             Players = new ObservableCollection<PlayerEntity>(players);
             IsProgressBarVisible = false;
+        }
+
+        private async void ExecutePlayerDialog(object o)
+        {
+            if (o == null || o.GetType() != typeof(PlayerEntity))
+            {
+                DialogPlayer = new PlayerEntity();
+            }
+            var view = new NewPlayerDialog();
+            view.DataContext = this;
+            var result = await DialogHost.Show(view, "RootDialog");
+            //new
+            if ((bool)result == true && (o == null || o.GetType() != typeof(PlayerEntity)))
+            {
+                await Task.Run(() => MainModel.InsertPlayer(DialogPlayer));
+                UpdatePlayers();
+            }
+            //updating
+            else if ((bool)result == true && o != null && o.GetType() == typeof(PlayerEntity))
+            {
+                await Task.Run(() => MainModel.UpdatePlayer(DialogPlayer));
+                UpdatePlayers();
+            }
         }
 
         virtual protected void OnPropertyChanged(string propName)
