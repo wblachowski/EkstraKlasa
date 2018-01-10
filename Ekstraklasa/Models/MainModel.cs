@@ -256,9 +256,9 @@ namespace Ekstraklasa
             return goals;
         }
 
-        public static List<string> GetTeams()
+        public static List<TeamEntity> GetTeams()
         {
-            List<string> teams = new List<string>();
+            List<TeamEntity> teams = new List<TeamEntity>();
             try
             {
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
@@ -272,8 +272,12 @@ namespace Ekstraklasa
                         {
                             while (dr.Read())
                             {
-                                string team = dr.GetString(0);
-                                teams.Add(team);
+                                int id = dr.GetInt32(0);
+                                string name = dr.GetString(1);
+                                DateTime foundedDate = dr.GetDateTime(2);
+                                string logoPath = dr.GetString(3);
+
+                                teams.Add(new TeamEntity(id,name,logoPath,foundedDate,null,null));
                             }
                         }
                     }
@@ -785,7 +789,7 @@ namespace Ekstraklasa
             return 0;
         }
 
-        public static int InsertPlayer(PlayerEntity Player)
+        public static int InsertPlayer(PlayerEntity Player, int TeamID=-1)
         {
             InsertPerson(Player);
             try
@@ -793,14 +797,26 @@ namespace Ekstraklasa
                 using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
                 {
                     connection.Open();
-                    string sql = Queries.InsertPlayerLatestTeam;
+                    string sql;
+                    if (TeamID == -1) {
+                        sql = Queries.InsertPlayerLatestTeam;
+                    }
+                    else
+                    {
+                        sql = Queries.InsertPlayer;
+                    }
                     using (OracleCommand command = new OracleCommand(sql, connection))
                     {
                         command.Parameters.Add("pesel", Player.Pesel);
                         command.Parameters.Add("weight", Player.Weight);
                         command.Parameters.Add("height", Player.Height);
                         command.Parameters.Add("nr", Player.Nr);
+                        if (TeamID != -1)
+                        {
+                            command.Parameters.Add("team_id", TeamID);
+                        }
                         command.Parameters.Add("position", Player.Position);
+
                         return command.ExecuteNonQuery();
                     }
                 }

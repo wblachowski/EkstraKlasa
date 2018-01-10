@@ -40,9 +40,9 @@ namespace Ekstraklasa
             }
         }
 
-        private ObservableCollection<string> FullHost = new ObservableCollection<string>();
-        private ObservableCollection<string> _HostTeams = new ObservableCollection<string>();
-        public ObservableCollection<string> HostTeams
+        private ObservableCollection<TeamEntity> FullHost = new ObservableCollection<TeamEntity>();
+        private ObservableCollection<TeamEntity> _HostTeams = new ObservableCollection<TeamEntity>();
+        public ObservableCollection<TeamEntity> HostTeams
         {
             get
             {
@@ -58,9 +58,9 @@ namespace Ekstraklasa
             }
         }
 
-        private ObservableCollection<string> FullGuest = new ObservableCollection<string>();
-        private ObservableCollection<string> _GuestTeams = new ObservableCollection<string>();
-        public ObservableCollection<string> GuestTeams
+        private ObservableCollection<TeamEntity> FullGuest = new ObservableCollection<TeamEntity>();
+        private ObservableCollection<TeamEntity> _GuestTeams = new ObservableCollection<TeamEntity>();
+        public ObservableCollection<TeamEntity> GuestTeams
         {
             get
             {
@@ -105,8 +105,8 @@ namespace Ekstraklasa
                 if (_HostSelected != value)
                 {
                     _HostSelected = value;
-                    GuestTeams = new ObservableCollection<string>(FullGuest);
-                    GuestTeams.Remove(value);
+                    GuestTeams = new ObservableCollection<TeamEntity>(FullGuest);
+                    //GuestTeams.Remove(value);
                     UpdateMatches();
                     OnPropertyChanged("GuestTeams");
                     OnPropertyChanged("HostSelected");
@@ -141,8 +141,8 @@ namespace Ekstraklasa
                 if (_GuestSelected != value)
                 {
                     _GuestSelected = value;
-                    HostTeams = new ObservableCollection<string>(FullHost);
-                    HostTeams.Remove(value);
+                    HostTeams = new ObservableCollection<TeamEntity>(FullHost);
+                    //HostTeams.Remove(value);
                     UpdateMatches();
                     OnPropertyChanged("HostTeams");
                     OnPropertyChanged("GuestSelected");
@@ -216,13 +216,13 @@ namespace Ekstraklasa
 
         private async void UpdateFilters()
         {
-            List<string> teams = await GetCurrentTeamsAsync();
+            List<TeamEntity> teams = await GetCurrentTeamsAsync();
             List<StadiumEntity> stadiums = await GetCurrentStadiumsAsync();
-            FullHost = new ObservableCollection<string>(teams);
-            FullGuest = new ObservableCollection<string>(teams);
+            FullHost = new ObservableCollection<TeamEntity>(teams);
+            FullGuest = new ObservableCollection<TeamEntity>(teams);
             Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
-            GuestTeams = new ObservableCollection<string>(FullGuest);
-            HostTeams = new ObservableCollection<string>(FullHost);
+            GuestTeams = new ObservableCollection<TeamEntity>(FullGuest);
+            HostTeams = new ObservableCollection<TeamEntity>(FullHost);
         }
 
         private async void UpdateMatches()
@@ -243,7 +243,7 @@ namespace Ekstraklasa
             });
         }
 
-        private async Task<List<string>> GetCurrentTeamsAsync()
+        private async Task<List<TeamEntity>> GetCurrentTeamsAsync()
         {
             return await Task.Run(() =>
             {

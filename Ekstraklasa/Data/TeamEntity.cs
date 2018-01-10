@@ -16,7 +16,7 @@ namespace Ekstraklasa
         public CoachEntity Coach = null;
         public StadiumEntity Stadium = null;
 
-        public TeamEntity() { }
+        public TeamEntity() { Name = ""; }
 
         public TeamEntity(int Id, string Name,string LogoPath, DateTime FoundedDate, CoachEntity Coach, StadiumEntity Stadium)
         {

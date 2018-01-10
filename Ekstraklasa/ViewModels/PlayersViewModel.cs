@@ -44,7 +44,8 @@ namespace Ekstraklasa
             {
                 if (_EditPlayer == null)
                 {
-                    _EditPlayer = new RelayCommand(param => {
+                    _EditPlayer = new RelayCommand(param =>
+                    {
                         PlayerEntity edited = param as PlayerEntity;
                         DialogPlayer = new PlayerEntity(edited.Pesel, edited.Firstname, edited.Lastname, edited.DateOfBirth, edited.Nationality, edited.Weight, edited.Height, edited.Nr, edited.Position);
                         ExecutePlayerDialog(param);
@@ -101,8 +102,8 @@ namespace Ekstraklasa
             }
         }
 
-        private ObservableCollection<string> _Teams;
-        public ObservableCollection<string> Teams
+        private ObservableCollection<TeamEntity> _Teams;
+        public ObservableCollection<TeamEntity> Teams
         {
             get { return _Teams; }
             set
@@ -402,10 +403,23 @@ namespace Ekstraklasa
             }
         }
 
+        private bool _IsAddingNew = false;
+        public bool IsAddingNew
+        {
+            get { return _IsAddingNew; }
+            set { _IsAddingNew = value; OnPropertyChanged("IsAddingNew"); }
+        }
+
+        private TeamEntity _NewPlayerDialogSelectedTeam;
+        public TeamEntity NewPlayerDialogSelectedTeam
+        {
+            get { return _NewPlayerDialogSelectedTeam; }
+            set { _NewPlayerDialogSelectedTeam = value; OnPropertyChanged("NewPlayerDialogSelectedTeam"); }
+        }
 
         private async void PrepareFilters()
         {
-            Teams = new ObservableCollection<string>(await Task.Run(() => MainModel.GetTeams()));
+            Teams = new ObservableCollection<TeamEntity>(await Task.Run(() => MainModel.GetTeams()));
 
             Positions = new ObservableCollection<string>(await Task.Run(() => MainModel.GetPositions()));
 
@@ -475,6 +489,11 @@ namespace Ekstraklasa
             if (o == null || o.GetType() != typeof(PlayerEntity))
             {
                 DialogPlayer = new PlayerEntity();
+                IsAddingNew = true;
+            }
+            else
+            {
+                IsAddingNew = false;
             }
             var view = new NewPlayerDialog();
             view.DataContext = this;
@@ -482,7 +501,7 @@ namespace Ekstraklasa
             //new
             if ((bool)result == true && (o == null || o.GetType() != typeof(PlayerEntity)))
             {
-                await Task.Run(() => MainModel.InsertPlayer(DialogPlayer));
+                await Task.Run(() => MainModel.InsertPlayer(DialogPlayer,NewPlayerDialogSelectedTeam.Id));
                 UpdatePlayers();
             }
             //updating
