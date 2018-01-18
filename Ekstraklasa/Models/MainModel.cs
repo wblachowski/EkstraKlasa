@@ -277,7 +277,7 @@ namespace Ekstraklasa
                                 DateTime foundedDate = dr.GetDateTime(2);
                                 string logoPath = dr.GetString(3);
 
-                                teams.Add(new TeamEntity(id,name,logoPath,foundedDate,null,null));
+                                teams.Add(new TeamEntity(id, name, logoPath, foundedDate, null, null));
                             }
                         }
                     }
@@ -789,7 +789,7 @@ namespace Ekstraklasa
             return 0;
         }
 
-        public static int InsertPlayer(PlayerEntity Player, int TeamID=-1)
+        public static int InsertPlayer(PlayerEntity Player, int TeamID = -1)
         {
             InsertPerson(Player);
             try
@@ -798,7 +798,8 @@ namespace Ekstraklasa
                 {
                     connection.Open();
                     string sql;
-                    if (TeamID == -1) {
+                    if (TeamID == -1)
+                    {
                         sql = Queries.InsertPlayerLatestTeam;
                     }
                     else
@@ -1044,6 +1045,29 @@ namespace Ekstraklasa
                 Console.WriteLine(ex.Message);
             }
             return 0;
+        }
+
+        public static void ExecuteTransfer(string pesel, int team_id)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = "transferPlayer";
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("pesel", pesel);
+                        command.Parameters.Add("team_id", team_id);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 

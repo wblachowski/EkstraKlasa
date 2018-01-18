@@ -11,6 +11,14 @@
              Style="{StaticResource UserControlStyle}">
     <UserControl.Resources>
         <ContextMenu  x:Key="RowMenu">
+            <MenuItem Header="Transfer" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type UserControl}},
+                                                         Path=DataContext.TransferPlayer}"
+                      CommandParameter="{Binding}">
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="SwapHorizontal" VerticalAlignment="Center" Height="18" Width="18"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem Header="Edytuj" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                                                          AncestorType={x:Type UserControl}},
                                                          Path=DataContext.EditPlayer}"

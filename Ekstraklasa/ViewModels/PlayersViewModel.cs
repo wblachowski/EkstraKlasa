@@ -37,6 +37,22 @@ namespace Ekstraklasa
             }
         }
 
+        private ICommand _TransferPlayer;
+        public ICommand TransferPlayer
+        {
+            get
+            {
+                if (_TransferPlayer == null)
+                {
+                    _TransferPlayer = new RelayCommand(param =>
+                    {
+                        ExecuteTransferDialog(param as PlayerEntity);
+                    });
+                }
+                return _TransferPlayer;
+            }
+        }
+
         private ICommand _EditPlayer;
         public ICommand EditPlayer
         {
@@ -417,6 +433,13 @@ namespace Ekstraklasa
             set { _NewPlayerDialogSelectedTeam = value; OnPropertyChanged("NewPlayerDialogSelectedTeam"); }
         }
 
+        private TeamEntity _TransferTeamSelected;
+        public TeamEntity TransferTeamSelected
+        {
+            get { return _TransferTeamSelected; }
+            set { _TransferTeamSelected = value; OnPropertyChanged("TransferTeamSelected"); }
+        }
+
         private async void PrepareFilters()
         {
             Teams = new ObservableCollection<TeamEntity>(await Task.Run(() => MainModel.GetTeams()));
@@ -501,13 +524,26 @@ namespace Ekstraklasa
             //new
             if ((bool)result == true && (o == null || o.GetType() != typeof(PlayerEntity)))
             {
-                await Task.Run(() => MainModel.InsertPlayer(DialogPlayer,NewPlayerDialogSelectedTeam.Id));
+                await Task.Run(() => MainModel.InsertPlayer(DialogPlayer, NewPlayerDialogSelectedTeam.Id));
                 UpdatePlayers();
             }
             //updating
             else if ((bool)result == true && o != null && o.GetType() == typeof(PlayerEntity))
             {
                 await Task.Run(() => MainModel.UpdatePlayer(DialogPlayer));
+                UpdatePlayers();
+            }
+        }
+
+        private async void ExecuteTransferDialog(PlayerEntity player)
+        {
+            TransferTeamSelected = new TeamEntity();
+            var view = new TransferPlayerDialog();
+            view.DataContext = this;
+            var result = await DialogHost.Show(view, "RootDialog");
+            if((bool)result == true && TransferTeamSelected != null)
+            {
+                await Task.Run(() => MainModel.ExecuteTransfer(player.Pesel, TransferTeamSelected.Id));
                 UpdatePlayers();
             }
         }

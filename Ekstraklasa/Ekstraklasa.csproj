@@ -160,6 +160,9 @@
     <Compile Include="Dialogs\NewPlayerDialog.xaml.cs">
       <DependentUpon>NewPlayerDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\TransferPlayerDialog.xaml.cs">
+      <DependentUpon>TransferPlayerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="ViewModels\GoalViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -221,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\NewPlayerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TransferPlayerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
