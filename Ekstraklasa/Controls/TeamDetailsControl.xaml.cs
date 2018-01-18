@@ -22,10 +22,10 @@ namespace Ekstraklasa
     /// </summary>
     public partial class TeamDetailsControl : UserControl
     {
-        public TeamDetailsControl(string Name="", delegateChangeControl ChangeControl =null)
+        public TeamDetailsControl(TeamEntity Team, delegateChangeControl ChangeControl =null)
         {
             InitializeComponent();
-            var viewModel = new TeamDetailsViewModel(Name, ChangeControl);
+            var viewModel = new TeamDetailsViewModel(Team, ChangeControl);
             DataContext = viewModel;
         }
 

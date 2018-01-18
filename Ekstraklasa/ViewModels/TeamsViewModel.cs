@@ -99,7 +99,7 @@ namespace Ekstraklasa
                     OnPropertyChanged("SelectedItem");
                     if (_SelectedItem!= null && ChangeContentEvent != null)
                     {
-                        ChangeContentEvent(0,new TeamDetailsControl(SelectedItem.Name, ChangeContentEvent));
+                        ChangeContentEvent(0,new TeamDetailsControl(SelectedItem, ChangeContentEvent));
                     }
                 }
             }

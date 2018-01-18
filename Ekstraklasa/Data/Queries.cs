@@ -85,6 +85,8 @@ namespace Ekstraklasa
             "join player on player_pesel = player.pesel join match on match_id = match.id " +
             "where player.team_id= goal.team_id group by person.pesel) order by goals desc";
 
+        public static string GetMatchesWithoutDefeat = "select teamMatchesWithoutDefeat(:team_id) from dual";
+
         public static string InsertMatch = "insert into match(start_time,score_host,score_guest,stadium_id,team_host_id,team_guest_id) " +
              "values(:start_time,:score_host,:score_guest,:stadium_id,:team_host_id,:team_guest_id)";
 

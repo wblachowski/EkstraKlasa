@@ -16,15 +16,10 @@ namespace Ekstraklasa
         public event PropertyChangedEventHandler PropertyChanged = null;
         public event delegateChangeControl ChangeContentEvent = null;
 
-        public TeamDetailsViewModel()
+        public TeamDetailsViewModel(TeamEntity Team, delegateChangeControl ChangeControl)
         {
-            GetData("Wisła Kraków");
-        }
-
-        public TeamDetailsViewModel(string TeamName, delegateChangeControl ChangeControl)
-        {
-            GetData(TeamName);
-            UpdateMatches(TeamName);
+            GetData(Team);
+            UpdateMatches(Team.Name);
             ChangeContentEvent = ChangeControl;
         }
 
@@ -231,6 +226,20 @@ namespace Ekstraklasa
             }
         }
 
+        private int _MatchesWithoutDefeat;
+        public int MatchesWithoutDefeat
+        {
+            get
+            {
+                return _MatchesWithoutDefeat;
+            }
+            set
+            {
+                _MatchesWithoutDefeat = value;
+                OnPropertyChanged("MatchesWithoutDefeat");
+            }
+        }
+
 
         private ICommand _GoBackCommand;
         public ICommand GoBackCommand
@@ -249,13 +258,15 @@ namespace Ekstraklasa
         {
             if (ChangeContentEvent != null)
             {
-                ChangeContentEvent(2,null);
+                ChangeContentEvent(2, null);
             }
         }
 
-        private async void GetData(string TeamName)
+        private async void GetData(TeamEntity Team)
         {
+            string TeamName = Team.Name;
             List<TeamEntity> teams = await GetTeamEntityAsync(TeamName);
+            MatchesWithoutDefeat = await Task.Run(()=>MainModel.GetGamesWithoutDefeat(Team.Id));
             if (teams == null)
             {
                 return;
