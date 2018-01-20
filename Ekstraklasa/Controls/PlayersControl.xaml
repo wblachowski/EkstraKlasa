@@ -57,7 +57,7 @@
                         <TextBox Text="{Binding SelectedFirstname, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" materialDesign:HintAssist.Hint="Imię" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}" KeyboardNavigation.TabIndex="0"/>
                         <TextBox Text="{Binding SelectedLastname, UpdateSourceTrigger=PropertyChanged}" Margin="15 0 0 0" materialDesign:HintAssist.Hint="Nazwisko" Width="110" Style="{StaticResource MaterialDesignFloatingHintTextBox}" KeyboardNavigation.TabIndex="1"/>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Drużyna" Width="110" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Teams}" Text="{Binding SelectedTeam, UpdateSourceTrigger=PropertyChanged}" KeyboardNavigation.TabIndex="2">
+				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Teams}" Text="{Binding SelectedTeam, UpdateSourceTrigger=PropertyChanged}" KeyboardNavigation.TabIndex="2" DisplayMemberPath="Name">
                         </ComboBox>
                         <ComboBox Margin="15 0 0 0" materialDesign:HintAssist.Hint="Pozycja" Width="110" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
 				  IsEditable="True" materialDesign:HintAssist.HintOpacity=".56" ItemsSource="{Binding Positions}"  Text="{Binding SelectedPosition, UpdateSourceTrigger=PropertyChanged}" KeyboardNavigation.TabIndex="3">
