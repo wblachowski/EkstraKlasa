@@ -20,10 +20,10 @@ namespace Ekstraklasa
     /// </summary>
     public partial class NewTeamControl : UserControl
     {
-        public NewTeamControl(delegateChangeControl ChangeContent = null, delegateUpdateControl UpdateContent = null, delegateShowSnackbar ShowSnackbar = null)
+        public NewTeamControl(delegateChangeControl ChangeContent = null, delegateUpdateControl UpdateContent = null, delegateShowSnackbar ShowSnackbar = null, TeamEntity EditedTeam = null)
         {
             InitializeComponent();
-            var viewModel = new NewTeamViewModel();
+            var viewModel = EditedTeam == null ? new NewTeamViewModel() : new NewTeamViewModel(EditedTeam);
             viewModel.ChangeContentEvent += ChangeContent;
             viewModel.UpdateControlEvent += UpdateContent;
             viewModel.ShowSnackbarEvent += ShowSnackbar;
@@ -38,7 +38,7 @@ namespace Ekstraklasa
 
         private void coach_clicked(Object sender, EventArgs a)
         {
-                (DataContext as NewTeamViewModel).ExecuteCoachDialog(null);
+            (DataContext as NewTeamViewModel).ExecuteCoachDialog(null);
         }
 
     }

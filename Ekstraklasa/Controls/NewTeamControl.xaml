@@ -63,8 +63,8 @@
                     </Button.Template>
                 </Button>
                 <StackPanel Margin="10 11 0 0" Width="150" Orientation="Vertical" HorizontalAlignment="Stretch">
-                        <TextBox Text="{Binding Name, Mode=OneWayToSource}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny" HorizontalAlignment="Stretch"/>
-                        <DatePicker Text="{Binding Date, Mode=OneWayToSource}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
+                        <TextBox Text="{Binding Name}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwa drużyny" HorizontalAlignment="Stretch"/>
+                        <DatePicker Text="{Binding Date}" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Data założenia" Width="150" HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
                     <TextBox Text="{Binding CoachCaption, Mode=OneWay}"  Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Trener" PreviewMouseDown="coach_clicked" PreviewTextInput="PreviewTextCoach"/>
                 </StackPanel>
                 </StackPanel>
@@ -80,7 +80,7 @@
                     </RadioButton>
                 </StackPanel>
                 <Grid>
-                    <ComboBox VerticalAlignment="Top" Margin="4 3 10 0" materialDesign:HintAssist.Hint="Obiekt" Visibility="{Binding IsExistingStadium,Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Stadiums}" SelectedItem="{Binding StadiumSelected, Mode=OneWayToSource}" DisplayMemberPath="Name"/>
+                    <ComboBox VerticalAlignment="Top" Margin="4 3 10 0" materialDesign:HintAssist.Hint="Obiekt" Visibility="{Binding IsExistingStadium,Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Stadiums}" SelectedItem="{Binding StadiumSelected}" DisplayMemberPath="Name"/>
                     <Grid Margin="4 6 10 0" Visibility="{Binding IsNotExistingStadium,Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -141,7 +141,7 @@
         </materialDesign:Card>
         <Button Grid.RowSpan="3" Grid.ColumnSpan="2" Command="{Binding GoBackCommand}" VerticalAlignment="Bottom"  Margin="0 0 110 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}" Content="Anuluj"/>
 
-        <Button Grid.RowSpan="3"  Grid.ColumnSpan="2" Command="{Binding AddCommand}" VerticalAlignment="Bottom"  Margin="0 0 40 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignRaisedButton}" Content="Dodaj"/>
+        <Button Grid.RowSpan="3"  Grid.ColumnSpan="2" Command="{Binding AddCommand}" VerticalAlignment="Bottom"  Margin="0 0 40 40" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignRaisedButton}" Content="{Binding BottomButtonText,FallbackValue=Dodaj}"/>
 
     </Grid>
 </UserControl>

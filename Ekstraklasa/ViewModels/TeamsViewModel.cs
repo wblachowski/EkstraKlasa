@@ -28,13 +28,14 @@ namespace Ekstraklasa
         {
             get
             {
-                if(_NewTeamCommand == null)
+                if (_NewTeamCommand == null)
                 {
-                    _NewTeamCommand = new RelayCommand(param => {
-                        if (ChangeContentEvent != null)
+                    _NewTeamCommand = new RelayCommand(param =>
                     {
-                        ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent,UpdateContentEvent,ShowSnackbarEvent));
-                    }
+                        if (ChangeContentEvent != null)
+                        {
+                            ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent, UpdateContentEvent, ShowSnackbarEvent));
+                        }
                     });
                 }
                 return _NewTeamCommand;
@@ -46,7 +47,7 @@ namespace Ekstraklasa
         {
             get
             {
-                if(_DeleteCommand == null)
+                if (_DeleteCommand == null)
                 {
                     _DeleteCommand = new RelayCommand(DeleteTeam);
                 }
@@ -59,11 +60,30 @@ namespace Ekstraklasa
         {
             get
             {
-                if(_OpenDialog == null)
+                if (_OpenDialog == null)
                 {
-                    _OpenDialog = new RelayCommand(param => ExecuteRunDialog(param)) ;
+                    _OpenDialog = new RelayCommand(param => ExecuteRunDialog(param));
                 }
                 return _OpenDialog;
+            }
+        }
+
+        private ICommand _EditTeam;
+        public ICommand EditTeam
+        {
+            get
+            {
+                if (_EditTeam == null)
+                {
+                    _EditTeam = new RelayCommand(param =>
+                    {
+                        if (ChangeContentEvent != null)
+                        {
+                            ChangeContentEvent(0, new NewTeamControl(ChangeContentEvent, UpdateContentEvent, ShowSnackbarEvent,param as TeamEntity));
+                        }
+                    });
+                }
+                return _EditTeam;
             }
         }
 
@@ -97,9 +117,9 @@ namespace Ekstraklasa
                 {
                     _SelectedItem = value;
                     OnPropertyChanged("SelectedItem");
-                    if (_SelectedItem!= null && ChangeContentEvent != null)
+                    if (_SelectedItem != null && ChangeContentEvent != null)
                     {
-                        ChangeContentEvent(0,new TeamDetailsControl(SelectedItem, ChangeContentEvent));
+                        ChangeContentEvent(0, new TeamDetailsControl(SelectedItem, ChangeContentEvent));
                     }
                 }
             }
@@ -118,7 +138,8 @@ namespace Ekstraklasa
 
         private async Task<List<TeamEntity>> GetTeamsAsync()
         {
-            return await Task.Run(()=> {
+            return await Task.Run(() =>
+            {
                 return MainModel.GetTeamDetails();
             });
         }
@@ -127,7 +148,7 @@ namespace Ekstraklasa
         {
             var view = new SimpleYesNoDialog("Czy na pewno chcesz usunąć drużynę " + (o as TeamEntity).Name + "?");
             var result = await DialogHost.Show(view, "RootDialog");
-            if((bool)result == true)
+            if ((bool)result == true)
             {
                 int deleted = await Task.Run(() => MainModel.DeleteTeam((o as TeamEntity).Id));
                 if (ShowSnackbarEvent != null)
@@ -146,10 +167,11 @@ namespace Ekstraklasa
 
         private void DeleteTeam(object obj)
         {
-           
+
         }
 
-        public void Update() {
+        public void Update()
+        {
             UpdateTeams();
         }
 

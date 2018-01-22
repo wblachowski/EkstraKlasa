@@ -18,9 +18,19 @@ namespace Ekstraklasa
         public event delegateChangeControl ChangeContentEvent = null;
         public event delegateUpdateControl UpdateControlEvent = null;
         public event delegateShowSnackbar ShowSnackbarEvent = null;
+        private TeamEntity EditedTeam;
+
+        public NewTeamViewModel(TeamEntity EditedTeam)
+        {
+            BottomButtonText = "Zapisz";
+            this.EditedTeam = EditedTeam;
+            UpdateStadiums();
+            SetTeamToEdit();
+        }
 
         public NewTeamViewModel()
         {
+            BottomButtonText = "Dodaj";
             IsExistingStadium = true;
             UpdateStadiums();
         }
@@ -117,25 +127,36 @@ namespace Ekstraklasa
             }
         }
 
+        private string _BottomButtonText;
+        public string BottomButtonText
+        {
+            get { return _BottomButtonText; }
+            set { _BottomButtonText = value;OnPropertyChanged("BottomButtonText"); }
+        }
+
         private string _Name;
         public string Name
         {
+            get { return _Name; }
             set
             {
                 _Name = value;
+                OnPropertyChanged("Name");
             }
         }
 
         private string _Date;
         public string Date
         {
-            set { _Date = value; }
+            get { return _Date; }
+            set { _Date = value; OnPropertyChanged("Date"); }
         }
 
         private StadiumEntity _StadiumSelected;
         public StadiumEntity StadiumSelected
         {
-            set { _StadiumSelected = value; }
+            get { return _StadiumSelected; }
+            set { _StadiumSelected = value; OnPropertyChanged("StadiumSelected"); }
         }
 
         private string _ImagePath = ConfigurationManager.AppSettings["default_logo"];
@@ -292,6 +313,10 @@ namespace Ekstraklasa
                 return MainModel.GetStadiums();
             });
             Stadiums = new ObservableCollection<StadiumEntity>(stadiums);
+            if (EditedTeam != null)
+            {
+                StadiumSelected = Stadiums.First(stadium => { return stadium.Id == EditedTeam.Stadium.Id; });
+            }
         }
 
         //o jest typu PlayerEntity czyli edytujemy istniejący
@@ -407,6 +432,22 @@ namespace Ekstraklasa
                 }
             }
             return "";
+        }
+
+        private void SetTeamToEdit()
+        {
+            Name = EditedTeam.Name;
+            Date = EditedTeam.FoundedDate.ToString("dd.MM.yyyy");
+            IsExistingStadium = true;
+            DialogCoach = EditedTeam.Coach;
+            ImagePath = EditedTeam.LogoPath;
+            SetEditedPlayers();
+        }
+
+        private async void SetEditedPlayers()
+        {
+            List<PlayerEntity> players = await Task.Run(()=>MainModel.GetPlayers(EditedTeam.Name));
+            Players = new ObservableCollection<PlayerEntity>(players);
         }
 
         virtual protected void OnPropertyChanged(string propName)
