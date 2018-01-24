@@ -16,7 +16,7 @@
             <TextBox Text="{Binding DialogCoach.Firstname}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Imię"/>
             <TextBox Text="{Binding DialogCoach.Lastname}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwisko"/>
             <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
-                <TextBox Width="120" Margin="0 0 4 0" Text="{Binding DialogCoach.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel"/>
+                <TextBox Width="120" Margin="0 0 4 0" Text="{Binding DialogCoach.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel" PreviewTextInput="PreviewTextInput"/>
                 <DatePicker Width="120" Margin="4 0 0 0" Text="{Binding DialogCoach.DateOfBirth, Mode=OneWayToSource, TargetNullValue=''}" materialDesign:HintAssist.Hint="Data urodzenia" HorizontalAlignment="Stretch"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
             </StackPanel>
             <TextBox Text="{Binding DialogCoach.Nationality}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Narodowość"/>

@@ -42,7 +42,17 @@ namespace Ekstraklasa
             {
                 if (_AddCommand == null)
                 {
-                    _AddCommand = new RelayCommand(param => AddTeam());
+                    _AddCommand = new RelayCommand(param =>
+                    {
+                        if (EditedTeam == null)
+                        {
+                            AddTeam();
+                        }
+                        else
+                        {
+                            UpdateTeam();
+                        }
+                    });
                 }
                 return _AddCommand;
             }
@@ -131,7 +141,7 @@ namespace Ekstraklasa
         public string BottomButtonText
         {
             get { return _BottomButtonText; }
-            set { _BottomButtonText = value;OnPropertyChanged("BottomButtonText"); }
+            set { _BottomButtonText = value; OnPropertyChanged("BottomButtonText"); }
         }
 
         private string _Name;
@@ -149,7 +159,7 @@ namespace Ekstraklasa
         public string Date
         {
             get { return _Date; }
-            set { _Date = value; OnPropertyChanged("Date"); }
+            set { _Date = value;Console.WriteLine(value); OnPropertyChanged("Date"); }
         }
 
         private StadiumEntity _StadiumSelected;
@@ -332,7 +342,8 @@ namespace Ekstraklasa
             if ((bool)result == true && (o == null || o.GetType() != typeof(PlayerEntity)))
             {
                 Players.Add(DialogPlayer);
-            }else if((bool)result == true && o!=null && o.GetType() == typeof(PlayerEntity))
+            }
+            else if ((bool)result == true && o != null && o.GetType() == typeof(PlayerEntity))
             {
                 int index = Players.IndexOf(o as PlayerEntity);
                 Players.RemoveAt(index);
@@ -382,7 +393,8 @@ namespace Ekstraklasa
         {
             string LogoPath = await Task.Run(() => CopyImage());
             DateTime foundedDate;
-            DateTime.TryParse(_Date, out foundedDate);
+            DateTime.TryParseExact(_Date, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture,
+        System.Globalization.DateTimeStyles.None, out foundedDate);
             TeamEntity team = new TeamEntity(0, _Name, "", foundedDate, null, null);
             team.LogoPath = LogoPath;
             int stadiumIndex = -1;
@@ -414,22 +426,66 @@ namespace Ekstraklasa
 
             if (ShowSnackbarEvent != null)
             {
-                ShowSnackbarEvent("Dodano drużynę");
+                ShowSnackbarEvent(insertedTeam == 1 ? "Dodano drużynę" : "Błąd przy dodawaniu drużyny");
+            }
+        }
+
+        private async void UpdateTeam()
+        {
+            string LogoPath = await Task.Run(() => CopyImage());
+            DateTime foundedDate;
+            DateTime.TryParseExact(_Date,"dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture,
+        System.Globalization.DateTimeStyles.None, out foundedDate);
+            TeamEntity team = new TeamEntity(EditedTeam.Id, _Name, LogoPath, foundedDate, null, null);
+            team.LogoPath = LogoPath;
+            int stadiumIndex = -1;
+            if (IsNotExistingStadium)
+            {
+                int insertedStadium = await Task.Run(() => MainModel.InsertStadium(NewStadium));
+            }
+            else
+            {
+                stadiumIndex = _StadiumSelected != null ? _StadiumSelected.Id : -1;
+            }
+            int insertedTeam = await Task.Run(() => MainModel.UpdateTeam(team, stadiumIndex));
+            if (ChangeContentEvent != null)
+            {
+                ChangeContentEvent(2, null);
+            }
+            if (UpdateControlEvent != null)
+            {
+                UpdateControlEvent(0);
+                UpdateControlEvent(1);
+                UpdateControlEvent(2);
+                UpdateControlEvent(3);
+                UpdateControlEvent(4);
+            }
+
+            if (ShowSnackbarEvent != null)
+            {
+                ShowSnackbarEvent(insertedTeam == 1 ? "Edutowano drużynę" : "Błąd przy edycji drużyny");
             }
         }
 
         private string CopyImage()
         {
-            if (ImagePath != ConfigurationManager.AppSettings["default_logo"])
+            try
             {
-                if (System.IO.File.Exists(ImagePath))
+                if (ImagePath != ConfigurationManager.AppSettings["default_logo"])
                 {
+                    if (System.IO.File.Exists(ImagePath))
+                    {
 
-                    string fileName = _Name == null ? "" : _Name.Replace(' ', '_') + ".png";
-                    string destFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\", fileName);
-                    System.IO.File.Copy(ImagePath, destFile, true);
-                    return fileName;
+                        string fileName = _Name == null ? "" : _Name.Replace(' ', '_') + ".png";
+                        string destFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Ekstraklasa\\", fileName);
+                        System.IO.File.Copy(ImagePath, destFile, true);
+                        return fileName;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return "";
         }
@@ -446,7 +502,7 @@ namespace Ekstraklasa
 
         private async void SetEditedPlayers()
         {
-            List<PlayerEntity> players = await Task.Run(()=>MainModel.GetPlayers(EditedTeam.Name));
+            List<PlayerEntity> players = await Task.Run(() => MainModel.GetPlayers(EditedTeam.Name));
             Players = new ObservableCollection<PlayerEntity>(players);
         }
 

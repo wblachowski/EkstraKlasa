@@ -16,7 +16,7 @@
             <TextBox Text="{Binding DialogPlayer.Firstname}" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Imię" />
             <TextBox Text="{Binding DialogPlayer.Lastname}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Nazwisko" />
             <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
-                <TextBox Width="120" Margin="0 0 4 0" Text="{Binding DialogPlayer.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel" />
+                <TextBox PreviewTextInput="PreviewTextInput" Width="120" Margin="0 0 4 0" Text="{Binding DialogPlayer.Pesel}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Pesel" />
                 <DatePicker Width="120" Margin="4 0 0 0" SelectedDate="{Binding DialogPlayer.DateOfBirth, TargetNullValue=''}" materialDesign:HintAssist.Hint="Data urodzenia" HorizontalAlignment="Stretch"  Style="{StaticResource MaterialDesignDatePicker}" Language="PL" FirstDayOfWeek="Monday"/>
             </StackPanel>
             <TextBox Text="{Binding DialogPlayer.Nationality}" Margin="0 8 0 0" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Narodowość" />
@@ -29,11 +29,11 @@
             </StackPanel>
             <DockPanel  Margin="0 8 0 0">
                 <StackPanel DockPanel.Dock="Left"  Orientation="Horizontal" Width="109">
-                    <TextBox  Width="60" Text="{Binding DialogPlayer.Height, TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Wzrost" />
+                    <TextBox  PreviewTextInput="PreviewTextInput" Width="60" Text="{Binding DialogPlayer.Height, TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Wzrost" />
                     <TextBlock Margin="8 0 0 0" Text="cm" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBox    Width="60" Text="{Binding DialogPlayer.Weight,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Waga" />
+                    <TextBox PreviewTextInput="PreviewTextInput"   Width="60" Text="{Binding DialogPlayer.Weight,TargetNullValue=''}"  Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Waga" />
                     <TextBlock Margin="8 0 0 0" Text="kg" VerticalAlignment="Center"/>
                 </StackPanel>
             </DockPanel>

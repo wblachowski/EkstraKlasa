@@ -36,5 +36,6 @@ namespace Ekstraklasa
         {
             m_tvFilter.IsExpanded = false;
         }
+
     }
 }

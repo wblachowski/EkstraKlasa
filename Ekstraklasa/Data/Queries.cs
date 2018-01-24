@@ -125,5 +125,8 @@ namespace Ekstraklasa
         public static string UpdatePerson = "update person set firstname = :firstname , lastname = :lastname , date_of_birth = :date_of_birth , nationality = :nationality  where pesel = :pesel";
 
         public static string UpdatePlayer = "update player set weight = :weight, height = :height, nr = :nr, position = :position where pesel = :pesel";
+
+        public static string UpdateTeam = "update team set name=:name,founded_date=:foundedDate,logo_path=:logoPath,stadium_id=:stadiumId where id=:id";
+        public static string UpdateTeamWoPath = "update team set name=:name,founded_date=:foundedDate,stadium_id=:stadiumId where id=:id";
     }
 }

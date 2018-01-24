@@ -1078,6 +1078,33 @@ namespace Ekstraklasa
             return 0;
         }
 
+        public static int UpdateTeam(TeamEntity Team, int stadiumId)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConfigurationManager.AppSettings["connection_string"]))
+                {
+                    connection.Open();
+                    string sql = Team.LogoPath== "" ? Queries.UpdateTeamWoPath : Queries.UpdateTeam;
+                    using (OracleCommand command = new OracleCommand(sql, connection))
+                    {
+                        command.Parameters.Add("name", Team.Name);
+                        command.Parameters.Add("foundedDate", Team.FoundedDate);
+                        if(Team.LogoPath!="")command.Parameters.Add("logoPath",Team.LogoPath);
+                        command.Parameters.Add("stadiumId", stadiumId);
+                        command.Parameters.Add("id", Team.Id);
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return 0;
+
+        }
+
         public static void ExecuteTransfer(string pesel, int team_id)
         {
             try
