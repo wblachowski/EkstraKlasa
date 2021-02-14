@@ -1,6 +1,6 @@
 # EkstraKlasa
 
-A simple app for managing a football league.
+A desktop app for managing a football league.
 
 ## Screenshots
 ![](https://github.com/wblachowski/EkstraKlasa/blob/master/Screenshots/1.PNG?raw=true "Loging page")
